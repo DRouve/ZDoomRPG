@@ -1,0 +1,1 @@
+gzdoom.exe -iwad doom2.wad -file "zdrpg"

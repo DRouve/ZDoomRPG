@@ -1,0 +1,6 @@
+gameinfo
+{
+    PlayerClasses = "ZDRPGDoomPlayer"
+    StatusBarClass = "ZDRPGHUD"
+    AddEventHandlers = "WorldHandler"
+}

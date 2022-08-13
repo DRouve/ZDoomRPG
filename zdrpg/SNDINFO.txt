@@ -1,0 +1,660 @@
+// Menu sounds
+menu/enter				MENUENTR
+menu/leave				MENULEAV
+menu/error				MENERROR
+menu/move				MENMOVE
+menu/shop				MENUENTR
+menu/buy				SHBUY
+menu/sell				SHSELL
+menu/click              CWHEEL
+
+// Credits related sounds
+credits/pickup			CREDGET
+credits/payout			CPAYOUT
+
+// Shop
+shop/autosell           AUSELL
+shop/autostore          AUSTORE
+
+// Crate
+crate/open              CRATEOPN
+crate/close             CRATECLS
+crate/loop1             CRATELP1
+crate/loop2             CRATELP2
+crate/off               CRATEOFF
+
+// Hacking
+hacking/begin           HACKBEGN
+hacking/select          HACKSLCT
+hacking/success         HACKSUCC
+hacking/fail            HACKFAIL
+hacking/critfail        HACKCRIT
+
+// Skills
+skills/fail				MENERROR
+skills/silence          S_SILENC
+skills/heal				S_HEAL
+skills/heal2			S_HEAL2
+skills/lifeleech		S_LSTEAL
+skills/decontaminate    s_DECONT
+skills/repair			S_REPAIR
+skills/aurasteal        S_AURAST
+skills/drop				S_RALLY
+skills/buff				S_BUFF
+skills/weaken			S_WEAKEN
+skills/blast            S_BLAST
+skills/soulsteal        S_SOULST
+skills/breakdown		S_BREAK
+skills/rally			S_RALLY
+skills/unsummon			S_UNSUMM
+skills/magnet           S_MAGNET
+skills/disruption       S_DISRPT
+skills/plasmabeam1      S_PLSBM1
+skills/plasmabeam2      S_PLSBM2
+skills/plasmabeam3      S_PLSBM3
+
+// Coin Bounce
+skills/coinbounce1 		DOSHUP1
+skills/coinbounce2		DOSHUP2
+$Random skills/coinbounce
+{
+	skills/coinbounce1
+	skills/coinbounce2
+}
+
+// Health
+health/low				HEALTHLO
+health/1up              GET1UP
+health/3up              GET3UP
+health/5up              GET5UP
+health/resurrect		RESURECT
+health/survive			GETVIS
+health/statuseffect     STATEFCT
+health/statuseffect2    STATEFC2
+health/epcapsule		GETEP
+
+// Shield Sounds
+shield/pickup			SH_GET
+shield/bisonpickup      BISON_GT
+shield/on				SH_ON
+shield/off				SH_OFF
+shield/equip			SH_EQP
+shield/unequip			SH_UNEQP
+shield/booster			SH_GET
+shield/charge			SH_CHARG
+shield/full				SH_FULL
+shield/empty			SH_EMPTY
+shield/restart			SH_RESTA
+shield/ohyeah           SH_OHYEA
+shield/hit1				SH_HIT1
+shield/hit2				SH_HIT2
+shield/hit3				SH_HIT3
+shield/hit4				SH_HIT4
+shield/hit5				SH_HIT5
+shield/hit6				SH_HIT6
+$random shield/hit
+{
+	shield/hit1
+	shield/hit2
+	shield/hit3
+	shield/hit4
+	shield/hit5
+	shield/hit6
+}
+shield/newu1            SH_NEWU1
+shield/newu2            SH_NEWU2
+shield/newu3            SH_NEWU3
+shield/newu4            SH_NEWU4
+shield/newu5            SH_NEWU5
+shield/newu6            SH_NEWU6
+shield/newu7            SH_NEWU7
+shield/newu8            SH_NEWU8
+shield/newu9            SH_NEWU9
+$random shield/newu
+{
+    shield/newu1
+    shield/newu2
+    shield/newu3
+    shield/newu4
+    shield/newu5
+    shield/newu6
+    shield/newu7
+    shield/newu8
+    shield/newu9
+}
+shield/lightning1       DSCVIZZ1
+shield/lightning2       DSCVIZZ2
+shield/lightning3       DSCVIZZ3
+$random shield/lightning
+{
+    shield/lightning1
+    shield/lightning2
+    shield/lightning3
+}
+$alias shield/explosion weapons/rocklx
+$limit shield/explosion 3
+
+// Turret
+turret/spawn            TSPAWN
+turret/despawn          TDSPAWN
+turret/hum              THUM
+turret/beep             TBEEP
+turret/targeting        TTARGET
+turret/cooldown         TCOOLDN
+turret/upgrade          TUPGRAD
+turret/fire             TSHOT
+turret/loadbullet       TLDBULL
+turret/loadpellet       TLDPELL
+turret/loadrocket       TLDROCK
+turret/loadplasma       TLDPLAS
+turret/loadrail         TLDRAIL
+turret/reloadbullet     TRLDBULL
+turret/reloadpellet     TRLDPELL
+turret/reloadrocket     TRLDROCK
+turret/reloadplasma     TRLDPLAS
+turret/reloadrail       TRLDRAIL
+turret/maintenance      TMAINT
+turret/maintenancedone  TMAINTDN
+turret/chargedone       TCHRDONE
+turret/repairdone       TRPRDONE
+turret/refitdone        TRFTDONE
+turret/spark1           TSPARK1
+turret/spark2           TSPARK2
+$random turret/spark
+{
+    turret/spark1
+    turret/spark2
+}
+
+// Hums
+hums/stat				HUMSTAT
+hums/skill				HUMSKILL
+hums/wildcard			HUMWCARD
+hums/mega				HUMMEGA
+hums/aug				HUMAUG
+hums/rareitem			HUMRARE
+hums/extralife          HUMXLIFE
+
+// Regen Sounds
+regen/health			REGEN1
+regen/armor				REGEN2
+regen/ep				REGEN3
+regen/battery			REGEN4
+regen/shield            SH_RESTA
+
+// Bullet-Time/Slomo sounds
+slomo/in				SLOMOIN
+slomo/out				SLOMOOUT
+slomo/loop				SLOWLOOP
+
+// Augmentations
+aug/pickup				AUGMENT
+aug/equip				AUGEQUIP
+aug/levelup				AUGMENT
+aug/disable				AUGDIS
+aug/dead                AUGDEAD
+
+// Misc Sounds
+misc/levelup			LEVELUP
+misc/rankup				RANKUP
+misc/statup             STATUP
+misc/secret				SECRET
+misc/edgar				LOLEDGAR
+misc/drugs              DRUGS
+misc/tokenconvert		TCONVERT
+misc/toxic              TOXHAZRD
+misc/alert              MGSALERT
+misc/alarm              OPALARM
+misc/poweroff           POWEROFF
+misc/poweron            POWERON
+misc/radiation          RADIATE
+misc/parbonus           PARBONUS
+misc/skillchange        SKILLCHG
+misc/transport          TRANSPRT
+misc/epfocus            EPFOCUS
+misc/epfocusdone        EPFOCUS2
+misc/breakglass         BREAKGLS
+misc/gzdoom.exe         GZDOOM
+
+// Enemy Aura Drains
+drain/ep                D_ENERGY
+drain/ammo              D_AMMO
+drain/money             D_CREDIT
+
+// Arena
+arena/activate          ARENAUSE
+arena/deactivate        ARENAUSE
+arena/drop              ARENADRP
+arena/keydrop           ARENAKEY
+arena/pickbonus         ARENAPBO
+
+// Events
+nuke/alert              NUKEALRT
+nuke/pickup             NUKEGET
+nuke/countdown          NUKECNT
+nuke/detonate           NUKEBOOM
+nuke/idle               NUKEIDLE
+nuke/disarmed           NUKEDSRM
+nuke/unlock             NUKEUNLK
+nuke/use                NUKEUSE
+nuke/beep               NUKEBEEP
+nuke/announce1          NUKEANN1
+nuke/announce2          NUKEANN2
+nuke/seconds/0          NUKEAS0
+nuke/seconds/1          NUKEAS1
+nuke/seconds/2          NUKEAS2
+nuke/seconds/3          NUKEAS3
+nuke/seconds/4          NUKEAS4
+nuke/seconds/5          NUKEAS5
+nuke/seconds/10         NUKEAS10
+nuke/seconds/20         NUKEAS20
+nuke/seconds/30         NUKEAS30
+nuke/minutes/1          NUKEAM1
+nuke/minutes/2          NUKEAM2
+nuke/minutes/3          NUKEAM3
+nuke/minutes/4          NUKEAM4
+nuke/minutes/5          NUKEAM5
+nuke/minutes/10         NUKEAM10
+nuke/minutes/20         NUKEAM20
+pandorabox/open1        PANDOPE1
+pandorabox/open2        PANDOPE2
+pandorabox/whoosh       PANDWHOO
+pandorabox/loop         PANDLOOP
+pandorabox/doom         PANDDOOM
+radiation/lowered       RADDOWN
+radiation/cleared       RADEND
+radiation/tankup        RADTANK
+radiation/startmachine  RDMSTART
+radiation/loopmachine   RDMLOOP
+radiation/stopmachine   RDMSTOP
+radiation/refuel        RDMFUEL
+veil/teleportrift       TELERIFT
+doomsday/moonshake      DOOMSHAK
+doomsday/doombell       DOOMBELL
+weather/rainloop        RAINFALL
+darkzone/arrived        COMING
+
+$random gibbage/blood    {gibbage/blood1 gibbage/blood2 gibbage/blood3 gibbage/blood4}
+gibbage/blood1  blood1
+gibbage/blood2  blood2
+gibbage/blood3  blood3
+gibbage/blood4  blood4
+
+// Transfer
+transfer/loop           TRANSFER
+transfer/complete       TRANSCOM
+transfer/fail           TRANSFL
+
+// Character Saving
+charsave/save           CHARSAVE
+charsave/accept         CHARACC
+charsave/fail           CHARFAIL
+
+// Mission
+mission/get             MISSGET
+mission/complete        MISSCOMP
+mission/fail            MISSFAIL
+mission/gottarget1      ALAUGH1
+mission/gottarget2      ALAUGH2
+
+// Items
+items/armor				ARMGET
+items/armor2			MEGAARM
+items/helmet			HELMET
+items/health			HEALGET
+items/healthuse			HEALUSE
+items/pack				PACKGET
+items/vial				VIAL
+items/chip              CHIP
+items/clip				CLIPGET
+items/clipbox			CLIPBOX
+items/shell				SHELGET     
+items/rocket			ROCKGET
+items/cell				CELLGET
+items/stim				STIMUSE
+items/battery           BATTGET
+items/loot              LOOTGET
+items/turret            TURRGET
+items/turretcrate       TURCGET
+items/module            GOTMODU
+
+// Keys
+keys/key				GETKEY
+keys/skull				GETSKL
+
+// Powerups
+powerups/berserk		GETBZRK
+powerups/protect		GETINVL
+powerups/map			GETMAP
+powerups/invis			GETVIS
+powerups/soulsphere		GETSOUL
+powerups/megasphere		GETMEGA
+powerups/suit			GETSUIT 
+powerups/light			GETLITE
+powerups/regen			GETREGN
+powerups/wings			GETWING
+powerups/time			SLOMOIN
+powerups/crystal        CRYSGET
+powerups/crystalpulse   CRYSPLS
+
+// Locked Doors
+locks/card				TECHLOCK
+locks/skull				HELLLOCK
+
+// --------------------------------------------------
+// MARINES
+// 
+
+drpgmarines/pistol					DSFHPIST
+drpgmarines/pistolreloadin			DSPISIN
+drpgmarines/pistolreloadout			DSPISOUT
+drpgmarines/pistolcock				DSGLKCK
+
+drpgmarines/battlerifle				DSUACRIF
+drpgmarines/battlerifleload			DSRIFLOA
+drpgmarines/battlerifleunload		DSRIFUNL
+drpgmarines/battleriflecock			DSRIFCOC
+
+drpgmarines/shotgun					DSSHOT1
+drpgmarines/shotgunpump				DSSHOTP2
+
+drpgmarines/doubleshotgun			DSEFSDBF
+drpgmarines/doubleshotgunopen		DSEFSDBO
+drpgmarines/doubleshotgunclose		DSEFSDBC
+drpgmarines/doubleshotgunload		DSEFSDBL
+
+drpgmarines/chaingun1				DSCHAIN1
+drpgmarines/chaingun2				DSCHAIN2
+drpgmarines/chaingun3				DSCHAIN3
+$random drpgmarines/chaingun { drpgmarines/chaingun1 drpgmarines/chaingun2 drpgmarines/chaingun3 }
+drpgmarines/chaingunload			DSCHAINL
+drpgmarines/chaingunwinddown		DSGTWNDD
+drpgmarines/chaingunwindup			DSGTWNDU
+drpgmarines/chaingunspin			DSGTSPIN
+
+drpgmarines/rocketlauncher			DSRPGRPG
+drpgmarines/rocketlauncherload		DSRPGLOA
+
+drpgmarines/hpminigunwinddown		DSHPMIEN
+drpgmarines/hpminigunwindup			DSHPMIST
+drpgmarines/hpminigunspin			DSHPMILO
+drpgmarines/hpminigun				DSHPMINI
+
+drpgmarines/plasmarifleunload		DSPLASL1
+drpgmarines/plasmarifleload			DSPLASL2
+
+drpgmarines/bfg9000unload			DSBFGLOA
+drpgmarines/bfg9000load				DSBFGLO2
+
+//==============================================================================
+
+drpgmarinemale1/sight				DSMM1SIT
+
+drpgmarinemale1/pain1				DSMM1PN1
+drpgmarinemale1/pain2				DSMM1PN2
+drpgmarinemale1/pain3				DSMM1PN3
+drpgmarinemale1/pain4				DSMM1PN4
+$random drpgmarinemale1/pain { drpgmarinemale1/pain1 drpgmarinemale1/pain2 drpgmarinemale1/pain3 drpgmarinemale1/pain4 }
+
+drpgmarinemale1/death1				DSMM1DT1
+drpgmarinemale1/death2				DSMM1DT2
+drpgmarinemale1/death3				DSMM1DT3
+$random drpgmarinemale1/death { drpgmarinemale1/death1 drpgmarinemale1/death2 drpgmarinemale1/death3 }
+
+drpgmarinemale2/sight				DSMM2SIT
+
+drpgmarinemale2/pain1				DSMM2PN1
+drpgmarinemale2/pain2				DSMM2PN2
+drpgmarinemale2/pain3				DSMM2PN3
+drpgmarinemale2/pain4				DSMM2PN4
+drpgmarinemale2/pain5				DSMM2PN5
+drpgmarinemale2/pain6				DSMM2PN6
+drpgmarinemale2/pain7				DSMM2PN7
+drpgmarinemale2/pain8				DSMM2PN8
+$random drpgmarinemale2/pain { drpgmarinemale2/pain1 drpgmarinemale2/pain2 drpgmarinemale2/pain3 drpgmarinemale2/pain4 drpgmarinemale2/pain5 drpgmarinemale2/pain6 drpgmarinemale2/pain7 drpgmarinemale2/pain8 }
+
+drpgmarinemale2/death1				DSMM2DT1
+drpgmarinemale2/death2				DSMM2DT2
+drpgmarinemale2/death3				DSMM2DT3
+$random drpgmarinemale2/death { drpgmarinemale2/death1 drpgmarinemale2/death2 drpgmarinemale2/death3 }
+
+drpgmarinemale3/sight				DSMM3SIT
+
+drpgmarinemale3/pain1				DSMM3PN1
+drpgmarinemale3/pain2				DSMM3PN2
+drpgmarinemale3/pain3				DSMM3PN3
+drpgmarinemale3/pain4				DSMM3PN4
+drpgmarinemale3/pain5				DSMM3PN5
+drpgmarinemale3/pain6				DSMM3PN6
+$random drpgmarinemale3/pain { drpgmarinemale3/pain1 drpgmarinemale3/pain2 drpgmarinemale3/pain3 drpgmarinemale3/pain4 drpgmarinemale3/pain5 drpgmarinemale3/pain6 }
+
+drpgmarinemale3/death				DSMM3DT1
+
+drpgmarinefemale1/sight				DSFM1SIT
+
+drpgmarinefemale1/pain1				DSFM1PN1
+drpgmarinefemale1/pain2				DSFM1PN2
+drpgmarinefemale1/pain3				DSFM1PN3
+drpgmarinefemale1/pain4				DSFM1PN4
+drpgmarinefemale1/pain5				DSFM1PN5
+drpgmarinefemale1/pain6				DSFM1PN6
+drpgmarinefemale1/pain7				DSFM1PN7
+$random drpgmarinefemale1/pain { drpgmarinefemale1/pain1 drpgmarinefemale1/pain2 drpgmarinefemale1/pain3 drpgmarinefemale1/pain4 drpgmarinefemale1/pain5 drpgmarinefemale1/pain6 drpgmarinefemale1/pain7 }
+
+drpgmarinefemale1/death1			DSFM1DT1
+drpgmarinefemale1/death2			DSFM1DT2
+drpgmarinefemale1/death3			DSFM1DT3
+$random drpgmarinefemale1/death { drpgmarinefemale1/death1 drpgmarinefemale1/death2 drpgmarinefemale1/death3 }
+
+//==============================================================================
+
+drpgpowersuit/whirr					DSPSWHIR
+drpgpowersuit/death					DSPSDEAT
+drpgpowersuit/explosion1			DSPSEXP1
+drpgpowersuit/explosion2			DSPSEXP2
+drpgpowersuit/explosion3			DSPSEXP3
+$random drpgpowersuit/explosion { drpgpowersuit/explosion1 drpgpowersuit/explosion2 drpgpowersuit/explosion3 }
+
+drpgpowersuit/plasmacannon			DSPS1PLS
+$limit drpgpowersuit/plasmacannon 0
+drpgpowersuit/hum					DSPS1HUM
+drpgpowersuit/vree					DSPS1VZZ
+$limit drpgpowersuit/vree 0
+
+drpgpowersuit/chainsawmiss			DSPS1SW1
+drpgpowersuit/chainsawhit			DSPS1SW2
+drpgpowersuit/chainsawstart			DSPS1SW3
+
+drpgpowersuit/step1					DSPS1ST1
+drpgpowersuit/step2					DSPS1ST2
+$random drpgpowersuit/step { drpgpowersuit/step1 drpgpowersuit/step2 }
+$limit drpgpowersuit/step1 0
+$limit drpgpowersuit/step2 0
+
+drpgpowersuit/active1				DSPS1AC1
+drpgpowersuit/active2				DSPS1AC2
+drpgpowersuit/active3				DSPS1AC3
+$random drpgpowersuit/active { drpgpowersuit/active1 drpgpowersuit/active2 drpgpowersuit/active3 }
+
+drpgpowersuit/pain					DSPS1PN1
+
+drpgpowersuit/sight1				DSPS1SI1
+drpgpowersuit/sight2				DSPS1SI2
+drpgpowersuit/sight3				DSPS1SI3
+drpgpowersuit/sight4				DSPS1SI4
+drpgpowersuit/sight5				DSPS1SI5
+drpgpowersuit/sight6				DSPS1SI6
+drpgpowersuit/sight7				DSPS1SI7
+drpgpowersuit/sight8				DSPS1SI8
+$random drpgpowersuit/sight { drpgpowersuit/sight1 drpgpowersuit/sight2 drpgpowersuit/sight3 drpgpowersuit/sight4 drpgpowersuit/sight5 drpgpowersuit/sight6 drpgpowersuit/sight7 drpgpowersuit/sight8 }
+
+//==============================================================================
+
+drpgheavypowersuit/antidemonfield			DSPS2ADF
+drpgheavypowersuit/hum						DSPS2HUM
+drpgheavypowersuit/chargeup					DSPS2CHG
+drpgheavypowersuit/plasmadisruptor			DSPS2PLS
+drpgheavypowersuit/plasmadisruptorhit		DSPS2PLX
+drpgheavypowersuit/minigunwindup			DSPS2MI1
+drpgheavypowersuit/minigunspin				DSPS2MI2
+drpgheavypowersuit/minigunwinddown			DSPS2MI3
+drpgheavypowersuit/minigun					DSPS2MI4
+drpgheavypowersuit/missile					DSPS2MIS
+drpgheavypowersuit/missileloop				DSPS2MIL
+drpgheavypowersuit/missilelock				DSPS2LOK
+drpgheavypowersuit/missilehatch				DSPS2HAT
+drpgheavypowersuit/falldown					DSPS2FAL
+drpgheavypowersuit/step						DSPS2STP
+$limit drpgheavypowersuit/step 0
+
+drpgheavypowersuit/active1			DSPS2AC1
+drpgheavypowersuit/active2			DSPS2AC2
+drpgheavypowersuit/active3			DSPS2AC3
+$random drpgheavypowersuit/active { drpgheavypowersuit/active1 drpgheavypowersuit/active2 drpgheavypowersuit/active3 }
+
+drpgheavypowersuit/pain1			DSPS2PN1
+drpgheavypowersuit/pain2			DSPS2PN2
+drpgheavypowersuit/pain3			DSPS2PN3
+drpgheavypowersuit/pain4			DSPS2PN4
+$random drpgheavypowersuit/pain { drpgheavypowersuit/pain1 drpgheavypowersuit/pain2 drpgheavypowersuit/pain3 drpgheavypowersuit/pain4 }
+
+drpgheavypowersuit/death1			DSPS2DT1
+drpgheavypowersuit/death2			DSPS2DT2
+drpgheavypowersuit/death3			DSPS2DT3
+$random drpgheavypowersuit/death { drpgheavypowersuit/death1 drpgheavypowersuit/death2 drpgheavypowersuit/death3 }
+
+drpgheavypowersuit/sight1			DSPS2SI1
+drpgheavypowersuit/sight2			DSPS2SI2
+drpgheavypowersuit/sight3			DSPS2SI3
+drpgheavypowersuit/sight4			DSPS2SI4
+drpgheavypowersuit/sight5			DSPS2SI5
+drpgheavypowersuit/sight6			DSPS2SI6
+$random drpgheavypowersuit/sight { drpgheavypowersuit/sight1 drpgheavypowersuit/sight2 drpgheavypowersuit/sight3 drpgheavypowersuit/sight4 drpgheavypowersuit/sight5 drpgheavypowersuit/sight6 }
+
+drpgheavypowersuitmkii/plasmadisruptormkii			DSPS2BAF
+drpgheavypowersuitmkii/plasmadisruptorhitmkii		DSPS2BAH
+drpgheavypowersuitmkii/plasmadisruptorloopmkii		DSPS2BAL
+
+//==============================================================================
+
+drpgmarines/betrayal1				DSBTRAY1
+drpgmarines/betrayal2				DSBTRAY2
+drpgmarines/betrayal3				DSBTRAY3
+$random drpgmarines/betrayal { drpgmarines/betrayal1 drpgmarines/betrayal2 drpgmarines/betrayal3 }
+
+drpgmarines/shopkeephatred			DSSHOPRG
+
+drpgmarines/bulletexp							DSPIPEX1
+$limit drpgmarines/bulletexp 0
+$random drpgmarines/smallexp { drpgmarines/smallexp1 drpgmarines/smallexp2 drpgmarines/smallexp3 }
+drpgmarines/smallexp1							DSPIPEX2
+drpgmarines/smallexp2							DSPIPEX3
+drpgmarines/smallexp3							DSPIPEX4
+$random drpgmarines/largeexp { drpgmarines/largeexp1 drpgmarines/largeexp2 drpgmarines/largeexp3 drpgmarines/largeexp4 drpgmarines/largeexp5 drpgmarines/largeexp6 drpgmarines/largeexp7 }
+drpgmarines/largeexp1							DSLAGEX1
+drpgmarines/largeexp2							DSLAGEX2
+drpgmarines/largeexp3							DSLAGEX3
+drpgmarines/largeexp4							DSLAGEX4
+drpgmarines/largeexp5							DSLAGEX5
+drpgmarines/largeexp6							DSLAGEX6
+drpgmarines/largeexp7							DSLAGEX7
+
+$random drpgmarines/bodythud		{drpgmarines/bodythud1 drpgmarines/bodythud2 drpgmarines/bodythud3 drpgmarines/bodythud4 drpgmarines/bodythud5 drpgmarines/bodythud6 drpgmarines/bodythud7 drpgmarines/bodythud8}
+drpgmarines/bodythud1			DSBODY1
+drpgmarines/bodythud2			DSBODY2
+drpgmarines/bodythud3			DSBODY3
+drpgmarines/bodythud4			DSBODY4
+drpgmarines/bodythud5			DSBODY5
+drpgmarines/bodythud6			DSBODY6
+drpgmarines/bodythud7			DSBODY7
+drpgmarines/bodythud8			DSBODY8
+
+$random drpgmarines/gibthud		{drpgmarines/gibthud1 drpgmarines/gibthud2}
+drpgmarines/gibthud1				DSVILBD1
+drpgmarines/gibthud2				DSVILBD2
+
+// --------------------------------------------------
+// MEGABOSSES
+// 
+
+megaboss/step1				MBOSSTP1
+megaboss/step2				MBOSSTP2
+megaboss/step3				MBOSSTP3
+$random megaboss/step
+{
+    megaboss/step1
+    megaboss/step2
+    megaboss/step3
+}
+
+megaboss/bite			    DSMBBITE
+megaboss/lootsplosion		LOOTSPLO
+
+//==============================================================================
+//				SLOTH SOUNDS
+//==============================================================================
+
+$alias sloth/sight			fatso/sight
+$alias sloth/pain			fatso/pain
+$alias sloth/active			fatso/active
+$alias sloth/death			fatso/death
+$alias sloth/raiseguns		fatso/raiseguns
+
+sloth/snore					DSSNORE
+sloth/radiationstream		DSRADSTR
+
+sloth/canisterfire1			DSSLOFF1
+$limit sloth/canisterfire1  0
+sloth/canisterfire2			DSSLOFF2
+$limit sloth/canisterfire2  0
+sloth/canisterfire3			DSSLOFF3
+$limit sloth/canisterfire3  0
+sloth/canisterfire4			DSSLOFF4
+$limit sloth/canisterfire4  0
+sloth/canisterfire5			DSSLOFF5
+$limit sloth/canisterfire5  0
+$random sloth/canisterfire
+{
+    sloth/canisterfire1
+    sloth/canisterfire2
+    sloth/canisterfire3
+    sloth/canisterfire4
+    sloth/canisterfire5
+}
+
+sloth/canisterblast1		DSSLOFH1
+$limit sloth/canisterblast1 0
+sloth/canisterblast2		DSSLOFH2
+$limit sloth/canisterblast2 0
+sloth/canisterblast3		DSSLOFH3
+$limit sloth/canisterblast3 0
+sloth/canisterblast4		DSSLOFH4
+$limit sloth/canisterblast4 0
+$random sloth/canisterblast
+{
+    sloth/canisterblast1
+    sloth/canisterblast2
+    sloth/canisterblast3
+    sloth/canisterblast4
+}
+
+//==============================================================================
+//				PRIDE SOUNDS
+//==============================================================================
+
+$alias pride/sight					caco/sight
+$alias pride/active					caco/active
+$alias pride/death					caco/death
+pride/pain							DSPRIDPN
+
+pride/charge1						DSPRCHR1
+pride/charge2						DSPRCHR2
+pride/lightningloop					DSPRIDLP
+pride/lightning						DSPRLIT1
+pride/supaalightning				DSPRLIT2
+pride/lightningstrike				DSPRDLIT
+pride/lightningball					DSPRSHOT
+$limit pride/lightningball 0
+pride/lightningballhit				DSPRSHIT
+$limit pride/lightningballhit 0
+pride/lightningballloop				DSPRSHOL

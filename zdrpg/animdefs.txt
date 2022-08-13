@@ -1,0 +1,417 @@
+// Warping Textures
+warp texture FFLDA0
+
+// Warping Outpost Textures
+// warp2 texture textures/outpost/Outpost_Water.png
+// warp2 texture textures/outpost/Outpost_PurpleWater.png
+
+// Event Skies
+// Doomsday
+texture FIRESK00
+    range FIRESK99 tics 2
+	
+//---------------------------------------------------
+// Outpost 2 textures
+
+texture 64MONI1 range 64MONI4 tics 4
+texture	OPANA1 range OPANA4	tics 6
+texture OPANAA1 range OPANAA4 tics 6
+texture CGCANI00 range CGCANI07 tics 4
+texture ECOMP1 range ECOMP4 tics 5
+
+// --------------------------------------------------
+// MENU
+
+// Doomguy
+texture PLAYA1
+	pic PLAYA1 tics 6
+	pic PLAYB1 tics 6
+	pic PLAYC1 tics 6
+	pic PLAYD1 tics 6
+
+// Modules
+texture UMODA0
+    pic UMODA0 tics 4
+    pic UMODB0 tics 4
+    pic UMODC0 tics 4
+    pic UMODD0 tics 4
+    pic UMODE0 tics 4
+    pic UMODF0 tics 4
+    pic UMODG0 tics 4
+    pic UMODH0 tics 4
+    pic UMODI0 tics 4
+    pic UMODJ0 tics 4
+    pic UMODK0 tics 4
+    pic UMODL0 tics 4
+    pic UMODM0 tics 4
+    pic UMODN0 tics 4
+    pic UMODO0 tics 4
+    
+// Surgery Kit
+texture MEDSA0
+    pic MEDSA0 tics 8
+    pic MEDSB0 tics 8
+
+// Soulsphere
+texture SOULA0
+    pic SOULA0 tics 6
+    pic SOULB0 tics 6
+    pic SOULC0 tics 6
+    pic SOULD0 tics 6
+    pic SOULC0 tics 6
+    pic SOULB0 tics 6
+
+// Armor Bonus
+texture BON2A0
+    pic BON2A0 tics 6
+    pic BON2B0 tics 6
+    pic BON2C0 tics 6
+    pic BON2D0 tics 6
+    pic BON2C0 tics 6
+    pic BON2B0 tics 6
+
+// Green Armor
+texture ARM1A0
+    pic ARM1A0 tics 6
+    pic ARM1B0 tics 6
+
+// Blue Armor
+texture ARM2A0
+    pic ARM2A0 tics 6
+    pic ARM2B0 tics 6
+
+// Yellow Armor
+texture ARM3A0
+    pic ARM3A0 tics 6
+    pic ARM3B0 tics 6
+
+// Red Armor
+texture ARM4A0
+    pic ARM4A0 tics 6
+    pic ARM4B0 tics 6
+
+// White Armor
+texture ARM5A0
+    pic ARM5A0 tics 6
+    pic ARM5B0 tics 6
+
+// Reinforced Green Armor
+texture ARX1A0
+    pic ARX1A0 tics 6
+    pic ARX1B0 tics 6
+
+// Reinforced Blue Armor
+texture ARX2A0
+    pic ARX2A0 tics 6
+    pic ARX2B0 tics 6
+
+// Reinforced Yellow Armor
+texture ARX3A0
+    pic ARX3A0 tics 6
+    pic ARX3B0 tics 6
+
+// Reinforced Red Armor
+texture ARX4A0
+    pic ARX4A0 tics 6
+    pic ARX4B0 tics 6
+
+// Reinforced White Armor
+texture ARX5A0
+    pic ARX5A0 tics 6
+    pic ARX5B0 tics 6
+
+// Invulnerability Charge
+texture CRG2A0
+    pic CRG2A0 tics 2
+    pic CRG2B0 tics 2
+    pic CRG2C0 tics 2
+
+// Invisibility Charge
+texture CRG1A0
+    pic CRG1A0 tics 2
+    pic CRG1B0 tics 2
+    pic CRG1C0 tics 2
+
+// Megasphere
+texture MEGAA0
+    pic MEGAA0 tics 6
+    pic MEGAB0 tics 6
+    pic MEGAC0 tics 6
+    pic MEGAD0 tics 6
+
+// Experimental Parts
+texture LT12A0
+    pic LT12A0 tics 6
+    pic LT12B0 tics 6
+
+// Turret Parts
+texture TPRTA0
+    pic TPRTA0 tics 6
+    pic TPRTB0 tics 6
+    pic TPRTC0 tics 6
+    pic TPRTD0 tics 6
+
+// Turret Parts Crate
+texture TCRTA0
+    pic TCRTA0 tics 6
+    pic TCRTB0 tics 6
+    pic TCRTC0 tics 6
+    pic TCRTD0 tics 6
+
+// --------------------------------------------------
+// HUD
+
+// EP Capsule
+texture EPENA0
+	pic EPENA0 tics 3
+	pic EPENB0 tics 3
+	pic EPENC0 tics 3
+	pic EPEND0 tics 3
+	pic EPENE0 tics 3
+	pic EPENF0 tics 3
+	pic EPENG0 tics 3
+	pic EPENH0 tics 3
+	pic EPENI0 tics 3
+	pic EPENH0 tics 3
+	pic EPENG0 tics 3
+	pic EPENF0 tics 3
+	pic EPENE0 tics 3
+	pic EPEND0 tics 3
+	pic EPENC0 tics 3
+	pic EPENB0 tics 3
+	pic EPENA0 tics 3
+texture EPUPA0
+	pic EPUPA0 tics 3
+	pic EPUPB0 tics 3
+	pic EPUPC0 tics 3
+	pic EPUPD0 tics 3
+	pic EPUPE0 tics 3
+	pic EPUPF0 tics 3
+	pic EPUPG0 tics 3
+	pic EPUPH0 tics 3
+	pic EPUPI0 tics 3
+	pic EPUPH0 tics 3
+	pic EPUPG0 tics 3
+	pic EPUPF0 tics 3
+	pic EPUPE0 tics 3
+	pic EPUPD0 tics 3
+	pic EPUPC0 tics 3
+	pic EPUPB0 tics 3
+	pic EPUPA0 tics 3
+
+// Invulnerability Sphere
+texture PINVA0
+	pic PINVA0 tics 6
+	pic PINVB0 tics 6
+	pic PINVC0 tics 6
+	pic PINVD0 tics 6
+
+// Invisibility Sphere
+texture PINSA0
+	pic PINSA0 tics 6
+	pic PINSB0 tics 6
+	pic PINSC0 tics 6
+	pic PINSD0 tics 6
+
+// Automap
+texture PMAPA0
+	pic PMAPA0 tics 6
+	pic PMAPB0 tics 6
+	pic PMAPC0 tics 6
+	pic PMAPD0 tics 6
+	pic PMAPC0 tics 6
+	pic PMAPB0 tics 6
+
+// Nightvision Goggles
+texture PVISA0
+	pic PVISA0 tics 6
+	pic PVISB0 tics 6
+
+// 1-Ups
+texture P1UPA0
+    pic P1UPA0 tics 4
+    pic P1UPB0 tics 4
+    pic P1UPC0 tics 4
+    pic P1UPD0 tics 4
+
+texture P3UPA0
+    pic P3UPA0 tics 4
+    pic P3UPB0 tics 4
+    pic P3UPC0 tics 4
+    pic P3UPD0 tics 4
+
+texture P5UPA0
+    pic P5UPA0 tics 4
+    pic P5UPB0 tics 4
+    pic P5UPC0 tics 4
+    pic P5UPD0 tics 4
+    
+// Blanks
+texture P1UBA0
+    pic P1UBA0 tics 4
+    pic P1UBB0 tics 4
+    pic P1UBC0 tics 4
+    pic P1UBD0 tics 4
+    
+texture P3UBA0
+    pic P3UBA0 tics 4
+    pic P3UBB0 tics 4
+    pic P3UBC0 tics 4
+    pic P3UBD0 tics 4
+    
+texture P5UBA0
+    pic P5UBA0 tics 4
+    pic P5UBB0 tics 4
+    pic P5UBC0 tics 4
+    pic P5UBD0 tics 4
+
+// Time Sphere
+texture TIMEA0
+	pic TIMEA0 tics 4
+	pic TIMEB0 tics 4
+	pic TIMEC0 tics 4
+	pic TIMED0 tics 4
+	pic TIMEC0 tics 4
+	pic TIMEB0 tics 4
+
+// Regen Sphere
+texture REGNA0
+	pic REGNA0 tics 4
+	pic REGNB0 tics 4
+	pic REGNC0 tics 4
+	pic REGND0 tics 4
+	pic REGNC0 tics 4
+	pic REGNB0 tics 4
+
+// Generator Cell
+texture GCELA0
+    pic GCELA0 tics 6
+    pic GCELB0 tics 6
+    pic GCELC0 tics 6
+    pic GCELD0 tics 6
+    pic GCELE0 tics 6
+    pic GCELF0 tics 6
+    pic GCELG0 tics 6
+    pic GCELF0 tics 6
+    pic GCELE0 tics 6
+    pic GCELD0 tics 6
+    pic GCELC0 tics 6
+    pic GCELB0 tics 6
+
+// --------------------------------------------------
+// INVENTORY BAR
+	
+// Green Armor
+texture ARM1
+	pic ARM1 tics 6
+	pic ARM1U tics 6
+
+// Blue Armor
+texture ARM2
+	pic ARM2 tics 6
+	pic ARM2U tics 6
+
+// Yellow Armor
+texture ARM3
+	pic ARM3 tics 6
+	pic ARM3U tics 6
+
+// Red Armor
+texture ARM4
+	pic ARM4 tics 6
+	pic ARM4U tics 6
+
+// White Armor
+texture ARM5
+	pic ARM5 tics 6
+	pic ARM5U tics 6
+
+// Reinforced Green Armor
+texture ARX1
+	pic ARX1 tics 6
+	pic ARX1U tics 6
+
+// Reinforced Blue Armor
+texture ARX2
+	pic ARX2 tics 6
+	pic ARX2U tics 6
+
+// Reinforced Yellow Armor
+texture ARX3
+	pic ARX3 tics 6
+	pic ARX3U tics 6
+
+// Reinforced Red Armor
+texture ARX4
+	pic ARX4 tics 6
+	pic ARX4U tics 6
+
+// Reinforced White Armor
+texture ARX5
+	pic ARX5 tics 6
+	pic ARX5U tics 6
+
+// Invulnerability Charge
+texture CRG2
+	pic CRG2 tics 3
+	pic CRG2B tics 3
+	pic CRG2C tics 3
+
+// Invisibility Charge
+texture CRG1
+	pic CRG1 tics 3
+	pic CRG1B tics 3
+	pic CRG1C tics 3
+
+// Infrared
+texture PVIS
+	pic PVIS tics 6
+	pic PVISB tics 6
+
+// Regeneration Sphere
+texture REGN
+	pic REGN tics 4
+	pic REGNB tics 4
+	pic REGNC tics 4
+	pic REGND tics 4
+	pic REGNC tics 4
+	pic REGNB tics 4
+
+// Time Sphere
+texture TIME
+	pic TIME tics 4
+	pic TIMEB tics 4
+	pic TIMEC tics 4
+	pic TIMED tics 4
+	pic TIMEC tics 4
+	pic TIMEB tics 4
+
+// --------------------------------------------------
+// HEALTH BARS
+
+texture Fill10
+    pic Fill10 tics 4
+    pic Fill10B tics 4
+    pic Fill10C tics 4
+    pic Fill10D tics 4
+
+// --------------------------------------------------
+// VIEW CAMERAS FOR ACS
+
+cameratexture P1VIEW 1067 600
+cameratexture P2VIEW 1067 600
+cameratexture P3VIEW 1067 600
+cameratexture P4VIEW 1067 600
+cameratexture P5VIEW 1067 600
+cameratexture P6VIEW 1067 600
+cameratexture P7VIEW 1067 600
+cameratexture P8VIEW 1067 600
+
+cameratexture P1SVIEW 320 240
+cameratexture P2SVIEW 320 240
+cameratexture P3SVIEW 320 240
+cameratexture P4SVIEW 320 240
+cameratexture P5SVIEW 320 240
+cameratexture P6SVIEW 320 240
+cameratexture P7SVIEW 320 240
+cameratexture P8SVIEW 320 240

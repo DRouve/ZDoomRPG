@@ -1,0 +1,416 @@
+//Outpost 2 textures
+
+texture OPANAA1, 128, 128 {Patch OPANAA1, 0, 0}
+texture OPANAA2, 128, 128 {Patch OPANAA2, 0, 0}
+texture OPANAA3, 128, 128 {Patch OPANAA3, 0, 0}
+texture OPANAA4, 128, 128 {Patch OPANAA4, 0, 0}
+texture OPANA1, 128, 47 {Patch OPANA1, 0, 0}
+texture OPANA2, 128, 47 {Patch OPANA2, 0, 0}
+texture OPANA3, 128, 47 {Patch OPANA3, 0, 0}
+texture OPANA4, 128, 47 {Patch OPANA4, 0, 0}
+texture 64MONI1, 128, 128 {Patch 64MONI1, 0, 0}
+texture 64MONI2, 128, 128 {Patch 64MONI2, 0, 0}
+texture 64MONI3, 128, 128 {Patch 64MONI3, 0, 0}
+texture 64MONI4, 128, 128 {Patch 64MONI4, 0, 0}
+
+texture CGCANI00, 128, 128 {Patch CGCANI00, 0, 0}
+texture CGCANI01, 128, 128 {Patch CGCANI01, 0, 0}
+texture CGCANI02, 128, 128 {Patch CGCANI02, 0, 0}
+texture CGCANI03, 128, 128 {Patch CGCANI03, 0, 0}
+texture CGCANI04, 128, 128 {Patch CGCANI04, 0, 0}
+texture CGCANI05, 128, 128 {Patch CGCANI05, 0, 0}
+texture CGCANI06, 128, 128 {Patch CGCANI06, 0, 0}
+texture CGCANI07, 128, 128 {Patch CGCANI07, 0, 0}
+
+texture ECOMP1, 256, 128 {Patch ECOMP1, 0, 0}
+texture ECOMP2, 256, 128 {Patch ECOMP2, 0, 0}
+texture ECOMP3, 256, 128 {Patch ECOMP3, 0, 0}
+texture ECOMP4, 256, 128 {Patch ECOMP4, 0, 0}
+
+// Agility Save
+Graphic AGISAVE, 429, 220 { XScale 4.0 YScale 4.0 Patch AgiSav_, 0, 0 }
+
+// Credits
+Sprite CREDA0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDA0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
+Sprite CREDB0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDB0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
+Sprite CREDC0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDC0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
+Sprite CREDD0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDD0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
+Sprite CREDE0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDE0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
+Sprite CREDF0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDF0, 2, 2 { Alpha 0.5 Style CopyNewAlpha } }
+// Silver
+Sprite CREDG0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDG0, 2, 2 { Alpha 0.6 Style CopyNewAlpha } }
+// Gold
+Sprite CREDH0, 32, 12 { Offset 16, 12 Patch CBRDA0, 0, 0 Patch CLEDH0, 2, 2 { Alpha 0.8 Style CopyNewAlpha } }
+
+// Chips
+Graphic CHIPGOLD, 32, 32 { Offset 0, 0 Patch CHPGA0, 0, 0 }
+Graphic CHIPPLAT, 32, 32 { Offset 0, 0 Patch CHPPA0, 0, 0 }
+
+// Basic Shield Package
+Sprite SHPAA0, 32, 32
+{
+	Offset 16, 32
+	Patch SHBOA0, 0, 0
+	Patch SHBAA0, 0, 0
+	Patch SHCAA0, 0, 0
+}
+
+// Stims
+Sprite STVLA0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIA0, 0, 0 }
+Sprite STVLB0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIB0, 0, 0 }
+Sprite STVLC0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIC0, 0, 0 }
+Sprite STVLD0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLID0, 0, 0 }
+Sprite STVLE0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIE0, 0, 0 }
+Sprite STVLF0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIF0, 0, 0 }
+Sprite STVLG0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIG0, 0, 0 }
+Sprite STVLH0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIH0, 0, 0 }
+Sprite STVLI0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLII0, 0, 0 }
+Sprite STVLJ0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIJ0, 0, 0 }
+Sprite STVLK0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIK0, 0, 0 }
+Sprite STVLL0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIL0, 0, 0 }
+Sprite STVLM0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIM0, 0, 0 }
+Sprite STVLN0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIN0, 0, 0 }
+Sprite STVLO0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIO0, 0, 0 }
+Sprite STVLP0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIP0, 0, 0 }
+Sprite STVLQ0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIQ0, 0, 0 }
+Sprite STVLR0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIR0, 0, 0 }
+Sprite STVLS0, 6, 16 { Offset 4, 16 Patch STCAA0, 0, 0 Patch STLIS0, 0, 0 }
+
+// Stim Packages
+Sprite STPAA0, 60, 16
+{
+	Offset 30, 16
+	Patch STVLA0, 0, 0
+	Patch STVLB0, 6, 0
+	Patch STVLC0, 12, 0
+	Patch STVLD0, 18, 0
+	Patch STVLE0, 24, 0
+	Patch STVLF0, 30, 0
+	Patch STVLG0, 36, 0
+	Patch STVLH0, 42, 0
+	Patch STVLI0, 48, 0
+	Patch STVLJ0, 54, 0
+}
+Sprite STPAB0, 54, 16
+{
+	Offset 27, 16
+	Patch STVLK0, 0, 0
+	Patch STVLL0, 6, 0
+	Patch STVLM0, 12, 0
+	Patch STVLN0, 18, 0
+	Patch STVLO0, 24, 0
+	Patch STVLP0, 30, 0
+	Patch STVLQ0, 36, 0
+	Patch STVLR0, 42, 0
+	Patch STVLS0, 48, 0
+}
+
+// Damage Numbers
+Sprite D1N0A0, 56, 56 { Offset 48, 16 Patch DamNum0, 48, 0 }
+Sprite D1N1A0, 56, 56 { Offset 48, 16 Patch DamNum1, 48, 0 }
+Sprite D1N2A0, 56, 56 { Offset 48, 16 Patch DamNum2, 48, 0 }
+Sprite D1N3A0, 56, 56 { Offset 48, 16 Patch DamNum3, 48, 0 }
+Sprite D1N4A0, 56, 56 { Offset 48, 16 Patch DamNum4, 48, 0 }
+Sprite D1N5A0, 56, 56 { Offset 48, 16 Patch DamNum5, 48, 0 }
+Sprite D1N6A0, 56, 56 { Offset 48, 16 Patch DamNum6, 48, 0 }
+Sprite D1N7A0, 56, 56 { Offset 48, 16 Patch DamNum7, 48, 0 }
+Sprite D1N8A0, 56, 56 { Offset 48, 16 Patch DamNum8, 48, 0 }
+Sprite D1N9A0, 56, 56 { Offset 48, 16 Patch DamNum9, 48, 0 }
+
+Sprite D2N0A0, 56, 56 { Offset 48, 16 Patch DamNum0, 40, 0 }
+Sprite D2N1A0, 56, 56 { Offset 48, 16 Patch DamNum1, 40, 0 }
+Sprite D2N2A0, 56, 56 { Offset 48, 16 Patch DamNum2, 40, 0 }
+Sprite D2N3A0, 56, 56 { Offset 48, 16 Patch DamNum3, 40, 0 }
+Sprite D2N4A0, 56, 56 { Offset 48, 16 Patch DamNum4, 40, 0 }
+Sprite D2N5A0, 56, 56 { Offset 48, 16 Patch DamNum5, 40, 0 }
+Sprite D2N6A0, 56, 56 { Offset 48, 16 Patch DamNum6, 40, 0 }
+Sprite D2N7A0, 56, 56 { Offset 48, 16 Patch DamNum7, 40, 0 }
+Sprite D2N8A0, 56, 56 { Offset 48, 16 Patch DamNum8, 40, 0 }
+Sprite D2N9A0, 56, 56 { Offset 48, 16 Patch DamNum9, 40, 0 }
+
+Sprite D3N0A0, 56, 56 { Offset 48, 16 Patch DamNum0, 32, 0 }
+Sprite D3N1A0, 56, 56 { Offset 48, 16 Patch DamNum1, 32, 0 }
+Sprite D3N2A0, 56, 56 { Offset 48, 16 Patch DamNum2, 32, 0 }
+Sprite D3N3A0, 56, 56 { Offset 48, 16 Patch DamNum3, 32, 0 }
+Sprite D3N4A0, 56, 56 { Offset 48, 16 Patch DamNum4, 32, 0 }
+Sprite D3N5A0, 56, 56 { Offset 48, 16 Patch DamNum5, 32, 0 }
+Sprite D3N6A0, 56, 56 { Offset 48, 16 Patch DamNum6, 32, 0 }
+Sprite D3N7A0, 56, 56 { Offset 48, 16 Patch DamNum7, 32, 0 }
+Sprite D3N8A0, 56, 56 { Offset 48, 16 Patch DamNum8, 32, 0 }
+Sprite D3N9A0, 56, 56 { Offset 48, 16 Patch DamNum9, 32, 0 }
+
+Sprite D4N0A0, 56, 56 { Offset 48, 16 Patch DamNum0, 24, 0 }
+Sprite D4N1A0, 56, 56 { Offset 48, 16 Patch DamNum1, 24, 0 }
+Sprite D4N2A0, 56, 56 { Offset 48, 16 Patch DamNum2, 24, 0 }
+Sprite D4N3A0, 56, 56 { Offset 48, 16 Patch DamNum3, 24, 0 }
+Sprite D4N4A0, 56, 56 { Offset 48, 16 Patch DamNum4, 24, 0 }
+Sprite D4N5A0, 56, 56 { Offset 48, 16 Patch DamNum5, 24, 0 }
+Sprite D4N6A0, 56, 56 { Offset 48, 16 Patch DamNum6, 24, 0 }
+Sprite D4N7A0, 56, 56 { Offset 48, 16 Patch DamNum7, 24, 0 }
+Sprite D4N8A0, 56, 56 { Offset 48, 16 Patch DamNum8, 24, 0 }
+Sprite D4N9A0, 56, 56 { Offset 48, 16 Patch DamNum9, 24, 0 }
+
+Sprite D5N0A0, 56, 56 { Offset 48, 16 Patch DamNum0, 16, 0 }
+Sprite D5N1A0, 56, 56 { Offset 48, 16 Patch DamNum1, 16, 0 }
+Sprite D5N2A0, 56, 56 { Offset 48, 16 Patch DamNum2, 16, 0 }
+Sprite D5N3A0, 56, 56 { Offset 48, 16 Patch DamNum3, 16, 0 }
+Sprite D5N4A0, 56, 56 { Offset 48, 16 Patch DamNum4, 16, 0 }
+Sprite D5N5A0, 56, 56 { Offset 48, 16 Patch DamNum5, 16, 0 }
+Sprite D5N6A0, 56, 56 { Offset 48, 16 Patch DamNum6, 16, 0 }
+Sprite D5N7A0, 56, 56 { Offset 48, 16 Patch DamNum7, 16, 0 }
+Sprite D5N8A0, 56, 56 { Offset 48, 16 Patch DamNum8, 16, 0 }
+Sprite D5N9A0, 56, 56 { Offset 48, 16 Patch DamNum9, 16, 0 }
+
+Sprite D6N0A0, 56, 56 { Offset 48, 16 Patch DamNum0, 8, 0 }
+Sprite D6N1A0, 56, 56 { Offset 48, 16 Patch DamNum1, 8, 0 }
+Sprite D6N2A0, 56, 56 { Offset 48, 16 Patch DamNum2, 8, 0 }
+Sprite D6N3A0, 56, 56 { Offset 48, 16 Patch DamNum3, 8, 0 }
+Sprite D6N4A0, 56, 56 { Offset 48, 16 Patch DamNum4, 8, 0 }
+Sprite D6N5A0, 56, 56 { Offset 48, 16 Patch DamNum5, 8, 0 }
+Sprite D6N6A0, 56, 56 { Offset 48, 16 Patch DamNum6, 8, 0 }
+Sprite D6N7A0, 56, 56 { Offset 48, 16 Patch DamNum7, 8, 0 }
+Sprite D6N8A0, 56, 56 { Offset 48, 16 Patch DamNum8, 8, 0 }
+Sprite D6N9A0, 56, 56 { Offset 48, 16 Patch DamNum9, 8, 0 }
+
+Sprite D7N0A0, 56, 56 { Offset 48, 16 Patch DamNum0, 0, 0 }
+Sprite D7N1A0, 56, 56 { Offset 48, 16 Patch DamNum1, 0, 0 }
+Sprite D7N2A0, 56, 56 { Offset 48, 16 Patch DamNum2, 0, 0 }
+Sprite D7N3A0, 56, 56 { Offset 48, 16 Patch DamNum3, 0, 0 }
+Sprite D7N4A0, 56, 56 { Offset 48, 16 Patch DamNum4, 0, 0 }
+Sprite D7N5A0, 56, 56 { Offset 48, 16 Patch DamNum5, 0, 0 }
+Sprite D7N6A0, 56, 56 { Offset 48, 16 Patch DamNum6, 0, 0 }
+Sprite D7N7A0, 56, 56 { Offset 48, 16 Patch DamNum7, 0, 0 }
+Sprite D7N8A0, 56, 56 { Offset 48, 16 Patch DamNum8, 0, 0 }
+Sprite D7N9A0, 56, 56 { Offset 48, 16 Patch DamNum9, 0, 0 }
+
+// Digital Numbers
+Sprite M1N0A0, 80, 56 { Offset 40, 16 Patch DigNum0, 48, 0 }
+Sprite M1N1A0, 80, 56 { Offset 40, 16 Patch DigNum1, 48, 0 }
+Sprite M1N2A0, 80, 56 { Offset 40, 16 Patch DigNum2, 48, 0 }
+Sprite M1N3A0, 80, 56 { Offset 40, 16 Patch DigNum3, 48, 0 }
+Sprite M1N4A0, 80, 56 { Offset 40, 16 Patch DigNum4, 48, 0 }
+Sprite M1N5A0, 80, 56 { Offset 40, 16 Patch DigNum5, 48, 0 }
+Sprite M1N6A0, 80, 56 { Offset 40, 16 Patch DigNum6, 48, 0 }
+Sprite M1N7A0, 80, 56 { Offset 40, 16 Patch DigNum7, 48, 0 }
+Sprite M1N8A0, 80, 56 { Offset 40, 16 Patch DigNum8, 48, 0 }
+Sprite M1N9A0, 80, 56 { Offset 40, 16 Patch DigNum9, 48, 0 }
+
+Sprite M2N0A0, 80, 56 { Offset 40, 16 Patch DigNum0, 40, 0 }
+Sprite M2N1A0, 80, 56 { Offset 40, 16 Patch DigNum1, 40, 0 }
+Sprite M2N2A0, 80, 56 { Offset 40, 16 Patch DigNum2, 40, 0 }
+Sprite M2N3A0, 80, 56 { Offset 40, 16 Patch DigNum3, 40, 0 }
+Sprite M2N4A0, 80, 56 { Offset 40, 16 Patch DigNum4, 40, 0 }
+Sprite M2N5A0, 80, 56 { Offset 40, 16 Patch DigNum5, 40, 0 }
+Sprite M2N6A0, 80, 56 { Offset 40, 16 Patch DigNum6, 40, 0 }
+Sprite M2N7A0, 80, 56 { Offset 40, 16 Patch DigNum7, 40, 0 }
+Sprite M2N8A0, 80, 56 { Offset 40, 16 Patch DigNum8, 40, 0 }
+Sprite M2N9A0, 80, 56 { Offset 40, 16 Patch DigNum9, 40, 0 }
+
+Sprite M3N0A0, 80, 56 { Offset 40, 16 Patch DigNum0, 32, 0 }
+Sprite M3N1A0, 80, 56 { Offset 40, 16 Patch DigNum1, 32, 0 }
+Sprite M3N2A0, 80, 56 { Offset 40, 16 Patch DigNum2, 32, 0 }
+Sprite M3N3A0, 80, 56 { Offset 40, 16 Patch DigNum3, 32, 0 }
+Sprite M3N4A0, 80, 56 { Offset 40, 16 Patch DigNum4, 32, 0 }
+Sprite M3N5A0, 80, 56 { Offset 40, 16 Patch DigNum5, 32, 0 }
+Sprite M3N6A0, 80, 56 { Offset 40, 16 Patch DigNum6, 32, 0 }
+Sprite M3N7A0, 80, 56 { Offset 40, 16 Patch DigNum7, 32, 0 }
+Sprite M3N8A0, 80, 56 { Offset 40, 16 Patch DigNum8, 32, 0 }
+Sprite M3N9A0, 80, 56 { Offset 40, 16 Patch DigNum9, 32, 0 }
+
+Sprite M4N0A0, 80, 56 { Offset 40, 16 Patch DigNum0, 24, 0 }
+Sprite M4N1A0, 80, 56 { Offset 40, 16 Patch DigNum1, 24, 0 }
+Sprite M4N2A0, 80, 56 { Offset 40, 16 Patch DigNum2, 24, 0 }
+Sprite M4N3A0, 80, 56 { Offset 40, 16 Patch DigNum3, 24, 0 }
+Sprite M4N4A0, 80, 56 { Offset 40, 16 Patch DigNum4, 24, 0 }
+Sprite M4N5A0, 80, 56 { Offset 40, 16 Patch DigNum5, 24, 0 }
+Sprite M4N6A0, 80, 56 { Offset 40, 16 Patch DigNum6, 24, 0 }
+Sprite M4N7A0, 80, 56 { Offset 40, 16 Patch DigNum7, 24, 0 }
+Sprite M4N8A0, 80, 56 { Offset 40, 16 Patch DigNum8, 24, 0 }
+Sprite M4N9A0, 80, 56 { Offset 40, 16 Patch DigNum9, 24, 0 }
+
+Sprite M5N0A0, 80, 56 { Offset 40, 16 Patch DigNum0, 16, 0 }
+Sprite M5N1A0, 80, 56 { Offset 40, 16 Patch DigNum1, 16, 0 }
+Sprite M5N2A0, 80, 56 { Offset 40, 16 Patch DigNum2, 16, 0 }
+Sprite M5N3A0, 80, 56 { Offset 40, 16 Patch DigNum3, 16, 0 }
+Sprite M5N4A0, 80, 56 { Offset 40, 16 Patch DigNum4, 16, 0 }
+Sprite M5N5A0, 80, 56 { Offset 40, 16 Patch DigNum5, 16, 0 }
+Sprite M5N6A0, 80, 56 { Offset 40, 16 Patch DigNum6, 16, 0 }
+Sprite M5N7A0, 80, 56 { Offset 40, 16 Patch DigNum7, 16, 0 }
+Sprite M5N8A0, 80, 56 { Offset 40, 16 Patch DigNum8, 16, 0 }
+Sprite M5N9A0, 80, 56 { Offset 40, 16 Patch DigNum9, 16, 0 }
+
+Sprite M6N0A0, 80, 56 { Offset 40, 16 Patch DigNum0, 8, 0 }
+Sprite M6N1A0, 80, 56 { Offset 40, 16 Patch DigNum1, 8, 0 }
+Sprite M6N2A0, 80, 56 { Offset 40, 16 Patch DigNum2, 8, 0 }
+Sprite M6N3A0, 80, 56 { Offset 40, 16 Patch DigNum3, 8, 0 }
+Sprite M6N4A0, 80, 56 { Offset 40, 16 Patch DigNum4, 8, 0 }
+Sprite M6N5A0, 80, 56 { Offset 40, 16 Patch DigNum5, 8, 0 }
+Sprite M6N6A0, 80, 56 { Offset 40, 16 Patch DigNum6, 8, 0 }
+Sprite M6N7A0, 80, 56 { Offset 40, 16 Patch DigNum7, 8, 0 }
+Sprite M6N8A0, 80, 56 { Offset 40, 16 Patch DigNum8, 8, 0 }
+Sprite M6N9A0, 80, 56 { Offset 40, 16 Patch DigNum9, 8, 0 }
+
+Sprite M7N0A0, 80, 56 { Offset 40, 16 Patch DigNum0, 0, 0 }
+Sprite M7N1A0, 80, 56 { Offset 40, 16 Patch DigNum1, 0, 0 }
+Sprite M7N2A0, 80, 56 { Offset 40, 16 Patch DigNum2, 0, 0 }
+Sprite M7N3A0, 80, 56 { Offset 40, 16 Patch DigNum3, 0, 0 }
+Sprite M7N4A0, 80, 56 { Offset 40, 16 Patch DigNum4, 0, 0 }
+Sprite M7N5A0, 80, 56 { Offset 40, 16 Patch DigNum5, 0, 0 }
+Sprite M7N6A0, 80, 56 { Offset 40, 16 Patch DigNum6, 0, 0 }
+Sprite M7N7A0, 80, 56 { Offset 40, 16 Patch DigNum7, 0, 0 }
+Sprite M7N8A0, 80, 56 { Offset 40, 16 Patch DigNum8, 0, 0 }
+Sprite M7N9A0, 80, 56 { Offset 40, 16 Patch DigNum9, 0, 0 }
+
+// Stat Graphics - Menu
+Graphic STAT1, 320, 320 { Offset 160, 290 XScale 9.37 YScale 9.37 Graphic StatStr, 0, 0 }
+Graphic STAT2, 320, 320 { Offset 160, 250 XScale 9.37 YScale 9.37 Graphic StatDef, 0, 0 }
+Graphic STAT3, 320, 320 { Offset 160, 275 XScale 9.37 YScale 9.37 Graphic StatVit, 0, 0 }
+Graphic STAT4, 320, 320 { Offset 160, 300 XScale 9.37 YScale 9.37 Graphic StatEng, 0, 0 }
+Graphic STAT5, 320, 320 { Offset 160, 300 XScale 9.37 YScale 9.37 Graphic StatReg, 0, 0 }
+Graphic STAT6, 320, 320 { Offset 160, 300 XScale 9.37 YScale 9.37 Graphic StatAgi, 0, 0 }
+Graphic STAT7, 320, 320 { Offset 160, 270 XScale 9.37 YScale 9.37 Graphic StatCpy, 0, 0 }
+Graphic STAT8, 320, 320 { Offset 160, 270 XScale 9.37 YScale 9.37 Graphic StatLuk, 0, 0 }
+Graphic STATP, 320, 320 { Offset 160, 270 XScale 24 YScale 24 Graphic StatPerk, 0, 0 }
+
+// Stat Graphics - Small Icons
+Graphic STAT1S, 320, 320 { Offset 160, 275 XScale 14.055 YScale 14.055 Graphic StatStr, 0, 0 }
+Graphic STAT2S, 320, 320 { Offset 160, 250 XScale 14.055 YScale 14.055 Graphic StatDef, 0, 0 }
+Graphic STAT3S, 320, 320 { Offset 160, 275 XScale 14.055 YScale 14.055 Graphic StatVit, 0, 0 }
+Graphic STAT4S, 320, 320 { Offset 160, 275 XScale 14.055 YScale 14.055 Graphic StatEng, 0, 0 }
+Graphic STAT5S, 320, 320 { Offset 160, 300 XScale 14.055 YScale 14.055 Graphic StatReg, 0, 0 }
+Graphic STAT6S, 320, 320 { Offset 160, 280 XScale 14.055 YScale 14.055 Graphic StatAgi, 0, 0 }
+Graphic STAT7S, 320, 320 { Offset 160, 275 XScale 14.055 YScale 14.055 Graphic StatCpy, 0, 0 }
+Graphic STAT8S, 320, 320 { Offset 160, 280 XScale 14.055 YScale 14.055 Graphic StatLuk, 0, 0 }
+
+// Simple Aura Sprites
+Sprite SAURA0, 320, 320 { Offset 160, 290 XScale 9.37 YScale 11.25 Graphic StatStr, 0, 0 }
+Sprite SAURB0, 320, 320 { Offset 160, 250 XScale 9.37 YScale 11.25 Graphic StatDef, 0, 0 }
+Sprite SAURC0, 320, 320 { Offset 160, 275 XScale 9.37 YScale 11.25 Graphic StatVit, 0, 0 }
+Sprite SAURD0, 320, 320 { Offset 160, 300 XScale 9.37 YScale 11.25 Graphic StatEng, 0, 0 }
+Sprite SAURE0, 320, 320 { Offset 160, 300 XScale 9.37 YScale 11.25 Graphic StatReg, 0, 0 }
+Sprite SAURF0, 320, 320 { Offset 160, 300 XScale 9.37 YScale 11.25 Graphic StatAgi, 0, 0 }
+Sprite SAURG0, 320, 320 { Offset 160, 270 XScale 9.37 YScale 11.25 Graphic StatCpy, 0, 0 }
+Sprite SAURH0, 320, 320 { Offset 160, 270 XScale 9.37 YScale 11.25 Graphic StatLuk, 0, 0 }
+Sprite SAURI0, 320, 320 { Offset 160, 270 XScale 9.37 YScale 11.25 Graphic StatShdw, 0, 0 }
+Sprite SAURJ0, 320, 320 { Offset 160, 270 XScale 9.37 YScale 11.25 Graphic StatXP, 0, 0 }
+Sprite SAURK0, 286, 222 { Offset 160, 270 XScale 9.37 YScale 11.25 Graphic GHRTA0, 0, 0 }
+
+// Augmentation Battery Icon
+Graphic AUGBATT, 320, 320 { Offset 160, 160 XScale 14 YScale 16 Graphic AugBat1, 0, 0 }
+//Graphic AUGBATT, 32, 32 { Offset 10, 10 Graphic AugBatL, 0, 0 }
+
+// Autosell/Autostore Icons
+Graphic SELLICN, 800, 800 { Offset 0, 0 XScale 50 YScale 50 Graphic SellIcon, 0, 0 }
+Graphic STORICN, 800, 800 { Offset 0, 0 XScale 50 YScale 50 Graphic StorIcon, 0, 0 }
+Graphic KEEPICN, 800, 800 { Offset 0, 0 XScale 50 YScale 50 Graphic KeepIcon, 0, 0 }
+
+// Health Critical Icon (Multiplayer HUD)
+Graphic HLTHCRIT, 5, 24 { Offset 0, 0 XScale 2 YScale 1.75 Graphic ALRTA0, 0, 0 }
+
+// Skill Icons
+Graphic SKIL1_1, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Heal, 0, 0 }
+Graphic SKIL1_2, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Heal2, 0, 0 }
+Graphic SKIL1_3, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Decont, 0, 0 }
+Graphic SKIL1_4, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_RArmor, 0, 0 }
+Graphic SKIL2_1, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Invuln, 0, 0 }
+Graphic SKIL2_2, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Invis, 0, 0 }
+Graphic SKIL2_3, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_TFreez, 0, 0 }
+Graphic SKIL2_4, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_ENShld, 0, 0 }
+Graphic SKIL2_5, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_NVisi, 0, 0 }
+Graphic SKIL2_6, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Berser, 0, 0 }
+Graphic SKIL2_7, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_MMap, 0, 0 }
+Graphic SKIL2_8, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_SuDrop, 0, 0 }
+Graphic SKIL3_1, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura1, 0, 0 }
+Graphic SKIL3_2, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura2, 0, 0 }
+Graphic SKIL3_3, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura3, 0, 0 }
+Graphic SKIL3_4, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura4, 0, 0 }
+Graphic SKIL3_5, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura5, 0, 0 }
+Graphic SKIL3_6, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura6, 0, 0 }
+Graphic SKIL3_7, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura7, 0, 0 }
+Graphic SKIL3_8, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura8, 0, 0 }
+Graphic SKIL3_9, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Aura9, 0, 0 }
+Graphic SKIL4_1, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Weaken, 0, 0 }
+Graphic SKIL4_2, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Transl, 0, 0 }
+Graphic SKIL4_3, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Repuls, 0, 0 }
+Graphic SKIL4_4, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_AuraSt, 0, 0 }
+Graphic SKIL4_5, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_SoulSt, 0, 0 }
+Graphic SKIL4_6, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Disrpt, 0, 0 }
+Graphic SKIL4_7, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_PlsBea, 0, 0 }
+Graphic SKIL5_1, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_2, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_3, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_4, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_5, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_6, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_7, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_8, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_9, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_10, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_11, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_12, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_13, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_14, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_15, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_16, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL5_17, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Summon, 0, 0 }
+Graphic SKIL6_1, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_BArmor, 0, 0 }
+Graphic SKIL6_2, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_FWall, 0, 0 }
+Graphic SKIL6_3, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Rally, 0, 0 }
+Graphic SKIL6_4, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Unsumm, 0, 0 }
+Graphic SKIL6_5, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Recall, 0, 0 }
+Graphic SKIL6_6, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Magnet, 0, 0 }
+Graphic SKIL6_7, 512, 512 { Offset 0, 0 XScale 16 YScale 16 Graphic S_Transp, 0, 0 }
+
+// Inventory Bar Icons
+Graphic ARM1, 31, 17 { Offset 0, -8 Graphic ARM1A0, 0, 0 }
+Graphic ARM1U, 31, 17 { Offset 0, -8 Graphic ARM1B0, 0, 0 }
+Graphic ARM2, 31, 17 { Offset 0, -8 Graphic ARM2A0, 0, 0 }
+Graphic ARM2U, 31, 17 { Offset 0, -8 Graphic ARM2B0, 0, 0 }
+Graphic ARM3, 31, 17 { Offset 0, -8 Graphic ARM3A0, 0, 0 }
+Graphic ARM3U, 31, 17 { Offset 0, -8 Graphic ARM3B0, 0, 0 }
+Graphic ARM4, 31, 17 { Offset 0, -8 Graphic ARM4A0, 0, 0 }
+Graphic ARM4U, 31, 17 { Offset 0, -8 Graphic ARM4B0, 0, 0 }
+Graphic ARM5, 31, 17 { Offset 0, -8 Graphic ARM5A0, 0, 0 }
+Graphic ARM5U, 31, 17 { Offset 0, -8 Graphic ARM5B0, 0, 0 }
+Graphic ARX1, 31, 17 { Offset 0, -8 Graphic ARX1A0, 0, 0 }
+Graphic ARX1U, 31, 17 { Offset 0, -8 Graphic ARX1B0, 0, 0 }
+Graphic ARX2, 31, 17 { Offset 0, -8 Graphic ARX2A0, 0, 0 }
+Graphic ARX2U, 31, 17 { Offset 0, -8 Graphic ARX2B0, 0, 0 }
+Graphic ARX3, 31, 17 { Offset 0, -8 Graphic ARX3A0, 0, 0 }
+Graphic ARX3U, 31, 17 { Offset 0, -8 Graphic ARX3B0, 0, 0 }
+Graphic ARX4, 31, 17 { Offset 0, -8 Graphic ARX4A0, 0, 0 }
+Graphic ARX4U, 31, 17 { Offset 0, -8 Graphic ARX4B0, 0, 0 }
+Graphic ARX5, 31, 17 { Offset 0, -8 Graphic ARX5A0, 0, 0 }
+Graphic ARX5U, 31, 17 { Offset 0, -8 Graphic ARX5B0, 0, 0 }
+Graphic MEDK, 28, 19 { Offset -1, -6 Graphic MEDKA0, 0, 0 }
+Graphic BATT1, 10, 13 { Offset -10, -10 Graphic BATTA0, 0, 0 }
+Graphic BATT2, 29, 21 { Offset 0, -6 Graphic BATTB0, 0, 0 }
+Graphic CRG1, 13, 24 { Offset -9, -4 Graphic CRG1A0, 0, 0 }
+Graphic CRG1B, 13, 24 { Offset -9, -4 Graphic CRG1B0, 0, 0 }
+Graphic CRG1C, 13, 24 { Offset -9, -4 Graphic CRG1C0, 0, 0 }
+Graphic CRG2, 13, 24 { Offset -9, -4 Graphic CRG2A0, 0, 0 }
+Graphic CRG2B, 13, 24 { Offset -9, -4 Graphic CRG2B0, 0, 0 }
+Graphic CRG2C, 13, 24 { Offset -9, -4 Graphic CRG2C0, 0, 0 }
+Graphic CRYSA, 32, 32 { Offset -2, -2 XScale 1.1 YScale 1.1 Graphic CRYSA0, 0, 0 }
+Graphic CRYSB, 32, 32 { Offset 0, -2 XScale 1.1 YScale 1.1 Graphic CRYSB0, 0, 0 }
+Graphic CRYSC, 32, 32 { Offset -2, -2 XScale 1.1 YScale 1.1 Graphic CRYSC0, 0, 0 }
+Graphic CRYSD, 32, 32 { Offset -2, -2 XScale 1.1 YScale 1.1 Graphic CRYSD0, 0, 0 }
+Graphic CRYSE, 32, 32 { Offset 1, -2 XScale 1.1 YScale 1.1 Graphic CRYSE0, 0, 0 }
+Graphic CRYSF, 32, 32 { Offset -2, -5 XScale 1.1 YScale 1.1 Graphic CRYSF0, 0, 0 }
+Graphic CRYSG, 32, 32 { Offset -2, -2 XScale 1.1 YScale 1.1 Graphic CRYSG0, 0, 0 }
+Graphic STIM, 14, 14 { Offset -8, -9 Graphic STIMA0, 0, 0 }
+Graphic NUKE, 50, 50 { Offset 0, 6 XScale 1.75 YScale 1.75 Graphic TBOMA0, 0, 0 }
+Graphic PSTR, 28, 19 { Offset -1, -6 Graphic PSTRA0, 0, 0 }
+Graphic PVIS, 28, 13 { Offset -1, -9 Graphic PVISA0, 0, 0 }
+Graphic PVISB, 28, 13 { Offset -1, -9 Graphic PVISB0, 0, 0 }
+Graphic REGN, 25, 25 { Offset -2, -3 Graphic REGNA0, 0, 0 }
+Graphic REGNB, 25, 25 { Offset -2, -3 Graphic REGNB0, 0, 0 }
+Graphic REGNC, 25, 25 { Offset -2, -3 Graphic REGNC0, 0, 0 }
+Graphic REGND, 25, 25 { Offset -2, -3 Graphic REGND0, 0, 0 }
+Graphic STIMC, 32, 32 { Offset -13, -4 XScale 1.25 YScale 1.25 Graphic STIMC0, 0, 0 }
+Graphic SUIT, 24, 47 { Offset -14, -4 XScale 1.75 YScale 1.75 Graphic SUITA0, 0, 0 }
+Graphic TIME, 32, 32 { Offset -3, -4 XScale 1.25 YScale 1.25 Graphic TIMEA0, 0, 0 }
+Graphic TIMEB, 32, 32 { Offset -3, -4 XScale 1.25 YScale 1.25 Graphic TIMEB0, 0, 0 }
+Graphic TIMEC, 32, 32 { Offset -3, -4 XScale 1.25 YScale 1.25 Graphic TIMEC0, 0, 0 }
+Graphic TIMED, 32, 32 { Offset -3, -4 XScale 1.25 YScale 1.25 Graphic TIMED0, 0, 0 }
+Graphic WINGS, 27, 24 { Offset -5, -8 XScale 1.25 YScale 1.25 Graphic WINGA0, 0, 0 }

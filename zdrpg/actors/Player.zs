@@ -15,9 +15,9 @@ class ZDRPGDoomPlayer : DoomPlayer
         Player.StartItem "Pistol";
         Player.StartItem "Clip", 51;
         Player.StartItem "Fist";
-        
+
         Player.StartItem "ZDRPGPlayerInventory";
-        Player.StartItem "ZDRPGStats";
+        Player.StartItem "ZDRPGStats";  
         
         +THRUSPECIES;
         +QUICKTORETALIATE ;

@@ -136,7 +136,12 @@ class ZDRPGStats: Inventory
     void regenerateHealth() {
         if((GameTic % 35) == 0)
 		{
-            owner.GiveBody(self.Regeneration / 100 + 1);
+            int hpRestoreAmount = self.Regeneration / 100 + 1;
+            if(owner.Health + hpRestoreAmount > self.getMaxHealth(owner)) {
+                owner.A_SetHealth(self.getMaxHealth(owner));
+            } else {
+                owner.GiveBody(self.Regeneration / 100 + 1);
+            }
 		}
     }
 

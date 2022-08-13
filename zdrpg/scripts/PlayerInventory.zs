@@ -31,7 +31,7 @@ class ZDRPGPlayerInventory: Inventory
         self.Medkit  = CVar.GetCVar("drpg_start_medkit",  player).GetInt();
 
         let Stats = ZDRPGStats.GetStats(owner);
-
+        
         self.MaxMedkit = Stats.Capacity;
 	}
 }

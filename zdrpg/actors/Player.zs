@@ -11,14 +11,7 @@ class ZDRPGDoomPlayer : DoomPlayer
         Player.DamageScreenColor "Green", 1.0, "Slime";
         Player.DamageScreenColor "Green", 1.0, "Radiation";
         Player.DamageScreenColor "Green", 1.0, "Toxicity";
-
-        Player.StartItem "Pistol";
-        Player.StartItem "Clip", 51;
-        Player.StartItem "Fist";
-
-        Player.StartItem "ZDRPGPlayerInventory";
-        Player.StartItem "ZDRPGStats";  
-        
+                
         +THRUSPECIES;
         +QUICKTORETALIATE ;
     }

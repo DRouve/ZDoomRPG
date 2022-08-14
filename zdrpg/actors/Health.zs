@@ -24,7 +24,6 @@ class ZDRPGMedkit: Inventory
     property GiveAmount : GiveAmount;
     Default {
         Inventory.Amount 0;
-        ZDRPGMedkit.GiveAmount 0;
     }
 
     override bool TryPickup (in out Actor toucher) 

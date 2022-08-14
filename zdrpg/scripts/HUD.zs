@@ -44,10 +44,12 @@ class ZDRPGHUD : BaseStatusBar
 
         // EP
         let Stats = ZDRPGStats(CPlayer.mo.FindInventory("ZDRPGStats"));
-        DrawString(fontBig, FormatNumber(Stats.EP, 3), (-35, -18), DI_SCREEN_RIGHT_BOTTOM|DI_TEXT_ALIGN_RIGHT, Font.CR_LIGHTBLUE);  
-        DrawImage("EPEMA0", (0, 6), DI_SCREEN_RIGHT_BOTTOM|DI_ITEM_RIGHT_BOTTOM);
-        DrawImage("EPENA0", (0, 6), DI_SCREEN_RIGHT_BOTTOM|DI_ITEM_RIGHT_BOTTOM);
-
+        if(Stats) {
+            DrawString(fontBig, FormatNumber(Stats.EP, 3), (-35, -18), DI_SCREEN_RIGHT_BOTTOM|DI_TEXT_ALIGN_RIGHT, Font.CR_LIGHTBLUE);  
+            DrawImage("EPEMA0", (0, 6), DI_SCREEN_RIGHT_BOTTOM|DI_ITEM_RIGHT_BOTTOM);
+            DrawImage("EPENA0", (0, 6), DI_SCREEN_RIGHT_BOTTOM|DI_ITEM_RIGHT_BOTTOM);
+        }
+        
         // Ammo
         Inventory ammotype1, ammotype2;
 		[ammotype1, ammotype2] = GetCurrentAmmo();
@@ -67,23 +69,25 @@ class ZDRPGHUD : BaseStatusBar
     }
 
     void DrawLeftTop() {
+
         let Inventory = ZDRPGPlayerInventory(CPlayer.mo.FindInventory("ZDRPGPlayerInventory"));
-        
-        // Credits
-        DrawImage("CREDA0", (12, 10), DI_SCREEN_LEFT_TOP|DI_ITEM_LEFT_TOP, 1., (-1, -1), (1.1, 1.1));
-        DrawString(fontBigNoMono, FormatNumber(Inventory.Credits, getCurrencyOffset(Inventory.Credits)), (65, 5), DI_SCREEN_LEFT_TOP|DI_TEXT_ALIGN_LEFT, Font.CR_GOLD);  
+        if(Inventory) {
+            // Credits
+            DrawImage("CREDA0", (12, 10), DI_SCREEN_LEFT_TOP|DI_ITEM_LEFT_TOP, 1., (-1, -1), (1.1, 1.1));
+            DrawString(fontBigNoMono, FormatNumber(Inventory.Credits, getCurrencyOffset(Inventory.Credits)), (65, 5), DI_SCREEN_LEFT_TOP|DI_TEXT_ALIGN_LEFT, Font.CR_GOLD);  
 
-        // Modules
-        DrawImage("UMODA0", (16, 35), DI_SCREEN_LEFT_TOP|DI_ITEM_LEFT_TOP, 1., (-1, -1), (1.1, 1.1));
-        DrawString(fontBigNoMono, FormatNumber(Inventory.Modules, getCurrencyOffset(Inventory.Modules)), (65, 35), DI_SCREEN_LEFT_TOP|DI_TEXT_ALIGN_LEFT, Font.CR_GREEN);  
+            // Modules
+            DrawImage("UMODA0", (16, 35), DI_SCREEN_LEFT_TOP|DI_ITEM_LEFT_TOP, 1., (-1, -1), (1.1, 1.1));
+            DrawString(fontBigNoMono, FormatNumber(Inventory.Modules, getCurrencyOffset(Inventory.Modules)), (65, 35), DI_SCREEN_LEFT_TOP|DI_TEXT_ALIGN_LEFT, Font.CR_GREEN);  
 
-        // Medpack
-        DrawImage("MEDKA0", (16, 75), DI_SCREEN_LEFT_TOP|DI_ITEM_LEFT_TOP, 1., (-1, -1), (1.05, 1.1));
-        let MedkitFontColor = Font.CR_RED; 
-        if(Inventory.Medkit > 0) {
-            MedkitFontColor = Font.CR_BRICK; 
+            // Medpack
+            DrawImage("MEDKA0", (16, 75), DI_SCREEN_LEFT_TOP|DI_ITEM_LEFT_TOP, 1., (-1, -1), (1.05, 1.1));
+            let MedkitFontColor = Font.CR_RED; 
+            if(Inventory.Medkit > 0) {
+                MedkitFontColor = Font.CR_BRICK; 
+            }
+            DrawString(fontBigNoMono, FormatNumber(Inventory.Medkit, getCurrencyOffset(Inventory.Medkit)), (65, 65), DI_SCREEN_LEFT_TOP|DI_TEXT_ALIGN_LEFT, MedkitFontColor);  
         }
-        DrawString(fontBigNoMono, FormatNumber(Inventory.Medkit, getCurrencyOffset(Inventory.Medkit)), (65, 65), DI_SCREEN_LEFT_TOP|DI_TEXT_ALIGN_LEFT, MedkitFontColor);  
     }
 
     // From GZDoom -> DoomStatusBar

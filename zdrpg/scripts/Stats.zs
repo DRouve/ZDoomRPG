@@ -9,8 +9,11 @@ class ZDRPGStats: Inventory
     int Capacity;
     int Luck;
 
+    int MaxHealth;
+
     int EP;
     int MaxEP;
+    int EPCostMultiplier;
 
     int Level;
     int Rank;
@@ -24,11 +27,14 @@ class ZDRPGStats: Inventory
     property Capacity     : Capacity;
     property Luck         : Luck;
 
-    property EP           : EP;
-    property MaxEP        : MaxEP;
+    property MaxHealth : MaxHealth;
 
-    property Level        : Level;
-    property Rank         : Rank;
+    property EP               : EP;
+    property MaxEP            : MaxEP;
+    property EPCostMultiplier : EPCostMultiplier;
+
+    property Level : Level;
+    property Rank  : Rank;
 
     Default {
         Inventory.Amount 0;
@@ -65,6 +71,7 @@ class ZDRPGStats: Inventory
             let actor = PlayerPawn(actor);
             actor.MaxHealth = value;
         }
+        self.MaxHealth = value;
         actor.A_SetHealth(value);
         
     }
@@ -73,9 +80,11 @@ class ZDRPGStats: Inventory
      *  Returns actor's calculated maxHealth
      *   
      *  @param Actor actor
-     *  @return void
+     *  @return int
      */
     int getMaxHealth(Actor actor) {
+        if(self.MaxHealth)
+            return self.MaxHealth;
         return actor.SpawnHealth() + self.Vitality;
     }
 
@@ -122,8 +131,10 @@ class ZDRPGStats: Inventory
     override void Tick () 
 	{
         Super.Tick(); 
-        if(owner.health < self.getMaxHealth(owner)) {
+        if(owner) {
+            if(owner.health < self.getMaxHealth(owner)) {
             self.regenerateHealth();
+        }
         }
 	}
 

@@ -3,8 +3,7 @@ Recreation of <a href="https://github.com/Kyle873/DoomRPG">Kyle873's Doom RPG Mo
 
 -- Work in progress --
 
-Requires GZDoom 4.3.3+ and Doom2.wad.
+Requires GZDoom 4.8.2+ and Doom2.wad.
 
-- Copy "zdrpg" folder inside your GZDoom folder;
-- Put doom2.wad into your GZDoom folder;
+- Put doom2.wad in this folder;
 - Run zdrpg.bat

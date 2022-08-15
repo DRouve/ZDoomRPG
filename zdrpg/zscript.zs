@@ -8,9 +8,8 @@ version "4.8.2"
 
 #include "handlers/WorldHandler.zs"
 #include "handlers/PlayerHandler.zs"
+#include "handlers/MenuHandler.zs"
 
-#include "forms/PlayerMenu.ZS"
-#include "forms/SimpleMenu2.ZS"
 #include "forms/ZDRPG_ZForms/Include.zsc"
 
 #include "actors/Player.zs"

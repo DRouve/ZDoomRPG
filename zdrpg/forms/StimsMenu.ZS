@@ -8,28 +8,31 @@
 
 // The menu's command handler.
 // This is needed so we can make our menu interactable.
-class Samples_SimpleMenuHandler2 : ZDRPG_ZF_Handler
+class ZDRPG_ZF_StimsMenuHandler : ZDRPG_ZF_Handler
 {
     // The menu this command handler belongs to.
     // We need this to be able to do anything with our menu.
-    ZDRPG_ZF_SimpleMenu2 link;
+    ZDRPG_ZF_StimsMenu link;
+    ZDRPGPlayerHandler playerHandler; 
 
     override void buttonClickCommand (ZDRPG_ZF_Button caller, Name command)
     {
-        // If the command is "aButton"...
-        if (command == "aButton")
+        Array<string> buttonCommand;
+        string commandString = command;
+        commandString.Split (buttonCommand, ":");
+    
+        if(buttonCommand [0] ~== "statUp" && buttonCommand.Size() > 1)
         {
-            // Change the text's colour to a random colour.
-            link.aLabel.SetTextColor (random [textColor] (Font.CR_BRICK, Font.CR_TEAL));
+            playerHandler.SendNetworkEvent("statUp", buttonCommand[1].ToInt());
         }
     }
 }
 
-class ZDRPG_ZF_SimpleMenu2 : ZDRPG_ZF_GenericMenu
+class ZDRPG_ZF_StimsMenu : ZDRPG_ZF_GenericMenu
 {
     // The menu's command handler.
     // We need a command handler so we can make our menu interactable.
-    Samples_SimpleMenuHandler2 handler;
+    ZDRPG_ZF_StimsMenuHandler handler;
 
     // A font to use for text.
     Font smallFont;
@@ -43,10 +46,11 @@ class ZDRPG_ZF_SimpleMenu2 : ZDRPG_ZF_GenericMenu
 
     override void Init (Menu parent)
     {
-        Vector2 baseRes = (320, 200);
+        Vector2 baseRes = (1920, 1080);
 
         // Call GenericMenu's 'Init' function to do some required initialization.
         Super.Init (parent);
+        menuactive = Menu.On;
         // Set our base resolution to 320x200.
         SetBaseResolution (baseRes);
 
@@ -54,30 +58,51 @@ class ZDRPG_ZF_SimpleMenu2 : ZDRPG_ZF_GenericMenu
         smallFont = OptionFont ();
 
         // Create an instance of the handler.
-        handler = new ('Samples_SimpleMenuHandler2');
+        handler = new ('ZDRPG_ZF_StimsMenuHandler');
         // Set the handler's "link" pointer to us.
         handler.link = self;
 
         // Add a background.
-        background = ZDRPG_ZF_Image.Create
+        /*background = ZDRPG_ZF_Image.Create
         (
             // Position
             (0, 0),
             // Size
-            (320, 200),
+            (1920, 1080),
             // Image path/name
             "graphics/ZFormsExamples/Panel.png",
             // Alignment options
             ZDRPG_ZF_Image.AlignType_TopLeft
         );
         // Add the image element into the main frame.
-        background.Pack (mainFrame);
+        background.Pack (mainFrame);*/
 
         // Create the box image's textures.
+
+        array <int> blocksCount;
+        CreateStatBox("Stim 1",     "statUp:1", baseRes, blocksCount);
+        CreateStatBox("Stim 2",      "statUp:2", baseRes, blocksCount);
+        CreateStatBox("Stim 3",     "statUp:3", baseRes, blocksCount);
+        CreateStatBox("Stim 4",       "statUp:4", baseRes, blocksCount);
+        CreateStatBox("Stim 5", "statUp:5", baseRes, blocksCount);
+        CreateStatBox("Stim 6",      "statUp:6", baseRes, blocksCount);
+        CreateStatBox("Stim 7",     "statUp:7", baseRes, blocksCount);
+        CreateStatBox("Stim 8",         "statUp:8", baseRes, blocksCount);
+    }
+
+    void CreateStatBox(string labelText, string commandName, Vector2 baseRes, out array <int> blocksCount) 
+    {
+        string textureColorArray[4] = 
+        {
+            "",
+            "Red",
+            "Green",
+            "Blue"
+        };
         let boxTexture = ZDRPG_ZF_BoxTextures.CreateTexturePixels
         (
             // The texture itself.
-            "graphics/ZFormsExamples/BoxTexture.png",
+            "graphics/ZFormsExamples/BoxTexture"..textureColorArray[random(0,textureColorArray.Size()-1)]..".png",
             // The top-left corner of the middle of the box.
             (32, 32),
             // The bottom-right corner of the middle of the box.
@@ -87,12 +112,19 @@ class ZDRPG_ZF_SimpleMenu2 : ZDRPG_ZF_GenericMenu
             // Whether to scale (true) or tile (false) the middle.
             false
         );
+        
+        let offsetY = 75;
         // Add a box image.
         let boxSize = (128, 128);
+        let boxOffset = offsetY + boxSize.X * blocksCount.Size();
+        let boxInnerOffset = blocksCount.Size() * 32;
+
         let aBoxImage = ZDRPG_ZF_BoxImage.Create
         (
             // Position
-            ((baseRes.X - boxSize.X) / 2., (baseRes.Y - boxSize.Y) / 2.),
+            
+            //((baseRes.X - boxSize.X) / testDouble, (baseRes.Y - boxSize.Y) / testDouble),
+            (boxOffset + boxInnerOffset, offsetY),
             // Size
             boxSize,
             // Texture
@@ -107,17 +139,23 @@ class ZDRPG_ZF_SimpleMenu2 : ZDRPG_ZF_GenericMenu
         let buttonIdle = ZDRPG_ZF_BoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonIdle.png", true);
         let buttonHover = ZDRPG_ZF_BoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonHovered.png", false);
         let buttonClick = ZDRPG_ZF_BoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonClicked.png", false);
+
+        let buttonSideSize = 18;
+        let buttonPosX = boxOffset + boxInnerOffset + aBoxImage.GetWidth() / 2 - buttonSideSize / 2;
+        let buttonPosY = offsetY + aBoxImage.GetHeight() / 2 - buttonSideSize / 2;
+
         // Add a button.
         aButton = ZDRPG_ZF_Button.Create
         (
             // Position
-            ((baseRes.X - 18.) / 2., (baseRes.Y - 18.) / 2.),
+            //((baseRes.X - 18.) / 2, (baseRes.Y - 18.) / 2),
+            (buttonPosX, buttonPosY),
             // Size
-            (18, 18),
+            (buttonSideSize, buttonSideSize),
             // Our command handler
             cmdHandler: handler,
             // A command string for the button
-            command: "aButton",
+            command: commandName,
             // The button's textures
             inactive: buttonIdle,
             hover: buttonHover,
@@ -134,7 +172,7 @@ class ZDRPG_ZF_SimpleMenu2 : ZDRPG_ZF_GenericMenu
             // Size.
             (0, smallFont.GetHeight ()),
             // The label's text
-            text: "Click me222!",
+            text: labelText,
             // The font to use
             fnt: smallFont,
             // Whether to automatically wrap the text or not
@@ -145,8 +183,15 @@ class ZDRPG_ZF_SimpleMenu2 : ZDRPG_ZF_GenericMenu
             textColor: Font.CR_WHITE
         );
         // Calculate the horizontal position for the label so that it's centered on the screen.
-        aLabel.SetPosX ((baseRes.x - smallFont.stringWidth (aLabel.GetText ())) / 2.);
+        aLabel.SetPosX (aButton.GetPosX () - smallFont.stringWidth (aLabel.GetText ()));
         // Add the label element to the main frame.
         aLabel.Pack (mainFrame);
+
+        blocksCount.Push(1);
     }
+
+    override void handleBack() {
+		super.handleBack();
+        menuactive = Menu.OnNoPause;
+	}
 }

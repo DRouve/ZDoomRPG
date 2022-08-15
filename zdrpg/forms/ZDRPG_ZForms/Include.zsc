@@ -22,3 +22,13 @@
 #include "forms/ZDRPG_ZForms/DropdownList.zsc"
 #include "forms/ZDRPG_ZForms/Tabs.zsc"
 #include "forms/ZDRPG_ZForms/FocusLinkHelper.zsc"
+
+#include "forms/PlayerMenu.ZS"
+#include "forms/StatsMenu.ZS"
+#include "forms/AugsMenu.ZS"
+#include "forms/SkillsMenu.ZS"
+#include "forms/ShieldMenu.ZS"
+#include "forms/StimsMenu.ZS"
+#include "forms/TurretMenu.ZS"
+#include "forms/ShopMenu.ZS"
+

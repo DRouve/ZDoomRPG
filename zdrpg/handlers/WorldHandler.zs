@@ -1,4 +1,4 @@
-class WorldHandler : EventHandler 
+class ZDRPGWorldHandler : EventHandler 
 {
     override void WorldThingSpawned(WorldEvent e)
     {

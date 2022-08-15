@@ -169,4 +169,50 @@ class ZDRPGStats: Inventory
     static ZDRPGStats GetStats(Actor actor) {
         return ZDRPGStats(actor.FindInventory("ZDRPGStats"));
     }
+
+    static void StatUpInt(Actor actor, int stat) 
+    {
+        let Stats = ZDRPGStats.GetStats(actor);
+        if(stat == 1) {
+            Stats.Strength++;
+            console.printf("Strength: %d", Stats.Strength);
+        }
+        if(stat == 2) {
+            Stats.Defense++;
+            console.printf("Defense: %d", Stats.Defense);
+        }
+        if(stat == 3) {
+            Stats.Vitality++;
+            console.printf("Vitality: %d", Stats.Vitality);
+        }
+        if(stat == 4) {
+            Stats.Energy++;
+            console.printf("Energy: %d", Stats.Energy);
+        }
+        if(stat == 5) {
+            Stats.Regeneration++;
+            console.printf("Regeneration: %d", Stats.Regeneration);
+        }
+        if(stat == 6) {
+            Stats.Agility++;
+            console.printf("Agility: %d", Stats.Agility);
+        }
+        if(stat == 7) {
+            Stats.Capacity++;
+            console.printf("Capacity: %d", Stats.Capacity);
+        }
+        if(stat == 8) {
+            Stats.Luck++;
+            console.printf("Luck: %d", Stats.Luck);
+        }
+    }
+
+    static void StatUpString(Actor actor, string stat) 
+    {
+        let Stats = ZDRPGStats.GetStats(actor);
+        if(stat == "Strength") {
+            Stats.Strength++;
+            console.printf("Strength: %d", Stats.Strength);
+        }
+    }
 }

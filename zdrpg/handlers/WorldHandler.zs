@@ -17,4 +17,12 @@ class ZDRPGWorldHandler : EventHandler
             console.printf("level: %d", Stats.Level);   
         }
     }
+
+    override void CheckReplacement (ReplaceEvent e)
+    {
+        if (e.Replacee is "Health")
+        {
+            e.Replacement = "ZDRPGSurgeryKit";
+        }
+    }
 }

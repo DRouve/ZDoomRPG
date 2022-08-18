@@ -17,13 +17,10 @@ class ZDRPG_ZF_SkillsMenuHandler : ZDRPG_ZF_Handler
 
     override void buttonClickCommand (ZDRPG_ZF_Button caller, Name command)
     {
-        Array<string> buttonCommand;
         string commandString = command;
-        commandString.Split (buttonCommand, ":");
-    
-        if(buttonCommand [0] ~== "statUp" && buttonCommand.Size() > 1)
+        if(commandString.IndexOf("useSkill") >= 0) 
         {
-            playerHandler.SendNetworkEvent("statUp", buttonCommand[1].ToInt());
+            playerHandler.SendNetworkEvent(command);
         }
     }
 }
@@ -79,11 +76,27 @@ class ZDRPG_ZF_SkillsMenu : ZDRPG_ZF_GenericMenu
 
         // Create the box image's textures.
 
+        /*array< class<ZDRPGSkill> > Skills;
+        BuildSkillItemList(Skills);
+        for (int i=0; i<Skills.size(); i++) {
+            let Skill = ZDRPGSkill(Skills[i]);
+            console.printf("skill+: %s", Skill.getClassname());
+        }*/
+
+        let item = players [consoleplayer].mo.inv;
         array <int> blocksCount;
-        CreateStatBox("Heal",     "statUp:1", baseRes, blocksCount);
-        CreateStatBox("Summon Zombieman",      "statUp:2", baseRes, blocksCount);
-        CreateStatBox("Magnetize",     "statUp:3", baseRes, blocksCount);
-        CreateStatBox("Red Aura",       "statUp:4", baseRes, blocksCount);
+        while (item != NULL)
+        {
+            if (item is "ZDRPGSkill")
+            {   
+                console.printf("useSkill:%s", item.GetClassName());
+                CreateStatBox(item.GetTag(), "useSkill:"..item.GetClassName(), baseRes, blocksCount);
+                item = item.inv;
+            } else {
+                item = item.inv;
+                continue;
+            }
+        }
     }
 
     void CreateStatBox(string labelText, string commandName, Vector2 baseRes, out array <int> blocksCount) 

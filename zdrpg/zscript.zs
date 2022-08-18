@@ -13,6 +13,7 @@ version "4.8.2"
 #include "forms/ZDRPG_ZForms/Include.zsc"
 
 #include "actors/Player.zs"
+#include "actors/Augs.zs"
 #include "actors/Weapons.zs"
 #include "actors/Credits.zs"
 #include "actors/Modules.zs"

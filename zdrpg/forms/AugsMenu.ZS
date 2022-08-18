@@ -17,13 +17,10 @@ class ZDRPG_ZF_AugsMenuHandler : ZDRPG_ZF_Handler
 
     override void buttonClickCommand (ZDRPG_ZF_Button caller, Name command)
     {
-        Array<string> buttonCommand;
         string commandString = command;
-        commandString.Split (buttonCommand, ":");
-    
-        if(buttonCommand [0] ~== "statUp" && buttonCommand.Size() > 1)
+        if(commandString.IndexOf("activateAug") >= 0) 
         {
-            playerHandler.SendNetworkEvent("statUp", buttonCommand[1].ToInt());
+            playerHandler.SendNetworkEvent(command);
         }
     }
 }
@@ -79,11 +76,20 @@ class ZDRPG_ZF_AugsMenu : ZDRPG_ZF_GenericMenu
 
         // Create the box image's textures.
 
+        let item = players [consoleplayer].mo.inv;
         array <int> blocksCount;
-        CreateStatBox("Aug 1",     "statUp:1", baseRes, blocksCount);
-        CreateStatBox("Aug 2",      "statUp:2", baseRes, blocksCount);
-        CreateStatBox("Aug 3",     "statUp:3", baseRes, blocksCount);
-        CreateStatBox("Aug 4",       "statUp:4", baseRes, blocksCount);
+        while (item != NULL)
+        {
+            if (item is "ZDRPGAug")
+            {   
+                console.printf("activateAug:%s", item.GetClassName());
+                CreateStatBox(item.GetTag(), "activateAug:"..item.GetClassName(), baseRes, blocksCount);
+                item = item.inv;
+            } else {
+                item = item.inv;
+                continue;
+            }
+        }
     }
 
     void CreateStatBox(string labelText, string commandName, Vector2 baseRes, out array <int> blocksCount) 

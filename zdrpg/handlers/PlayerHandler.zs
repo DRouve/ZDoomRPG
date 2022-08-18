@@ -7,6 +7,23 @@ class ZDRPGPlayerHandler : EventHandler
         player.mo.GiveInventory("ZDRPGPlayerInventory", 1);   
         player.mo.GiveInventory("ZDRPGMedkitActivator", 1);   
         player.mo.GiveInventory("ZDRPGShieldActivator", 1);   
+
+        // adding skills and augs
+        for (int i=0; i<allactorclasses.size(); i++) {
+            if ((allactorclasses[i] is 'ZDRPGSkill' && allactorclasses[i].getClassName() != 'ZDRPGSkill') 
+            ||  (allactorclasses[i] is 'ZDRPGAug'   && allactorclasses[i].getClassName() != 'ZDRPGAug')) {
+                player.mo.GiveInventory(allactorclasses[i].GetClassName(), 1);
+            }
+        }
+
+        int lump;
+        lump = Wads.FindLump("verylonglumpname");
+        if(lump)
+        {
+            string jsonSkills = Wads.ReadLump(lump);
+            console.printf("lump: %s", jsonSkills);
+        }
+        //whatever.Replace("\r","");
     }
 
     override void NetworkProcess(ConsoleEvent e)
@@ -21,15 +38,32 @@ class ZDRPGPlayerHandler : EventHandler
         {
             ZDRPGStats.StatUp(players[e.Player], command[1]);
         }*/
-
-        if (e.Name ~== "UseSkill")
+        
+        
+        string eString = e.Name;
+        if(eString.IndexOf("useSkill") >= 0) 
         {
-            let item = players[e.Player].mo.FindInventory("ZDRPGHeal");
-            if (item)
-                item.Use(true);
+            Array <String> skillname;
+            e.Name.split(skillname, ":");
+            if (skillname.Size() != 0) {
+                let Skill = players[e.Player].mo.FindInventory(skillname[1]);
+                if (Skill)
+                    Skill.Use(true);
+            } 
         }
 
-        if (e.Name ~== "UseMedkit")
+        if(eString.IndexOf("activateAug") >= 0) 
+        {
+            Array <String> augname;
+            e.Name.split(augname, ":");
+            if (augname.Size() != 0) {
+                let Aug = players[e.Player].mo.FindInventory(augname[1]);
+                if (Aug)
+                    Aug.Use(true);
+            } 
+        }
+
+        if (e.Name ~== "UseMedkit" && players[e.Player].mo.health > 0)
         {
             let item = players[e.Player].mo.FindInventory("ZDRPGMedkitActivator");
             if (item)

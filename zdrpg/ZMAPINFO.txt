@@ -1,0 +1,186 @@
+// Customized GameInfo
+gameinfo
+{
+    // Player Class
+    playerclasses = "ZDRPGDoomPlayer"
+
+    // Respawning
+    defaultrespawntime = 300
+    
+    // Drop Style
+    defaultdropstyle = 1
+
+    // Inventory
+    definventorymaxamount = 1000
+    
+    // Menus/UI
+    dimamount = 0
+    menufontcolor_title = "green"
+    menufontcolor_label = "red"
+    menufontcolor_value = "white"
+    menufontcolor_action = "white"
+    menufontcolor_header = "white"
+    menufontcolor_highlight = "green"
+    menufontcolor_selection = "green"
+
+    StatusBarClass = "ZDRPGHUD"
+    AddEventHandlers = "ZDRPGWorldHandler",
+                       "ZDRPGPlayerHandler",
+                       "ZDRPGMenuHandler",
+                       "ZDRPGStaticHandler"
+}
+
+DoomEdNums
+{
+    11190 = DRPGLootDropper
+    11191 = MedParticle
+    11192 = MedParticleRed
+    11193 = ArmorParticle
+    11194 = AUGParticle
+    11195 = EPParticle
+
+    11011 = DRPGOutpostLevelTransportParticleSpawner
+    11012 = DRPGOutpostAlarm
+    11013 = DRPGOutpostHealthPadParticleSpawner
+    11014 = DRPGOutpostEPPadParticleSpawner
+    11015 = DRPGOutpostArmorPadParticleSpawner
+    11016 = DRPGOutpostBatteryPadParticleSpawner
+    11017 = OutpostSignTransporter
+    11018 = OutpostSignMissionBBS
+    11019 = OutpostSignShop
+    11020 = OutpostSignSkillComputer
+    11021 = OutpostSignRechargePads
+    11022 = OutpostSignEastArea
+    11023 = OutpostSignItemRoulette
+    11024 = OutpostSignArena
+    11025 = OutpostSignArenaFar
+    11026 = OutpostSignArenaWS
+    11027 = OutpostSignArenaStart
+    11028 = OutpostSignArenaReady
+    11029 = OutpostSignShootingRange
+    11030 = OutpostSignSale
+    11031 = OutpostSignSurgeonCapsule
+    11032 = OutpostSignDisassemblingDevice
+
+    11033 = ZDRPGMissionInteraction
+    11034 = ZDRPGShopInteraction
+    11035 = ZDRPGSpecialShopInteraction
+    11036 = ZDRPGPowerOutage
+
+    12000 = OutpostMarker_ArmorPad
+    12001 = OutpostMarker_AugBatteryPad
+    12002 = OutpostMarker_EPPad
+    12003 = OutpostMarker_HealthPad
+    12004 = OutpostMarker_ItemLockers
+    12005 = OutpostMarker_MissionBBS
+    12006 = OutpostMarker_Shop
+    12007 = OutpostMarker_LevelTransporter
+    12008 = OutpostMarker_SkillComputer
+    12009 = OutpostMarker_TokenConverter
+    12010 = OutpostMarker_GamesTable
+    12011 = OutpostMarker_Sale
+    12100 = OutpostAdminLamp
+}
+
+// UAC Outpost
+map Outpost "UAC Outpost"
+{
+    levelnum = 999
+    cluster = 999
+    sky1 = "textures/outpost/outpost_sky.png"
+    
+    nointermission
+}
+
+cluster 999
+{
+    entertext = " "
+    pic = "PostPic"
+}
+
+// Allow players to start the game on the Outpost
+episode OUTPOST
+{
+    name = "UAC Outpost"
+    key = "U"
+    noskillmenu
+}
+
+// Rejigger the skills
+clearskills
+
+// Easy skill
+skill easy
+{
+    aggressiveness = 0.0
+    spawnfilter = normal
+
+    easybossbrain
+    easykey
+    autousehealth
+    
+    acsreturn = 1
+    
+    name = "Easy"
+    textcolor = "Green"
+}
+
+// Normal skill
+skill normal
+{
+    aggressiveness = 0.25
+    spawnfilter = hard
+    
+    autousehealth
+
+    acsreturn = 2
+    
+    name = "Normal"
+    textcolor = "Yellow"
+}
+
+// Hard skill
+skill hard
+{
+    aggressiveness = 0.5
+    spawnfilter = nightmare
+    
+    autousehealth
+
+    acsreturn = 3
+    
+    name = "Hard"
+    textcolor = "Orange"
+}
+
+// Nightmare skill
+skill nightmare
+{
+    aggressiveness = 1.0
+    spawnfilter = nightmare
+    
+    autousehealth
+    defaultskill
+
+    acsreturn = 4
+    
+    name = "Nightmare"
+    MustConfirm = "'Towering, fierce, terrible. Nightmare made material!'"
+    textcolor = "Red"
+}
+
+// Hell skill
+skill hell
+{
+    aggressiveness = 1.0
+    spawnfilter = nightmare
+
+    disablecheats
+    autousehealth
+    
+    acsreturn = 5
+    
+    name = "Hell"
+    MustConfirm = "'Steel yourself and remember: there can be no victory without madness!'"
+    textcolor = "Brick"
+}

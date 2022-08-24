@@ -1,0 +1,121 @@
+type = "Doom Builder Map Settings Configuration";
+gameconfig = "GZDoom_DoomUDMF.cfg";
+strictpatches = 0;
+
+maps
+{
+	
+	OUTPOST
+	{
+		defaultwalltexture = "textures/outpost/Outpost_Cement1.png";
+		overridemiddletexture = false;
+		defaultceiltexture = "textures/outpost/Outpost_CompSpan.png";
+		overrideceiltexture = false;
+		custombrightness = 196;
+		scriptcompiler = "zdoom_acs.cfg";
+		
+		resources
+		{
+			
+			resource0
+			{
+				type = 2;
+				location = "D:\\SEO\\VM-PROJECTS\\DoomRPG\\DoomRPG SE Rebalance\\ports\\gzdoom-4.8.2\\gzdoom.pk3";
+				option1 = 0;
+				option2 = 0;
+				notfortesting = 1;
+			}
+			
+			resource1
+			{
+				type = 1;
+				location = "D:\\SEO\\VM-PROJECTS\\DoomRPG\\DoomRPG SE Rebalance\\ports\\gzdoom-4.8.2\\zdrpg";
+				option1 = 0;
+				option2 = 0;
+				notfortesting = 0;
+			}
+		}
+		viewpositiony = 157.1557f;
+		viewpositionx = 56.89282f;
+		
+		testprecommand
+		{
+			autocloseonsuccess = true;
+			exitcodeiserror = true;
+			stderriserror = true;
+		}
+		customceilheight = 128;
+		customfloorheight = 0;
+		
+		grid
+		{
+			backoffsetx = 0;
+			backsource = 0;
+			gridoriginy = 0;
+			backscaley = 100;
+			gridrotate = 0;
+			backscalex = 100;
+			gridoriginx = 0;
+			gridsize = 16;
+			background = "";
+			backoffsety = 0;
+		}
+		viewscale = 2.045473f;
+		
+		reloadresourceprecommand
+		{
+			autocloseonsuccess = true;
+			exitcodeiserror = true;
+			stderriserror = true;
+		}
+		defaulttoptexture = "textures/outpost/Outpost_Cement1.png";
+		overridebottomtexture = false;
+		defaultbottomtexture = "textures/outpost/Outpost_Cement1.png";
+		defaultfloortexture = "textures/outpost/Outpost_CompSpan.png";
+		overrideceilheight = false;
+		overridebrightness = false;
+		
+		testpostcommand
+		{
+			autocloseonsuccess = true;
+			exitcodeiserror = true;
+			stderriserror = true;
+		}
+		overridefloorheight = false;
+		overridetoptexture = false;
+		uselongtexturenames = false;
+		overridefloortexture = false;
+		
+		reloadresourcepostcommand
+		{
+			autocloseonsuccess = true;
+			exitcodeiserror = true;
+			stderriserror = true;
+		}
+		
+		scriptdocuments
+		{
+			
+			document0
+			{
+				filename = "DIALOGUE";
+				hash = 3588187714;
+				resource;
+				tabtype = 0;
+				scripttype = 18;
+			}
+			
+			document1
+			{
+				filename = "SCRIPTS";
+				hash = 3469170009;
+				resource;
+				tabtype = 0;
+				scripttype = 1;
+				caretposition = 679;
+				firstvisibleline = 3;
+				activetab = true;
+			}
+		}
+	}
+}

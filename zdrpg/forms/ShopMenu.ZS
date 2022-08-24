@@ -176,9 +176,4 @@ class ZDRPG_ZF_ShopMenu : ZDRPG_ZF_GenericMenu
 
         blocksCount.Push(1);
     }
-
-    override void handleBack() {
-		super.handleBack();
-        menuactive = Menu.OnNoPause;
-	}
 }

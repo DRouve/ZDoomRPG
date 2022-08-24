@@ -1,17 +1,11 @@
 class ZDRPGMenuHandler : EventHandler 
 {
+    array <string> mapsList;
+
     override void NetworkProcess(ConsoleEvent e)
     {
         if (e.IsManual || e.Player < 0 || !PlayerInGame[e.Player] || !(players[e.Player].mo))
             return;
-
-        /*Array<string> command;
-        e.Name.Split (command, ":");
-    
-        if(command [0] ~== "statUp" && command.Size() > 1)
-        {
-            ZDRPGStats.StatUp(players[e.Player], command[1]);
-        }*/
 
         if (e.Name ~== "statUp")
         {
@@ -20,6 +14,31 @@ class ZDRPGMenuHandler : EventHandler
             {   
                 ZDRPGStats.StatUpInt(players[e.Player].mo, e.Args[0]); 
             }
+        }
+
+        Array<string> command;
+        e.Name.Split (command, "#");
+    
+        if(command [0] ~== "showMaps" && command.Size() > 1)
+        {
+            mapsList.Clear();
+            Array<string> maps;
+            command[1].Split (maps, "::");
+            for(int i = 0; i<maps.Size();i++)
+            {
+                mapsList.Push(maps[i]);
+            }
+
+            ZDRPG_ZF_TransportMenu link;
+            link.setMenu('ZDRPG_ZF_MapsMenu');
+        }
+
+        command.Clear();
+        e.Name.Split (command, ":");
+        
+        if(command [0] ~== "changeMap")
+        {
+            Level.ChangeLevel(command[1]);
         }
     }
 }

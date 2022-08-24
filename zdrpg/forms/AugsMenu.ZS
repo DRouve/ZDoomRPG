@@ -184,9 +184,4 @@ class ZDRPG_ZF_AugsMenu : ZDRPG_ZF_GenericMenu
 
         blocksCount.Push(1);
     }
-
-    override void handleBack() {
-		super.handleBack();
-        menuactive = Menu.OnNoPause;
-	}
 }

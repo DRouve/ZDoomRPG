@@ -31,4 +31,6 @@
 #include "forms/StimsMenu.ZS"
 #include "forms/TurretMenu.ZS"
 #include "forms/ShopMenu.ZS"
+#include "forms/TransportMenu.ZS"
+#include "forms/MapsMenu.ZS"
 

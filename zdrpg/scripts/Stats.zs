@@ -15,8 +15,10 @@ class ZDRPGStats: Inventory
     int MaxEP;
     int EPCostMultiplier;
 
-    int Level;
+    int Lvl;
     int Rank;
+
+    string LastMap;
 
     property Strength     : Strength;
     property Defense      : Defense;
@@ -33,8 +35,10 @@ class ZDRPGStats: Inventory
     property MaxEP            : MaxEP;
     property EPCostMultiplier : EPCostMultiplier;
 
-    property Level : Level;
-    property Rank  : Rank;
+    property Lvl  : Lvl;
+    property Rank : Rank;
+
+    property LastMap  : LastMap;
 
     Default {
         Inventory.Amount 0;
@@ -124,17 +128,19 @@ class ZDRPGStats: Inventory
         self.Capacity     = CVar.GetCVar("drpg_start_capacity",     player).GetInt();
         self.Luck         = CVar.GetCVar("drpg_start_luck",         player).GetInt();
 
-        self.Level        = CVar.GetCVar("drpg_start_level", player).GetInt() > 0 ? CVar.GetCVar("drpg_start_level", player).GetInt() : 1; 
+        self.Lvl        = CVar.GetCVar("drpg_start_level", player).GetInt() > 0 ? CVar.GetCVar("drpg_start_level", player).GetInt() : 1; 
         self.Rank         = CVar.GetCVar("drpg_start_rank",  player).GetInt() > 0 ? CVar.GetCVar("drpg_start_rank",  player).GetInt() : 1;
     }
 
     override void Tick () 
 	{
         Super.Tick(); 
-        if(owner) {
-            if(owner.health < self.getMaxHealth(owner)) {
-            self.regenerateHealth();
-        }
+        if(owner) 
+        {
+            if(owner.health < self.getMaxHealth(owner)) 
+            {
+                self.regenerateHealth();
+            }
         }
 	}
 
@@ -160,8 +166,11 @@ class ZDRPGStats: Inventory
 	{
         if (!passive && damage > 0)
 		{
+            int targetDefense = 0;
             let targetStats = self.GetStats(source);
-            newdamage = damage + (self.Strength - targetStats.Defense); 
+            if(targetStats)
+                targetDefense = targetStats.Defense;
+            newdamage = damage + (self.Strength - targetDefense); 
             console.printf("Enemy health: %d", source.health);
 		}
 	}

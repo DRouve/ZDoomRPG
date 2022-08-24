@@ -1,11 +1,11 @@
 class ZDRPGSkill: Inventory
 {
-    int Level;
+    int SkillLevel;
     int ModulesCost;
     int EPCost;
     int Power;
 
-    property Level        : Level;
+    property SkillLevel   : SkillLevel;
     property ModulesCost  : ModulesCost;
     property EPCost       : EPCost;
     property Power        : Power;
@@ -15,6 +15,34 @@ class ZDRPGSkill: Inventory
         Inventory.MaxAmount 1;
         +Inventory.Undroppable;
         +Inventory.PersistentPower;
+    }
+}
+
+class ZDRPGTransport : ZDRPGSkill
+{
+    Default {
+        Tag "Transport";
+        ZDRPGSkill.EPCost 0;
+        ZDRPGSkill.Power  50;
+    }
+
+    override bool Use(bool pickup)
+    {
+        let Stats = ZDRPGStats.GetStats(owner);
+        if(Stats.LastMap || Level.MapName != 'Outpost')
+        {
+            let destination = Stats.LastMap;
+            Stats.LastMap = Level.MapName;
+            if(Level.MapName == 'Outpost')
+            {
+                Level.ChangeLevel(destination);
+                return true;
+            }
+            Level.ChangeLevel('Outpost');
+            return true;
+        }
+        console.printf('No prev map found');
+        return false;
     }
 }
 

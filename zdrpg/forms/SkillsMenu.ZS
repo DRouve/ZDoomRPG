@@ -20,6 +20,7 @@ class ZDRPG_ZF_SkillsMenuHandler : ZDRPG_ZF_Handler
         string commandString = command;
         if(commandString.IndexOf("useSkill") >= 0) 
         {
+            link.mParentMenu.Close();
             playerHandler.SendNetworkEvent(command);
         }
     }
@@ -89,7 +90,6 @@ class ZDRPG_ZF_SkillsMenu : ZDRPG_ZF_GenericMenu
         {
             if (item is "ZDRPGSkill")
             {   
-                console.printf("useSkill:%s", item.GetClassName());
                 CreateStatBox(item.GetTag(), "useSkill:"..item.GetClassName(), baseRes, blocksCount);
                 item = item.inv;
             } else {

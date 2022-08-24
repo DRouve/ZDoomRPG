@@ -1,0 +1,92 @@
+// Monster Flags
+const int MF_BOSS = 1;
+const int MF_NOXP = 2;
+const int MF_NOSTATS = 4;
+const int MF_NOAURA = 8;
+const int MF_NOPAYKILL = 16;
+const int MF_NODROPS = 32;
+const int MF_NOHEALTHBAR = 64;
+const int MF_NOWEAKEN = 128;
+const int MF_MEGABOSS = 256;
+const int MF_NAMEGEN = 512;
+const int MF_NOAURAGEN = 1024;
+const int MF_RANKLOSS = 2048;
+
+// Damage Types
+const int DT_NONE = -1;
+const int DT_NORMAL = 0;
+const int DT_TOXIC = 1;
+const int DT_RADIATION = 2;
+const int DT_MELEE = 3;
+const int DT_FIRE = 4;
+const int DT_PLASMA = 5;
+const int DT_LIGHTNING = 6;
+
+// Status Effects
+const int SE_BLIND = 0;
+const int SE_CONFUSION = 1;
+const int SE_POISON = 2;
+const int SE_CORROSION = 3;
+const int SE_FATIGUE = 4;
+const int SE_VIRUS = 5;
+const int SE_SILENCE = 6;
+const int SE_CURSE = 7;
+const int SE_EMP = 8;
+const int SE_RADIATION = 9;
+
+// Ammo Types
+const int AMMO_CLIP = 1;
+const int AMMO_SHELL = 2;
+const int AMMO_ROCKET = 3;
+const int AMMO_CELL = 4;
+
+// Immunity Crystal Types
+const int IC_RANDOM = 0;
+const int IC_BULLET = 1;
+const int IC_MELEE = 2;
+const int IC_FIRE = 3;
+const int IC_PLASMA = 4;
+
+// Turret Weapons
+const int TW_NONE = 0;
+const int TW_BULLET = 1;
+const int TW_PELLET = 2;
+const int TW_ROCKET = 3;
+const int TW_PLASMA = 4;
+const int TW_RAILGUN = 5;
+
+// Turret Projectiles
+const int TP_ROCKET = 0;
+const int TP_PLASMA = 1;
+
+// Turret Commands
+const int TC_NONE = 0;
+const int TC_IDLE = 1;
+const int TC_WANDER = 2;
+const int TC_ORBIT = 3;
+const int TC_TARGET = 4;
+const int TC_CONTROL = 5;
+
+// Randomizers
+#include "actors/Randomizers.txt"
+
+// Marines
+#include "actors/Marines/Base.txt"
+#include "actors/Marines/Pistol.txt"
+#include "actors/Marines/Shotgun.txt"
+#include "actors/Marines/DoubleShotgun.txt"
+#include "actors/Marines/BattleRifle.txt"
+#include "actors/Marines/Chaingun.txt"
+#include "actors/Marines/Minigun.txt"
+#include "actors/Marines/RocketLauncher.txt"
+#include "actors/Marines/PlasmaRifle.txt"
+#include "actors/Marines/BFG9000.txt"
+#include "actors/Marines/PowerSuit.txt"
+#include "actors/Marines/Summons.txt"
+#include "actors/Dummies.txt"
+//#include "actors/Outpost.txt"
+
+// Megabosses
+#include "actors/Megabosses/Base.txt"
+#include "actors/Megabosses/Pride.txt"
+#include "actors/Megabosses/Sloth.txt"

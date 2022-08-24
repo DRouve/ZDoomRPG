@@ -9,10 +9,12 @@ version "4.8.2"
 #include "handlers/WorldHandler.zs"
 #include "handlers/PlayerHandler.zs"
 #include "handlers/MenuHandler.zs"
+#include "handlers/StaticHandler.zs"
 
 #include "forms/ZDRPG_ZForms/Include.zsc"
 
 #include "actors/Player.zs"
+#include "actors/Outpost.zs"
 #include "actors/Augs.zs"
 #include "actors/Weapons.zs"
 #include "actors/Credits.zs"

@@ -50,7 +50,7 @@ class ZDRPG_ZF_ShieldMenu : ZDRPG_ZF_GenericMenu
 
         // Call GenericMenu's 'Init' function to do some required initialization.
         Super.Init (parent);
-        menuactive = Menu.On;
+        menuactive = Menu.OnNoPause;
         // Set our base resolution to 320x200.
         SetBaseResolution (baseRes);
 
@@ -179,9 +179,4 @@ class ZDRPG_ZF_ShieldMenu : ZDRPG_ZF_GenericMenu
 
         blocksCount.Push(1);
     }
-
-    override void handleBack() {
-		super.handleBack();
-        menuactive = Menu.OnNoPause;
-	}
 }

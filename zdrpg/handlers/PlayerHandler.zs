@@ -16,13 +16,42 @@ class ZDRPGPlayerHandler : EventHandler
             }
         }
 
-        int lump;
+        //if(Level.MapName != 'Outpost')
+        //{
+            /*let Stats = ZDRPGStats.GetStats(player.mo);
+            Stats.LastMap = Level.MapName;
+            console.printf(player.mo.getClassName());
+            console.printf(Stats.LastMap);*/
+        //}
+        
+
+        /*int lump;
         lump = Wads.FindLump("verylonglumpname");
         if(lump)
         {
             string jsonSkills = Wads.ReadLump(lump);
             console.printf("lump: %s", jsonSkills);
         }
+        
+        int levelsCount = LevelInfo.GetLevelInfoCount();
+        for(int i=0; i<levelsCount; i++)
+        {
+            let level = LevelInfo.GetLevelInfo(i);
+            if(level.MapExists(level.MapName))
+            {
+                string mapName = level.MapName;
+                mapName.DeleteLastCharacter();
+                mapName.DeleteLastCharacter();
+                string mapPackName = Stringtable.Localize("$C_"..mapName);
+
+                console.printf(level.LookupLevelName());
+                console.printf(mapPackName);
+                console.printf("");
+                //console.printf(level.LevelName);
+                
+                
+            }
+        }*/
         //whatever.Replace("\r","");
     }
 

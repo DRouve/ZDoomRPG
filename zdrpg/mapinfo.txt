@@ -1,8 +1,0 @@
-gameinfo
-{
-    PlayerClasses = "ZDRPGDoomPlayer"
-    StatusBarClass = "ZDRPGHUD"
-    AddEventHandlers = "ZDRPGWorldHandler",
-                       "ZDRPGPlayerHandler",
-                       "ZDRPGMenuHandler"
-}

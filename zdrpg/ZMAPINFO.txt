@@ -32,19 +32,25 @@ gameinfo
 
 DoomEdNums
 {
-    11190 = DRPGLootDropper
-    11191 = MedParticle
-    11192 = MedParticleRed
-    11193 = ArmorParticle
-    11194 = AUGParticle
-    11195 = EPParticle
+    11001 = ZDRPGShopWeaponRandomizer
+    11002 = ZDRPGShopAmmoRandomizer
+    11003 = ZDRPGShopHealthRandomizer
+    11004 = ZDRPGShopArmorRandomizer
+    11005 = ZDRPGShopPowerupRandomizer
+    11006 = ZDRPGShopMiscRandomizer
+    11007 = ZDRPGShopShieldRandomizer
+    11008 = ZDRPGShopAugRandomizer
+    11009 = ZDRPGShopRandomizer
+    
+    11010 = ZDRPGMarineOutpostSpawner
 
-    11011 = DRPGOutpostLevelTransportParticleSpawner
-    11012 = DRPGOutpostAlarm
-    11013 = DRPGOutpostHealthPadParticleSpawner
-    11014 = DRPGOutpostEPPadParticleSpawner
-    11015 = DRPGOutpostArmorPadParticleSpawner
-    11016 = DRPGOutpostBatteryPadParticleSpawner
+    11011 = ZDRPGOutpostLevelTransportParticleSpawner
+    11012 = ZDRPGOutpostAlarm
+    11013 = ZDRPGOutpostHealthPadParticleSpawner
+    11014 = ZDRPGOutpostEPPadParticleSpawner
+    11015 = ZDRPGOutpostArmorPadParticleSpawner
+    11016 = ZDRPGOutpostBatteryPadParticleSpawner
+
     11017 = OutpostSignTransporter
     11018 = OutpostSignMissionBBS
     11019 = OutpostSignShop
@@ -67,6 +73,13 @@ DoomEdNums
     11035 = ZDRPGSpecialShopInteraction
     11036 = ZDRPGPowerOutage
 
+    11190 = ZDRPGLootDropper
+    11191 = MedParticle
+    11192 = MedParticleRed
+    11193 = ArmorParticle
+    11194 = AUGParticle
+    11195 = EPParticle
+
     12000 = OutpostMarker_ArmorPad
     12001 = OutpostMarker_AugBatteryPad
     12002 = OutpostMarker_EPPad
@@ -80,6 +93,89 @@ DoomEdNums
     12010 = OutpostMarker_GamesTable
     12011 = OutpostMarker_Sale
     12100 = OutpostAdminLamp
+
+    19998 = ZDRPGBouncyBall
+
+    20100 = ZDRPGStimSmall
+    20101 = ZDRPGStimMedium
+    20102 = ZDRPGStimLarge
+    20103 = ZDRPGStimXL
+    20104 = ZDRPGStimDetox
+
+    20110 = ZDRPGVialStrength
+    20111 = ZDRPGVialDefense
+    20112 = ZDRPGVialVitality
+    20113 = ZDRPGVialEnergy
+    20114 = ZDRPGVialRegeneration
+    20115 = ZDRPGVialAgility
+    20116 = ZDRPGVialCapacity
+    20117 = ZDRPGVialLuck
+    20118 = ZDRPGVialPurifier
+    20119 = ZDRPGVialPotency
+    20120 = ZDRPGVialIndestructible
+    20121 = ZDRPGVialShadow
+    20122 = ZDRPGVialInfinity
+    20123 = ZDRPGVialChrono
+    20124 = ZDRPGVialAdrenaline
+    20125 = ZDRPGVialGravity
+    20126 = ZDRPGVialVampire
+    20127 = ZDRPGVialRage
+    20128 = ZDRPGVialMagnetic
+    20130 = ZDRPGStimPackageStat
+    20131 = ZDRPGStimPackagePowerup
+
+    20156 = ZDRPGHealthMonsterDropper
+    20157 = ZDRPGEPMonsterDropper
+    20158 = ZDRPGAmmoMonsterDropper
+    20159 = ZDRPGTurretMonsterDropper
+
+    25000 = ZDRPGMoneyDropper
+    25001 = ZDRPGHealthDropper
+    25002 = ZDRPGEPDropper
+    25003 = ZDRPGArmorDropper
+    25004 = ZDRPGPowerupDropper
+    25005 = ZDRPGWeaponDropper
+    25006 = ZDRPGAmmoDropper
+    25007 = ZDRPGModuleDropper
+    25009 = ZDRPGAugDropper
+    25010 = ZDRPGBatteryDropper
+    25011 = ZDRPGShieldDropper
+    25012 = ZDRPGStimDropper
+    25013 = ZDRPGVialDropper
+    25014 = ZDRPGVialDropperRare
+    25015 = ZDRPGTurretDropper
+    25016 = ZDRPGChipDropper
+
+    25020 = ZDRPGCredits1
+    25021 = ZDRPGCredits5
+    25022 = ZDRPGCredits10
+    25023 = ZDRPGCredits20
+    25024 = ZDRPGCredits50
+    25025 = ZDRPGCredits100
+    25026 = ZDRPGCredits1000
+    25027 = ZDRPGCredits250
+    25028 = ZDRPGCredits500
+
+    25034 = ZDRPGSoulsphere2
+    25035 = ZDRPGSoulsphere3
+    25036 = ZDRPG1Up
+    25037 = ZDRPGEPCapsule
+    25038 = ZDRPGBigEPCapsule
+    25039 = ZDRPGLittleEPCapsule
+
+    25042 = ZDRPGYellowArmor
+    25044 = ZDRPGRedArmor
+    25046 = ZDRPGWhiteArmor
+    25047 = ZDRPGReinforcedGreenArmor
+    25048 = ZDRPGReinforcedBlueArmor
+    25049 = ZDRPGReinforcedYellowArmor
+    25050 = ZDRPGReinforcedRedArmor
+    25051 = ZDRPGReinforcedWhiteArmor
+    25052 = ZDRPGTimeSphere
+    25053 = ZDRPGRegenSphere
+    25054 = ZDRPGWings
+
+    25080 = ZDRPGShieldBooster
 }
 
 // UAC Outpost

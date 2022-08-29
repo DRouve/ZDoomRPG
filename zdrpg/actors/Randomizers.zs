@@ -1,7 +1,7 @@
 // SPECIAL
 // --------------------------------------------------
-/*
-class DRPGLuckDropper : MapSpot
+
+class ZDRPGLuckDropper : MapSpot
 {
     States
     {
@@ -11,7 +11,7 @@ class DRPGLuckDropper : MapSpot
     }
 }
 
-class DRPGGenericMonsterDropper : RandomSpawner
+class ZDRPGGenericMonsterDropper : RandomSpawner
 {
     Default
     {
@@ -22,647 +22,797 @@ class DRPGGenericMonsterDropper : RandomSpawner
         +SOLID;
         Radius 50;
         Height 110;
+
+        DropItem "ZombieMan",            255, 700;
+        DropItem "ShotgunGuy",           255, 700;
+        DropItem "ChaingunGuy",          255, 500;
+        DropItem "DoomImp",              255, 500;
+        DropItem "Demon",                255, 400;
+        DropItem "Spectre",              255, 300;
+        DropItem "Cacodemon",            255, 300;
+        DropItem "Fatso",                255, 300;
+        DropItem "HellKnight",           255, 240;
+        DropItem "Arachnotron",          255, 200;
+        DropItem "PainElemental",        255, 100;
+        DropItem "Revenant",             255, 100;
+        DropItem "BaronOfHell",          255, 100;
+        DropItem "Archvile",             255,  20;
+        DropItem "Cyberdemon",           255,   1;
     }
-    
-    DropItem "ZombieMan"            255 700
-    DropItem "ShotgunGuy"           255 700
-    DropItem "ChaingunGuy"          255 500
-    DropItem "DoomImp"              255 500
-    DropItem "Demon"                255 400
-    DropItem "Spectre"              255 300
-    DropItem "Cacodemon"            255 300
-    DropItem "Fatso"                255 300
-    DropItem "HellKnight"           255 240
-    DropItem "Arachnotron"          255 200
-    DropItem "PainElemental"        255 100
-    DropItem "Revenant"             255 100
-    DropItem "BaronOfHell"          255 100
-    DropItem "Archvile"             255  20
-    DropItem "Cyberdemon"           255   1
     
     States
     {
-    Spawn:
-        TNT1 A -1 NoDelay A_ChangeFlag("SOLID", 0)
-        Stop
+        Spawn:
+            TNT1 A -1 NoDelay 
+            {
+                bSolid = false;
+            }
+            Stop;
     }
 }
 
-actor DRPGGenericDropper : RandomSpawner
+class ZDRPGGenericDropper : RandomSpawner
 {
-    DropItem "DRPGHealthDropper"                255 10
-    DropItem "DRPGEPDropper"                    255 10
-    DropItem "DRPGArmorDropper"                 255 10
-    DropItem "DRPGPowerupDropper"               255 5
-    DropItem "DRPGWeaponDropper"                255 5
-    DropItem "DRPGAmmoDropper"                  255 10
-    DropItem "DRPGModuleDropper"                255 1
-    DropItem "DRPGAugDropper"                   255 1
-    DropItem "DRPGBatteryDropper"               255 1
-    DropItem "DRPGShieldDropper"                255 1
-    DropItem "DRPGStimDropper"                  255 1
-    DropItem "DRPGVialDropper"                  255 1
-    DropItem "DRPGChipDropper"                  255 5
-    DropItem "DRPGTurretDropper"                255 3
+    Default
+    {
+        DropItem "ZDRPGHealthDropper",                255, 10;
+        DropItem "ZDRPGEPDropper",                    255, 10;
+        DropItem "ZDRPGArmorDropper",                 255, 10;
+        DropItem "ZDRPGPowerupDropper",               255, 5;
+        DropItem "ZDRPGWeaponDropper",                255, 5;
+        DropItem "ZDRPGAmmoDropper",                  255, 10;
+        DropItem "ZDRPGModuleDropper",                255, 1;
+        DropItem "ZDRPGAugDropper",                   255, 1;
+        DropItem "ZDRPGBatteryDropper",               255, 1;
+        DropItem "ZDRPGShieldDropper",                255, 1;
+        DropItem "ZDRPGStimDropper",                  255, 1;
+        DropItem "ZDRPGVialDropper",                  255, 1;
+        DropItem "ZDRPGChipDropper",                  255, 5;
+        DropItem "ZDRPGTurretDropper",                255, 3;
+    }   
 }
 
-actor DRPGGenericBossDropper : RandomSpawner
+class ZDRPGGenericBossDropper : RandomSpawner
 {
-    DropItem "DRPGMoneyDropper"
-    DropItem "DRPGHealthDropper"
-    DropItem "DRPGEPDropper"
-    DropItem "DRPGArmorDropper"
-    DropItem "DRPGPowerupDropper"
-    DropItem "DRPGWeaponDropper"
-    DropItem "DRPGAmmoDropper"
-    DropItem "DRPGModuleDropper"
-    DropItem "DRPGAugDropper"
-    DropItem "DRPGBatteryDropper"
-    DropItem "DRPGShieldDropper"
-    DropItem "DRPGStimPackageStat"
-    DropItem "DRPGStimPackagePowerup"
-    DropItem "DRPGChipDropper"
-    DropItem "DRPGTurretDropper"
+    Default
+    {
+        DropItem "ZDRPGMoneyDropper";
+        DropItem "ZDRPGHealthDropper";
+        DropItem "ZDRPGEPDropper";
+        DropItem "ZDRPGArmorDropper";
+        DropItem "ZDRPGPowerupDropper";
+        DropItem "ZDRPGWeaponDropper";
+        DropItem "ZDRPGAmmoDropper";
+        DropItem "ZDRPGModuleDropper";
+        DropItem "ZDRPGAugDropper";
+        DropItem "ZDRPGBatteryDropper";
+        DropItem "ZDRPGShieldDropper";
+        DropItem "ZDRPGStimPackageStat";
+        DropItem "ZDRPGStimPackagePowerup";
+        DropItem "ZDRPGChipDropper";
+        DropItem "ZDRPGTurretDropper";
+    }
 }
 
-actor DRPGMoneyDropper : RandomSpawner 25000
+class ZDRPGMoneyDropper : RandomSpawner
 {
-    DropItem "DRPGCredits1"         255 75
-    DropItem "DRPGCredits5"         255 10
-    DropItem "DRPGCredits10"        255 8
-    DropItem "DRPGCredits20"        255 4
-    DropItem "DRPGCredits50"        255 2
-    DropItem "DRPGCredits100"       255 1
+    Default
+    {
+        DropItem "ZDRPGCredits1",         255, 75;
+        DropItem "ZDRPGCredits5",         255, 10;
+        DropItem "ZDRPGCredits10",        255, 8;
+        DropItem "ZDRPGCredits20",        255, 4;
+        DropItem "ZDRPGCredits50",        255, 2;
+        DropItem "ZDRPGCredits100",       255, 1;
+    }
 }
 
-actor DRPGHealthDropper : RandomSpawner 25001
+class ZDRPGHealthDropper : RandomSpawner
 {
-    DropItem "DRPGHealthBonus"      255 150
-    DropItem "DRPGStimpack"         255 100
-    DropItem "DRPGMedikit"          255 30
-    DropItem "DRPGLargeMedikit"     255 10
-    DropItem "DRPGXLMedikit"        255 6
-    DropItem "DRPGMedPack"          255 3
-    DropItem "DRPGSurgeryKit"       255 1
+    Default
+    {
+        DropItem "ZDRPGHealthBonus",      255, 150;
+        DropItem "ZDRPGStimpack",         255, 100;
+        DropItem "ZDRPGMedikit",          255, 30;
+        DropItem "ZDRPGLargeMedikit",     255, 10;
+        DropItem "ZDRPGXLMedikit",        255, 6;
+        DropItem "ZDRPGMedPack",          255, 3;
+        DropItem "ZDRPGSurgeryKit",       255, 1;
+    }
 }
 
-actor DRPGLifeDropper : RandomSpawner
+class ZDRPGLifeDropper : RandomSpawner
 {
-    DropItem "DRPG1Up"              255 100
-//  DropItem "DRPG3Up"              255 5
-//  DropItem "DRPG5Up"              255 1
+    Default
+    {
+        DropItem "ZDRPG1Up",              255, 100;
+    //  DropItem "ZDRPG3Up",              255, 5;
+    //  DropItem "ZDRPG5Up",              255, 1;
+    }
 }
 
-actor DRPGEPDropper : RandomSpawner 25002
+class ZDRPGEPDropper : RandomSpawner
 {
-    DropItem "DRPGLittleEPCapsule"  255 50
-    DropItem "DRPGEPCapsule"        255 40
-    DropItem "DRPGBigEPCapsule"     255 10
+    Default
+    {
+        DropItem "ZDRPGLittleEPCapsule",  255, 50;
+        DropItem "ZDRPGEPCapsule",        255, 40;
+        DropItem "ZDRPGBigEPCapsule",     255, 10;
+    }
 }
 
-actor DRPGArmorDropper : RandomSpawner 25003
+class ZDRPGArmorDropper : RandomSpawner
 {
-    DropItem "DRPGGreenArmorRandomizer" 255 75
-    DropItem "DRPGBlueArmorRandomizer"  255 25
+    Default
+    {
+        DropItem "ZDRPGGreenArmorRandomizer", 255, 75;
+        DropItem "ZDRPGBlueArmorRandomizer",  255, 25;
+    }
 }
 
-actor DRPGPowerupDropper : RandomSpawner 25004
+class ZDRPGPowerupDropper : RandomSpawner
 {
-    DropItem "DRPGInvulnerabilitySphere" 255 10
-    DropItem "DRPGInvulnerabilityCharge" 255 10
-    DropItem "DRPGBlurSphere"            255 10
-    DropItem "DRPGInvisibilityCharge"    255 10
-    DropItem "DRPGTimeSphere"            255 10
-    DropItem "DRPGRegenSphere"           255 10
-    DropItem "DRPGRadSuit"               255 10
-    DropItem "DRPGInfrared"              255 10
-//  DropItem "DRPGBerserk"               255 10
+    Default
+    {
+        DropItem "ZDRPGInvulnerabilitySphere", 255, 10;
+        DropItem "ZDRPGInvulnerabilityCharge", 255, 10;
+        DropItem "ZDRPGBlurSphere",            255, 10;
+        DropItem "ZDRPGInvisibilityCharge",    255, 10;
+        DropItem "ZDRPGTimeSphere",            255, 10;
+        DropItem "ZDRPGRegenSphere",           255, 10;
+        DropItem "ZDRPGRadSuit",               255, 10;
+        DropItem "ZDRPGInfrared",              255, 10;
+    //  DropItem "ZDRPGBerserk",               255, 10;
+    }
 }
 
-actor DRPGImmunityCrystalDropper : RandomSpawner
+class ZDRPGImmunityCrystalDropper : RandomSpawner
 {
-    DropItem "DRPGImmunityCrystalMelee"
-    DropItem "DRPGImmunityCrystalBullet"
-    DropItem "DRPGImmunityCrystalFire"
-    DropItem "DRPGImmunityCrystalPlasma"
-    DropItem "DRPGImmunityCrystalLightning"
-    DropItem "DRPGImmunityCrystalToxic"
-    DropItem "DRPGImmunityCrystalRadiation"
+    Default
+    {
+        DropItem "ZDRPGImmunityCrystalMelee";
+        DropItem "ZDRPGImmunityCrystalBullet";
+        DropItem "ZDRPGImmunityCrystalFire";
+        DropItem "ZDRPGImmunityCrystalPlasma";
+        DropItem "ZDRPGImmunityCrystalLightning";
+        DropItem "ZDRPGImmunityCrystalToxic";
+        DropItem "ZDRPGImmunityCrystalRadiation";
+    }
 }
 
-actor DRPGWeaponDropper : RandomSpawner 25005
+class ZDRPGWeaponDropper : RandomSpawner 
 {
-    DropItem "Pistol"           255 7
-    DropItem "Shotgun"          255 6
-    DropItem "SuperShotgun"     255 5
-    DropItem "Chaingun"         255 4
-    DropItem "RocketLauncher"   255 3
-    DropItem "PlasmaRifle"      255 2
-    DropItem "BFG9000"          255 1
-    DropItem "Chainsaw"         255 1
+    Default
+    {
+        DropItem "Pistol",           255, 7;
+        DropItem "Shotgun",          255, 6;
+        DropItem "SuperShotgun",     255, 5;
+        DropItem "Chaingun",         255, 4;
+        DropItem "RocketLauncher",   255, 3;
+        DropItem "PlasmaRifle",      255, 2;
+        DropItem "BFG9000",          255, 1;
+        DropItem "Chainsaw",         255, 1;
+    }
 }
 
-actor DRPGAmmoDropper : RandomSpawner 25006
+class ZDRPGAmmoDropper : RandomSpawner
 {
-    DropItem "DRPGClip"                 255 80
-	DropItem "DRPGShell"                255 60
-    DropItem "DRPGRocketAmmo"           255 20
-    DropItem "DRPGCell"                 255 10
-    DropItem "DRPGClipBox"              255 4
-    DropItem "DRPGShellBox"             255 3	
-    DropItem "DRPGRocketBox"            255 2	
-    DropItem "DRPGCellPack"             255 1
+    Default
+    {
+        DropItem "ZDRPGClip",                 255, 80;
+        DropItem "ZDRPGShell",                255, 60;
+        DropItem "ZDRPGRocketAmmo",           255, 20;
+        DropItem "ZDRPGCell",                 255, 10;
+        DropItem "ZDRPGClipBox",              255, 4;
+        DropItem "ZDRPGShellBox",             255, 3;	
+        DropItem "ZDRPGRocketBox",            255, 2;	
+        DropItem "ZDRPGCellPack",             255, 1;
+    }
 }
 
-actor DRPGModuleDropper : RandomSpawner 25007
+class ZDRPGModuleDropper : RandomSpawner
 {
-    DropItem "DRPGModulePickup"
+    Default
+    {
+        DropItem "ZDRPGModulePickup";
+    }
 }
 
-actor DRPGAugDropper : RandomSpawner 25009
+class ZDRPGAugDropper : RandomSpawner
 {
-    DropItem "DRPGAugCanister"          255 25
-    DropItem "DRPGAugUpgradeCanister"   255 70
-    DropItem "DRPGAugSlotUpgrade"       255 5
+    Default
+    {
+        DropItem "ZDRPGAugCanister",          255, 25;
+        DropItem "ZDRPGAugUpgradeCanister",   255, 70;
+        DropItem "ZDRPGAugSlotUpgrade",       255, 5;
+    }
 }
 
-actor DRPGBatteryDropper : RandomSpawner 25010
+class ZDRPGBatteryDropper : RandomSpawner
 {
-    DropItem "DRPGBatterySmall"         255 19
-    DropItem "DRPGBatteryLarge"         255 1
+    Default
+    {
+        DropItem "ZDRPGBatterySmall",         255, 19;
+        DropItem "ZDRPGBatteryLarge",         255, 1;
+    }
 }
 
-actor DRPGShieldDropper : RandomSpawner 25011
+class ZDRPGShieldDropper : RandomSpawner
 {
-    // Bodies
-    DropItem "DRPGShieldBody1"          255 40 // UAC
-    DropItem "DRPGShieldBody2"          255 33 // XTron
-    DropItem "DRPGShieldBody3"          255 32 // Black Mesa
-    DropItem "DRPGShieldBody4"          255 28 // EDF
-    DropItem "DRPGShieldBody5"          255 25 // Cyberdyne Systems
-    DropItem "DRPGShieldBody6"          255 24 // Misfit Tech
-    DropItem "DRPGShieldBody7"          255 16 // Shadaloo
-    DropItem "DRPGShieldBody8"          255 22 // Arkai
-    DropItem "DRPGShieldBody9"          255 21 // Ironclad Inc.
-    DropItem "DRPGShieldBody10"         255 21 // Yholl
-    DropItem "DRPGShieldBody11"         255 19 // Hyperix
-    DropItem "DRPGShieldBody12"         255 17 // Xaser Inc.
-    DropItem "DRPGShieldBody13"         255 16 // dataDyne
-    DropItem "DRPGShieldBody14"         255 13 // Starbright
-    DropItem "DRPGShieldBody15"         255 13 // Hellsing
-    DropItem "DRPGShieldBody16"         255 12 // S.H.I.E.L.D.
-    DropItem "DRPGShieldBody17"         255 9  // UAC Elite
-    DropItem "DRPGShieldBody18"         255 9  // Stark Industries
-    DropItem "DRPGShieldBody19"         255 8  // Weyland-Yutani
-    DropItem "DRPGShieldBody20"         255 5  // Megalith
-    DropItem "DRPGShieldBody21"         255 2  // Reaper Industries
-    DropItem "DRPGShieldBody22"         255 2  // Eternity Systems
-    
-    // Batteries
-    DropItem "DRPGShieldBattery1"       255 29 // Crappy
-    DropItem "DRPGShieldBattery2"       255 24 // Bullet
-    DropItem "DRPGShieldBattery3"       255 20 // Elegant
-    DropItem "DRPGShieldBattery4"       255 18 // Spiked
-    DropItem "DRPGShieldBattery5"       255 17 // Stubborn
-    DropItem "DRPGShieldBattery6"       255 14 // Mirrored
-    DropItem "DRPGShieldBattery7"       255 13 // Refined
-    DropItem "DRPGShieldBattery8"       255 9  // Clustered
-    DropItem "DRPGShieldBattery9"       255 8  // Winged
-    DropItem "DRPGShieldBattery10"      255 6  // Overcharged
-    DropItem "DRPGShieldBattery11"      255 3  // Superb
-    DropItem "DRPGShieldBattery12"      255 2  // Redundant
-    DropItem "DRPGShieldBattery13"      255 2  // Reinforced
-    
-    // Capacitors
-    DropItem "DRPGShieldCapacitor1"     255 38 // Standard
-    DropItem "DRPGShieldCapacitor2"     255 32 // Outdated
-    DropItem "DRPGShieldCapacitor3"     255 29 // Cooled
-    DropItem "DRPGShieldCapacitor4"     255 26 // Warm
-    DropItem "DRPGShieldCapacitor5"     255 20 // Inefficient
-    DropItem "DRPGShieldCapacitor6"     255 18 // Energized
-    DropItem "DRPGShieldCapacitor7"     255 15 // Infused
-    DropItem "DRPGShieldCapacitor8"     255 13 // Plasmatic
-    DropItem "DRPGShieldCapacitor9"     255 11 // Burning
-    DropItem "DRPGShieldCapacitor10"    255 9  // Pulsating
-    DropItem "DRPGShieldCapacitor11"    255 8  // Fiery
-    DropItem "DRPGShieldCapacitor12"    255 6  // Eternal
-    DropItem "DRPGShieldCapacitor13"    255 3  // Overloaded
-    DropItem "DRPGShieldCapacitor14"    255 2  // Dark
-    DropItem "DRPGShieldCapacitor15"    255 2  // Chaotic
-    
-    // Accessories
-    // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
-    DropItem "DRPGShieldAccessory1"     255 5 // X-7
-    DropItem "DRPGShieldAccessory2"     255 4 // SGENX-5b
-    DropItem "DRPGShieldAccessory3"     255 4 // AMP-3000
-    DropItem "DRPGShieldAccessory4"     255 5 // HRY-VP80
-    DropItem "DRPGShieldAccessory5"     255 5 // DEF-2
-    DropItem "DRPGShieldAccessory6"     255 5 // B1-ZUT3
-    DropItem "DRPGShieldAccessory7"     255 6 // CNV-RT99
-    DropItem "DRPGShieldAccessory8"     255 5 // REK-T50
-    DropItem "DRPGShieldAccessory9"     255 4 // UW-0t
-    DropItem "DRPGShieldAccessory10"    255 6 // CU-256
-    DropItem "DRPGShieldAccessory11"    255 6 // TX-BGONN
-    DropItem "DRPGShieldAccessory12"    255 6 // WRP30-LITE
-    DropItem "DRPGShieldAccessory13"    255 3 // NOV-A2
-    DropItem "DRPGShieldAccessory14"    255 5 // LZ-Y200
-    DropItem "DRPGShieldAccessory15"    255 5 // BST-700
-    DropItem "DRPGShieldAccessory16"    255 2 // PH-D88
-    DropItem "DRPGShieldAccessory17"    255 1 // BATT-B
-    DropItem "DRPGShieldAccessory18"    255 3 // SHVR-Z7
-    DropItem "DRPGShieldAccessory19"    255 4 // MM-12
-    DropItem "DRPGShieldAccessory20"    255 4 // MRTE-KRAR
-    DropItem "DRPGShieldAccessory21"    255 3 // SP-00k
-    DropItem "DRPGShieldAccessory22"    255 3 // RR-G0
-    DropItem "DRPGShieldAccessory23"    255 2 // E1N-T31
-    DropItem "DRPGShieldAccessory24"    255 3 // PATR-0T
-    DropItem "DRPGShieldAccessory25"    255 4 // RNJSUS-2
-    DropItem "DRPGShieldAccessory26"    255 2 // PWAA-9001
-    DropItem "DRPGShieldAccessory27"    255 2 // AW-G01
-    DropItem "DRPGShieldAccessory28"    255 1 // SCL-AR53
-    DropItem "DRPGShieldAccessory29"    255 1 // RF-CT
-    DropItem "DRPGShieldAccessory30"    255 6 // TEW-11
-    DropItem "DRPGShieldAccessory31"    255 5 // NU-YU5
-    DropItem "DRPGShieldAccessory32"    255 4 // RUS-ROU1
-    DropItem "DRPGShieldAccessory33"    255 4 // TENS-H11
-    DropItem "DRPGShieldAccessory34"    255 3 // TEEM-AU5
-    DropItem "DRPGShieldAccessory35"    255 3 // VENG-R
-    DropItem "DRPGShieldAccessory36"    255 4 // SANIC-S88
-    DropItem "DRPGShieldAccessory37"    255 5 // NAKD-N0W
-    DropItem "DRPGShieldAccessory38"    255 3 // HA3-L1N
-    DropItem "DRPGShieldAccessory39"    255 3 // HAET-60
-    DropItem "DRPGShieldAccessory40"    255 6 // PHA-LX2
-    DropItem "DRPGShieldAccessory41"    255 3 // IKU-N7
-    DropItem "DRPGShieldAccessory42"    255 4 // REGN-ER8
-    DropItem "DRPGShieldAccessory43"    255 3 // COUN-TR20
-    DropItem "DRPGShieldAccessory44"    255 3 // PRO-100
-    DropItem "DRPGShieldAccessory45"    255 4 // ADPT-V15
-    DropItem "DRPGShieldAccessory46"    255 2 // OCD-MX90
-    DropItem "DRPGShieldAccessory47"    255 2 // MASTA-R4
-    DropItem "DRPGShieldAccessory48"    255 1 // HOW-EV3N
-    DropItem "DRPGShieldAccessory49"    255 3 // K00-LAYD
-    DropItem "DRPGShieldAccessory50"    255 2 // SKROO-G3
-    DropItem "DRPGShieldAccessory51"    255 1 // INFI-NT1
-    DropItem "DRPGShieldAccessory52"    255 1 // REMI-500
-    DropItem "DRPGShieldAccessory53"    255 1 // FLAN-495
-    DropItem "DRPGShieldAccessory54"    255 3 // TOJ1-K0
-    DropItem "DRPGShieldAccessory55"    255 4 // TRANS-EB2S2
-    DropItem "DRPGShieldAccessory56"    255 6 // LIL-ZZ8
-    DropItem "DRPGShieldAccessory57"    255 2 // MURD-BURD
-    DropItem "DRPGShieldAccessory58"    255 2 // LKY-BSTRD4
-    DropItem "DRPGShieldAccessory59"    255 4 // HEL-FY20
-    DropItem "DRPGShieldAccessory60"    255 3 // MUN3-MAG
-    DropItem "DRPGShieldAccessory61"    255 2 // EFF-C13
-    DropItem "DRPGShieldAccessory62"    255 2 // SYN-C3P
-    DropItem "DRPGShieldAccessory63"    255 4 // TUFF-MAG3
-    DropItem "DRPGShieldAccessory64"    255 3 // UBR-MANZ5
-    DropItem "DRPGShieldAccessory65"    255 2 // HORD-3RR
-    DropItem "DRPGShieldAccessory66"    255 3 // S-SP4G3TT
+    Default
+    {
+        // Bodies
+        DropItem "ZDRPGShieldBody1",          255, 40; // UAC
+        DropItem "ZDRPGShieldBody2",          255, 33; // XTron
+        DropItem "ZDRPGShieldBody3",          255, 32; // Black Mesa
+        DropItem "ZDRPGShieldBody4",          255, 28; // EDF
+        DropItem "ZDRPGShieldBody5",          255, 25; // Cyberdyne Systems
+        DropItem "ZDRPGShieldBody6",          255, 24; // Misfit Tech
+        DropItem "ZDRPGShieldBody7",          255, 16; // Shadaloo
+        DropItem "ZDRPGShieldBody8",          255, 22; // Arkai
+        DropItem "ZDRPGShieldBody9",          255, 21; // Ironclad Inc.
+        DropItem "ZDRPGShieldBody10",         255, 21; // Yholl
+        DropItem "ZDRPGShieldBody11",         255, 19; // Hyperix
+        DropItem "ZDRPGShieldBody12",         255, 17; // Xaser Inc.
+        DropItem "ZDRPGShieldBody13",         255, 16; // dataDyne
+        DropItem "ZDRPGShieldBody14",         255, 13; // Starbright
+        DropItem "ZDRPGShieldBody15",         255, 13; // Hellsing
+        DropItem "ZDRPGShieldBody16",         255, 12; // S.H.I.E.L.D.
+        DropItem "ZDRPGShieldBody17",         255, 9;  // UAC Elite
+        DropItem "ZDRPGShieldBody18",         255, 9;  // Stark Industries
+        DropItem "ZDRPGShieldBody19",         255, 8;  // Weyland-Yutani
+        DropItem "ZDRPGShieldBody20",         255, 5;  // Megalith
+        DropItem "ZDRPGShieldBody21",         255, 2;  // Reaper Industries
+        DropItem "ZDRPGShieldBody22",         255, 2;  // Eternity Systems
+        
+        // Batteries
+        DropItem "ZDRPGShieldBattery1",       255, 29; // Crappy
+        DropItem "ZDRPGShieldBattery2",       255, 24; // Bullet
+        DropItem "ZDRPGShieldBattery3",       255, 20; // Elegant
+        DropItem "ZDRPGShieldBattery4",       255, 18; // Spiked
+        DropItem "ZDRPGShieldBattery5",       255, 17; // Stubborn
+        DropItem "ZDRPGShieldBattery6",       255, 14; // Mirrored
+        DropItem "ZDRPGShieldBattery7",       255, 13; // Refined
+        DropItem "ZDRPGShieldBattery8",       255, 9;  // Clustered
+        DropItem "ZDRPGShieldBattery9",       255, 8;  // Winged
+        DropItem "ZDRPGShieldBattery10",      255, 6;  // Overcharged
+        DropItem "ZDRPGShieldBattery11",      255, 3;  // Superb
+        DropItem "ZDRPGShieldBattery12",      255, 2;  // Redundant
+        DropItem "ZDRPGShieldBattery13",      255, 2;  // Reinforced
+        
+        // Capacitors
+        DropItem "ZDRPGShieldCapacitor1",     255, 38; // Standard
+        DropItem "ZDRPGShieldCapacitor2",     255, 32; // Outdated
+        DropItem "ZDRPGShieldCapacitor3",     255, 29; // Cooled
+        DropItem "ZDRPGShieldCapacitor4",     255, 26; // Warm
+        DropItem "ZDRPGShieldCapacitor5",     255, 20; // Inefficient
+        DropItem "ZDRPGShieldCapacitor6",     255, 18; // Energized
+        DropItem "ZDRPGShieldCapacitor7",     255, 15; // Infused
+        DropItem "ZDRPGShieldCapacitor8",     255, 13; // Plasmatic
+        DropItem "ZDRPGShieldCapacitor9",     255, 11; // Burning
+        DropItem "ZDRPGShieldCapacitor10",    255, 9;  // Pulsating
+        DropItem "ZDRPGShieldCapacitor11",    255, 8;  // Fiery
+        DropItem "ZDRPGShieldCapacitor12",    255, 6;  // Eternal
+        DropItem "ZDRPGShieldCapacitor13",    255, 3;  // Overloaded
+        DropItem "ZDRPGShieldCapacitor14",    255, 2;  // Dark
+        DropItem "ZDRPGShieldCapacitor15",    255, 2;  // Chaotic
+        
+        // Accessories
+        // THE CURSE OF YHOLL STRIKES A SECOND TIME also have some nice weights
+        DropItem "ZDRPGShieldAccessory1",     255, 5; // X-7
+        DropItem "ZDRPGShieldAccessory2",     255, 4; // SGENX-5b
+        DropItem "ZDRPGShieldAccessory3",     255, 4; // AMP-3000
+        DropItem "ZDRPGShieldAccessory4",     255, 5; // HRY-VP80
+        DropItem "ZDRPGShieldAccessory5",     255, 5; // DEF-2
+        DropItem "ZDRPGShieldAccessory6",     255, 5; // B1-ZUT3
+        DropItem "ZDRPGShieldAccessory7",     255, 6; // CNV-RT99
+        DropItem "ZDRPGShieldAccessory8",     255, 5; // REK-T50
+        DropItem "ZDRPGShieldAccessory9",     255, 4; // UW-0t
+        DropItem "ZDRPGShieldAccessory10",    255, 6; // CU-256
+        DropItem "ZDRPGShieldAccessory11",    255, 6; // TX-BGONN
+        DropItem "ZDRPGShieldAccessory12",    255, 6; // WRP30-LITE
+        DropItem "ZDRPGShieldAccessory13",    255, 3; // NOV-A2
+        DropItem "ZDRPGShieldAccessory14",    255, 5; // LZ-Y200
+        DropItem "ZDRPGShieldAccessory15",    255, 5; // BST-700
+        DropItem "ZDRPGShieldAccessory16",    255, 2; // PH-D88
+        DropItem "ZDRPGShieldAccessory17",    255, 1; // BATT-B
+        DropItem "ZDRPGShieldAccessory18",    255, 3; // SHVR-Z7
+        DropItem "ZDRPGShieldAccessory19",    255, 4; // MM-12
+        DropItem "ZDRPGShieldAccessory20",    255, 4; // MRTE-KRAR
+        DropItem "ZDRPGShieldAccessory21",    255, 3; // SP-00k
+        DropItem "ZDRPGShieldAccessory22",    255, 3; // RR-G0
+        DropItem "ZDRPGShieldAccessory23",    255, 2; // E1N-T31
+        DropItem "ZDRPGShieldAccessory24",    255, 3; // PATR-0T
+        DropItem "ZDRPGShieldAccessory25",    255, 4; // RNJSUS-2
+        DropItem "ZDRPGShieldAccessory26",    255, 2; // PWAA-9001
+        DropItem "ZDRPGShieldAccessory27",    255, 2; // AW-G01
+        DropItem "ZDRPGShieldAccessory28",    255, 1; // SCL-AR53
+        DropItem "ZDRPGShieldAccessory29",    255, 1; // RF-CT
+        DropItem "ZDRPGShieldAccessory30",    255, 6; // TEW-11
+        DropItem "ZDRPGShieldAccessory31",    255, 5; // NU-YU5
+        DropItem "ZDRPGShieldAccessory32",    255, 4; // RUS-ROU1
+        DropItem "ZDRPGShieldAccessory33",    255, 4; // TENS-H11
+        DropItem "ZDRPGShieldAccessory34",    255, 3; // TEEM-AU5
+        DropItem "ZDRPGShieldAccessory35",    255, 3; // VENG-R
+        DropItem "ZDRPGShieldAccessory36",    255, 4; // SANIC-S88
+        DropItem "ZDRPGShieldAccessory37",    255, 5; // NAKD-N0W
+        DropItem "ZDRPGShieldAccessory38",    255, 3; // HA3-L1N
+        DropItem "ZDRPGShieldAccessory39",    255, 3; // HAET-60
+        DropItem "ZDRPGShieldAccessory40",    255, 6; // PHA-LX2
+        DropItem "ZDRPGShieldAccessory41",    255, 3; // IKU-N7
+        DropItem "ZDRPGShieldAccessory42",    255, 4; // REGN-ER8
+        DropItem "ZDRPGShieldAccessory43",    255, 3; // COUN-TR20
+        DropItem "ZDRPGShieldAccessory44",    255, 3; // PRO-100
+        DropItem "ZDRPGShieldAccessory45",    255, 4; // ADPT-V15
+        DropItem "ZDRPGShieldAccessory46",    255, 2; // OCD-MX90
+        DropItem "ZDRPGShieldAccessory47",    255, 2; // MASTA-R4
+        DropItem "ZDRPGShieldAccessory48",    255, 1; // HOW-EV3N
+        DropItem "ZDRPGShieldAccessory49",    255, 3; // K00-LAYD
+        DropItem "ZDRPGShieldAccessory50",    255, 2; // SKROO-G3
+        DropItem "ZDRPGShieldAccessory51",    255, 1; // INFI-NT1
+        DropItem "ZDRPGShieldAccessory52",    255, 1; // REMI-500
+        DropItem "ZDRPGShieldAccessory53",    255, 1; // FLAN-495
+        DropItem "ZDRPGShieldAccessory54",    255, 3; // TOJ1-K0
+        DropItem "ZDRPGShieldAccessory55",    255, 4; // TRANS-EB2S2
+        DropItem "ZDRPGShieldAccessory56",    255, 6; // LIL-ZZ8
+        DropItem "ZDRPGShieldAccessory57",    255, 2; // MURD-BURD
+        DropItem "ZDRPGShieldAccessory58",    255, 2; // LKY-BSTRD4
+        DropItem "ZDRPGShieldAccessory59",    255, 4; // HEL-FY20
+        DropItem "ZDRPGShieldAccessory60",    255, 3; // MUN3-MAG
+        DropItem "ZDRPGShieldAccessory61",    255, 2; // EFF-C13
+        DropItem "ZDRPGShieldAccessory62",    255, 2; // SYN-C3P
+        DropItem "ZDRPGShieldAccessory63",    255, 4; // TUFF-MAG3
+        DropItem "ZDRPGShieldAccessory64",    255, 3; // UBR-MANZ5
+        DropItem "ZDRPGShieldAccessory65",    255, 2; // HORD-3RR
+        DropItem "ZDRPGShieldAccessory66",    255, 3; // S-SP4G3TT
+    }
 }
 
-actor DRPGStimDropper : RandomSpawner 25012
+class ZDRPGStimDropper : RandomSpawner
 {
-    // Stims
-    DropItem "DRPGStimSmall"            255 70
-    DropItem "DRPGStimMedium"           255 20
-    DropItem "DRPGStimLarge"            255 9
-    DropItem "DRPGStimXL"               255 1
+    Default
+    {
+        // Stims
+        DropItem "ZDRPGStimSmall",            255, 70;
+        DropItem "ZDRPGStimMedium",           255, 20;
+        DropItem "ZDRPGStimLarge",            255, 9;
+        DropItem "ZDRPGStimXL",               255, 1;
+    }
 }
 
-actor DRPGVialDropper : RandomSpawner 25013
+class ZDRPGVialDropper : RandomSpawner
 {
-    // Stats
-    DropItem "DRPGVialStrength"         255 20
-    DropItem "DRPGVialDefense"          255 20
-    DropItem "DRPGVialVitality"         255 20
-    DropItem "DRPGVialEnergy"           255 20
-    DropItem "DRPGVialRegeneration"     255 20
-    DropItem "DRPGVialAgility"          255 20
-    DropItem "DRPGVialCapacity"         255 20
-    DropItem "DRPGVialLuck"             255 20
-    
-    // Rare Vials
-    DropItem "DRPGVialDropperRare"      255 5
-    
-    // Stim Packages
-//  DropItem "DRPGStimPackageStat"      255 1
-//  DropItem "DRPGStimPackagePowerup"   255 1
+    Default
+    {
+        // Stats
+        DropItem "ZDRPGVialStrength",         255, 20;
+        DropItem "ZDRPGVialDefense",          255, 20;
+        DropItem "ZDRPGVialVitality",         255, 20;
+        DropItem "ZDRPGVialEnergy",           255, 20;
+        DropItem "ZDRPGVialRegeneration",     255, 20;
+        DropItem "ZDRPGVialAgility",          255, 20;
+        DropItem "ZDRPGVialCapacity",         255, 20;
+        DropItem "ZDRPGVialLuck",             255, 20;
+        
+        // Rare Vials
+        DropItem "ZDRPGVialDropperRare",      255, 5;
+        
+        // Stim Packages
+    //  DropItem "ZDRPGStimPackageStat",      255, 1;
+    //  DropItem "ZDRPGStimPackagePowerup",   255, 1;
+    }
 }
 
-actor DRPGVialDropperRare : RandomSpawner 25014
+class ZDRPGVialDropperRare : RandomSpawner
 {
-	// Boosters
-    DropItem "DRPGVialPotency"          255 10
-    DropItem "DRPGVialPurifier"         255 10
-    
-    // Powerups
-    DropItem "DRPGVialIndestructible"   255 10
-    DropItem "DRPGVialShadow"           255 10
-    DropItem "DRPGVialInfinity"         255 10
-    DropItem "DRPGVialChrono"           255 10
-    DropItem "DRPGVialAdrenaline"       255 10
-    DropItem "DRPGVialGravity"          255 10
-    DropItem "DRPGVialVampire"          255 10
-    DropItem "DRPGVialRage"             255 10
-    DropItem "DRPGVialMagnetic"         255 10
+    Default
+    {
+        // Boosters
+        DropItem "ZDRPGVialPotency",          255, 10;
+        DropItem "ZDRPGVialPurifier",         255, 10;
+        
+        // Powerups
+        DropItem "ZDRPGVialIndestructible",   255, 10;
+        DropItem "ZDRPGVialShadow",           255, 10;
+        DropItem "ZDRPGVialInfinity",         255, 10;
+        DropItem "ZDRPGVialChrono",           255, 10;
+        DropItem "ZDRPGVialAdrenaline",       255, 10;
+        DropItem "ZDRPGVialGravity",          255, 10;
+        DropItem "ZDRPGVialVampire",          255, 10;
+        DropItem "ZDRPGVialRage",             255, 10;
+        DropItem "ZDRPGVialMagnetic",         255, 10;
 
-    // Stims
-    DropItem "DRPGStimDropper"          255 5
+        // Stims
+        DropItem "ZDRPGStimDropper",          255, 5;
+    }
 }
 
-actor DRPGTurretDropper : RandomSpawner 25015
+class ZDRPGTurretDropper : RandomSpawner
 {
-    DropItem "DRPGTurretPart"       255 93
-    DropItem "DRPGTurretPartCrate"  255 5
-	DropItem "DRPGDestroyedTurret"  255 2
+    Default
+    {
+        DropItem "ZDRPGTurretPart",       255, 93;
+        DropItem "ZDRPGTurretPartCrate",  255, 5;
+        DropItem "ZDRPGDestroyedTurret",  255, 2;
+    }
 }
 
-actor DRPGChipDropper : RandomSpawner 25016
+class ZDRPGChipDropper : RandomSpawner
 {
-    DropItem "DRPGChipGold"         255 32
-    DropItem "DRPGChipPlatinum"     255 1
+    Default
+    {
+        DropItem "ZDRPGChipGold",         255, 32;
+        DropItem "ZDRPGChipPlatinum",     255, 1;
+    }   
 }
 
-actor DRPGHealthMonsterDropper : RandomSpawner 20156
+class ZDRPGHealthMonsterDropper : RandomSpawner 
 {
-    DropItem "DRPGStimpack"         255 80
-    DropItem "DRPGMedikit"          255 15
-    DropItem "DRPGLargeMedikit"     255 5
+    Default
+    {
+        DropItem "ZDRPGStimpack",         255, 80;
+        DropItem "ZDRPGMedikit",          255, 15;
+        DropItem "ZDRPGLargeMedikit",     255, 5;
+    }
 }
 
-actor DRPGEPMonsterDropper : RandomSpawner 20157
+class ZDRPGEPMonsterDropper : RandomSpawner
 {
-    DropItem "DRPGLittleEPCapsule"  255 50
-    DropItem "DRPGEPCapsule"        255 40
-    DropItem "DRPGBigEPCapsule"     255 10
+    Default
+    {
+        DropItem "ZDRPGLittleEPCapsule",  255, 50;
+        DropItem "ZDRPGEPCapsule",        255, 40;
+        DropItem "ZDRPGBigEPCapsule",     255, 10;
+    }
 }
 
-actor DRPGAmmoMonsterDropper : RandomSpawner 20158
+class ZDRPGAmmoMonsterDropper : RandomSpawner
 {
-    DropItem "DRPGClip"                 255 150
-	DropItem "DRPGShell"                255 75
-	DropItem "DRPGRocketAmmo"           255 45
-	DropItem "DRPGCell"                 255 30
+    Default
+    {
+        DropItem "ZDRPGClip",             255, 150;
+        DropItem "ZDRPGShell",            255, 75;
+        DropItem "ZDRPGRocketAmmo",       255, 45;
+        DropItem "ZDRPGCell",             255, 30;
+    }
 }
 
-actor DRPGTurretMonsterDropper : RandomSpawner 20159
+class ZDRPGTurretMonsterDropper : RandomSpawner
 {
-    DropItem "DRPGTurretPart"       255 98
-    DropItem "DRPGTurretPartCrate"  255 2
+    Default
+    {
+        DropItem "ZDRPGTurretPart",       255, 98;
+        DropItem "ZDRPGTurretPartCrate",  255, 2;
+    }
 }
 
 // MARINES
 // --------------------------------------------------
 
-actor DRPGMarineOutpostSpawner : RandomSpawner 11010
+class ZDRPGMarineOutpostSpawner : RandomSpawner
 {
-    DropItem "DRPGMarineGuardPistol"            255 12
-    DropItem "DRPGMarineGuardShotgun"           255 15
-    DropItem "DRPGMarineGuardDoubleShotgun"     255 5
-    DropItem "DRPGMarineGuardChaingun"          255 7
-    DropItem "DRPGMarineGuardBattleRifle"       255 20
-    DropItem "DRPGMarineFemGuardBattleRifle"    255 20
+    Default
+    {
+        DropItem "ZDRPGMarineGuardPistol",            255, 12;
+        DropItem "ZDRPGMarineGuardShotgun",           255, 15;
+        DropItem "ZDRPGMarineGuardDoubleShotgun",     255, 5;
+        DropItem "ZDRPGMarineGuardChaingun",          255, 7;
+        DropItem "ZDRPGMarineGuardBattleRifle",       255, 20;
+        DropItem "ZDRPGMarineFemGuardBattleRifle",    255, 20;
+    }
 }
 
-actor DRPGMarineReinforcementSpawner : RandomSpawner
+class ZDRPGMarineReinforcementSpawner : RandomSpawner
 {
-    DropItem "DRPGMarineShotgun"                255 15
-    DropItem "DRPGMarineDoubleShotgun"          255 5
-    DropItem "DRPGMarineChaingun"               255 10
-    DropItem "DRPGMarineBattleRifle"            255 20
-    DropItem "DRPGMarineFemBattleRifle"         255 20
-    DropItem "DRPGMarineRocketLauncher"         255 6
-    DropItem "DRPGMarinePlasmaRifle"            255 8
-    DropItem "DRPGMarineBFG9000"                255 2
+    Default
+    {
+        DropItem "ZDRPGMarineShotgun",                255, 15;
+        DropItem "ZDRPGMarineDoubleShotgun",          255, 5;
+        DropItem "ZDRPGMarineChaingun",               255, 10;
+        DropItem "ZDRPGMarineBattleRifle",            255, 20;
+        DropItem "ZDRPGMarineFemBattleRifle",         255, 20;
+        DropItem "ZDRPGMarineRocketLauncher",         255, 6;
+        DropItem "ZDRPGMarinePlasmaRifle",            255, 8;
+        DropItem "ZDRPGMarineBFG9000",                255, 2;
+    }
 }
 
 // LOOT
 // --------------------------------------------------
 
 // Generic Loot locations
-actor DRPGGenericLootRandomizer : RandomSpawner
+class ZDRPGGenericLootRandomizer : RandomSpawner
 {
-    DropItem "DRPGLootMedicalSupplies"     255 30
-    DropItem "DRPGLootChemicals"           255 30
-    DropItem "DRPGLootHazardousMaterials"  255 30
-    DropItem "DRPGLootAnomalousMaterials"  255 30
-    DropItem "DRPGLootBriefcase"           255 30
-    DropItem "DRPGLootComputerData"        255 30
-    DropItem "DRPGLootGunParts"            255 15
-    DropItem "DRPGLootAmmoCasings"         255 15
-    DropItem "DRPGLootFuelCapsule"         255 10
-    DropItem "DRPGLootScrapMetals"         255 15
-    DropItem "DRPGLootScrapElectronics"    255 15
-    DropItem "DRPGLootExperimentalParts"   255 10
-    DropItem "DRPGLootDemonArtifact"       255 5
+    Default
+    {
+        DropItem "ZDRPGLootMedicalSupplies",     255, 30;
+        DropItem "ZDRPGLootChemicals",           255, 30;
+        DropItem "ZDRPGLootHazardousMaterials",  255, 30;
+        DropItem "ZDRPGLootAnomalousMaterials",  255, 30;
+        DropItem "ZDRPGLootBriefcase",           255, 30;
+        DropItem "ZDRPGLootComputerData",        255, 30;
+        DropItem "ZDRPGLootGunParts",            255, 15;
+        DropItem "ZDRPGLootAmmoCasings",         255, 15;
+        DropItem "ZDRPGLootFuelCapsule",         255, 10;
+        DropItem "ZDRPGLootScrapMetals",         255, 15;
+        DropItem "ZDRPGLootScrapElectronics",    255, 15;
+        DropItem "ZDRPGLootExperimentalParts",   255, 10;
+        DropItem "ZDRPGLootDemonArtifact",       255, 5;
+    }
 }
 
 // AMMO
 // --------------------------------------------------
 
 // Backpack locations
-actor DRPGBackpackRandomizer : RandomSpawner Replaces Backpack
+class ZDRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 {
-    DropItem "DRPGSmallBackpack"    255 50
-    DropItem "DRPGBackpack"         255 40
-    DropItem "DRPGBigBackpack"      255 10
-//  DropItem "DRPGCrate"            255 1
+    Default
+    {
+        DropItem "ZDRPGSmallBackpack",    255, 50;
+        DropItem "ZDRPGBackpack",         255, 40;
+        DropItem "ZDRPGBigBackpack",      255, 10;
+    //  DropItem "ZDRPGCrate",            255, 1;
+    }
 }
 
 // HEALTH ITEMS
 // --------------------------------------------------
 
 // Health Bonus Locations
-actor DRPGHealthBonusReplacer : RandomSpawner Replaces HealthBonus
+class ZDRPGHealthBonusReplacer : RandomSpawner Replaces HealthBonus
 {
-    DropItem "DRPGHealthBonusSpawner"    255 226
-    DropItem "DRPGHealthBonus"           255 30
+    Default
+    {
+        DropItem "ZDRPGLootSpawner",      255, 226;
+        DropItem "ZDRPGHealthBonus",      255, 30;
+    }
+
+    override Name ChooseSpawn()
+    {
+        for(int i = 0; i<Players.Size(); i++)
+		{
+            let playerStart = LevelLocals.PickPlayerStart(i);
+            if(LevelLocals.Vec3Diff(playerStart, self.pos).length() <= 550)
+                return 'ZDRPGHealthBonus';
+        }
+
+        return super.ChooseSpawn();
+    }
 }
 
 // Stimpack Locations
-actor DRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
+class ZDRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 {
-    DropItem "DRPGHealthBonus"      255 100
-    DropItem "DRPGStimpack"         255 50
-    DropItem "DRPGMedikit"          255 15
-    DropItem "DRPGLargeMedikit"     255 5
+    Default
+    {
+        DropItem "ZDRPGHealthBonus",      255, 100;
+        DropItem "ZDRPGStimpack",         255, 50;
+        DropItem "ZDRPGMedikit",          255, 15;
+        DropItem "ZDRPGLargeMedikit",     255, 5;
+    }
 }
 
 // Medikit Locations
-actor DRPGMedikitRandomizer : RandomSpawner Replaces Medikit
+class ZDRPGMedikitRandomizer : RandomSpawner Replaces Medikit
 {
-    DropItem "DRPGHealthBonus"      255 150
-    DropItem "DRPGStimpack"         255 50
-    DropItem "DRPGMedikit"          255 30
-    DropItem "DRPGLargeMedikit"     255 10
-    DropItem "DRPGXLMedikit"        255 6
-    DropItem "DRPGMedPack"          255 3
-    DropItem "DRPGSurgeryKit"       255 1
+    Default
+    {
+        DropItem "ZDRPGHealthBonus",      255, 150;
+        DropItem "ZDRPGStimpack",         255, 50;
+        DropItem "ZDRPGMedikit",          255, 30;
+        DropItem "ZDRPGLargeMedikit",     255, 10;
+        DropItem "ZDRPGXLMedikit",        255, 6;
+        DropItem "ZDRPGMedPack",          255, 3;
+        DropItem "ZDRPGSurgeryKit",       255, 1;
+    }
 }
 
 // Soulsphere Locations
-actor DRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
+class ZDRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
 {
-    DropItem "DRPGSoulsphere"   255 70
-    DropItem "DRPGSoulsphere2"  255 20
-    DropItem "DRPGSoulsphere3"  255 9
-    DropItem "DRPGLifeDropper"  255 1
+    Default
+    {
+        DropItem "ZDRPGSoulsphere",   255, 70;
+        DropItem "ZDRPGSoulsphere2",  255, 20;
+        DropItem "ZDRPGSoulsphere3",  255, 9;
+        DropItem "ZDRPGLifeDropper",  255, 1;
+    }
 }
 
 // ARMOR ITEMS
 // --------------------------------------------------
 
 // Armor Bonus Locations
-actor DRPGArmorBonusReplacer : RandomSpawner Replaces ArmorBonus
+class ZDRPGArmorBonusReplacer : RandomSpawner Replaces ArmorBonus
 {
-    DropItem "DRPGArmorBonusSpawner"    255 226
-    DropItem "DRPGArmorBonus"           255 30
+    Default
+    {
+        DropItem "ZDRPGArmorBonusSpawner",    255, 226;
+        DropItem "ZDRPGArmorBonus",           255, 30;
+    }
 }
 
 // Green Armor Locations
-actor DRPGGreenArmorRandomizer : RandomSpawner Replaces GreenArmor
+class ZDRPGGreenArmorRandomizer : RandomSpawner Replaces GreenArmor
 {
-    DropItem "DRPGGreenArmor"               255 50
-    DropItem "DRPGReinforcedGreenArmor"     255 10
-    DropItem "DRPGBlueArmor"                255 40
-    DropItem "DRPGReinforcedBlueArmor"      255 5
-    DropItem "DRPGYellowArmor"              255 10
-    DropItem "DRPGReinforcedYellowArmor"    255 1
+    Default
+    {
+        DropItem "ZDRPGGreenArmor",               255, 50;
+        DropItem "ZDRPGReinforcedGreenArmor",     255, 10;
+        DropItem "ZDRPGBlueArmor",                255, 40;
+        DropItem "ZDRPGReinforcedBlueArmor",      255, 5;
+        DropItem "ZDRPGYellowArmor",              255, 10;
+        DropItem "ZDRPGReinforcedYellowArmor",    255, 1;
+    }
 }
 
 // Blue Armor Locations
-actor DRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
+class ZDRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
 {
-    DropItem "DRPGYellowArmor"              255 75
-    DropItem "DRPGReinforcedYellowArmor"    255 20
-    DropItem "DRPGRedArmor"                 255 20
-    DropItem "DRPGReinforcedRedArmor"       255 5
-    DropItem "DRPGWhiteArmor"               255 5
-    DropItem "DRPGReinforcedWhiteArmor"     255 1
+    Default
+    {
+        DropItem "ZDRPGYellowArmor",              255, 75;
+        DropItem "ZDRPGReinforcedYellowArmor",    255, 20;
+        DropItem "ZDRPGRedArmor",                 255, 20;
+        DropItem "ZDRPGReinforcedRedArmor",       255, 5;
+        DropItem "ZDRPGWhiteArmor",               255, 5;
+        DropItem "ZDRPGReinforcedWhiteArmor",     255, 1;
+    }
 }
 
 // POWERUPS
 // --------------------------------------------------
 
 // Invulnerability Sphere Locations
-actor DRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces InvulnerabilitySphere
+class ZDRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces InvulnerabilitySphere
 {
-    DropItem "DRPGInvulnerabilitySphere"    255 100
-//  DropItem "DRPGCrate"                    255 1
+    Default
+    {
+        DropItem "ZDRPGInvulnerabilitySphere",    255, 100;
+    //  DropItem "ZDRPGCrate",                    255, 1;
+    }
 }
 
 // Blur Sphere Locations
-actor DRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
+class ZDRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
 {
-    DropItem "DRPGBlurSphere"               255 100
-//  DropItem "DRPGCrate"                    255 1
+    Default
+    {
+        DropItem "ZDRPGBlurSphere",               255, 100;
+    //  DropItem "ZDRPGCrate",                    255, 1;
+    }
 }
 
 // SHOP DISPLAYS
 // --------------------------------------------------
 
-actor DRPGShopWeaponRandomizer : RandomSpawner 11001
+class ZDRPGShopWeaponRandomizer : RandomSpawner
 {
-    DropItem "Pistol"               255 8
-    DropItem "Shotgun"              255 7
-    DropItem "SuperShotgun"         255 6
-    DropItem "Chaingun"             255 5
-    DropItem "RocketLauncher"       255 4
-    DropItem "PlasmaRifle"          255 3
-    DropItem "BFG9000"              255 2
-    DropItem "Chainsaw"             255 1
+    Default
+    {
+        DropItem "Pistol",               255, 8;
+        DropItem "Shotgun",              255, 7;
+        DropItem "SuperShotgun",         255, 6;
+        DropItem "Chaingun",             255, 5;
+        DropItem "RocketLauncher",       255, 4;
+        DropItem "PlasmaRifle",          255, 3;
+        DropItem "BFG9000",              255, 2;
+        DropItem "Chainsaw",             255, 1;
+    }
 }
 
-actor DRPGShopAmmoRandomizer : RandomSpawner 11002
+class ZDRPGShopAmmoRandomizer : RandomSpawner
 {
-    DropItem "DRPGClip"             255 11
-    DropItem "DRPGClipBox"          255 10
-    DropItem "DRPGShell"            255 9
-    DropItem "DRPGShellBox"         255 8
-    DropItem "DRPGRocketAmmo"       255 7
-    DropItem "DRPGRocketBox"        255 6
-    DropItem "DRPGCell"             255 5
-    DropItem "DRPGCellPack"         255 4
-    DropItem "DRPGSmallBackpack"    255 3
-    DropItem "DRPGBackpack"         255 2
-    DropItem "DRPGBigBackpack"      255 1
+    Default
+    {
+        DropItem "ZDRPGClip",             255, 11;
+        DropItem "ZDRPGClipBox",          255, 10;
+        DropItem "ZDRPGShell",            255, 9;
+        DropItem "ZDRPGShellBox",         255, 8;
+        DropItem "ZDRPGRocketAmmo",       255, 7;
+        DropItem "ZDRPGRocketBox",        255, 6;
+        DropItem "ZDRPGCell",             255, 5;
+        DropItem "ZDRPGCellPack",         255, 4;
+        DropItem "ZDRPGSmallBackpack",    255, 3;
+        DropItem "ZDRPGBackpack",         255, 2;
+        DropItem "ZDRPGBigBackpack",      255, 1;
+    }
 }
 
-actor DRPGShopHealthRandomizer : RandomSpawner 11003
+class ZDRPGShopHealthRandomizer : RandomSpawner
 {
-    DropItem "DRPGStimpack"         255 10
-    DropItem "DRPGMedikit"          255 9
-    DropItem "DRPGLargeMedikit"     255 8
-    DropItem "DRPGXLMedikit"        255 7
-    DropItem "DRPGMedPack"          255 6
-    DropItem "DRPGSurgeryKit"       255 5
-    DropItem "DRPGSoulSphere"       255 4
-    DropItem "DRPGSoulsphere2"      255 3
-    DropItem "DRPGSoulsphere3"      255 2
-    DropItem "DRPGLifeDropper"      255 1
+    Default
+    {
+        DropItem "ZDRPGStimpack",         255, 10;
+        DropItem "ZDRPGMedikit",          255, 9;
+        DropItem "ZDRPGLargeMedikit",     255, 8;
+        DropItem "ZDRPGXLMedikit",        255, 7;
+        DropItem "ZDRPGMedPack",          255, 6;
+        DropItem "ZDRPGSurgeryKit",       255, 5;
+        DropItem "ZDRPGSoulSphere",       255, 4;
+        DropItem "ZDRPGSoulsphere2",      255, 3;
+        DropItem "ZDRPGSoulsphere3",      255, 2;
+        DropItem "ZDRPGLifeDropper",      255, 1;
+    }
 }
 
-actor DRPGShopArmorRandomizer : RandomSpawner 11004
+class ZDRPGShopArmorRandomizer : RandomSpawner
 {
-    DropItem "DRPGGreenArmor"       255 5
-    DropItem "DRPGBlueArmor"        255 4
-    DropItem "DRPGYellowArmor"      255 3
-    DropItem "DRPGRedArmor"         255 2
-    DropItem "DRPGWhiteArmor"       255 1
+    Default
+    {
+        DropItem "ZDRPGGreenArmor",       255, 5;
+        DropItem "ZDRPGBlueArmor",        255, 4;
+        DropItem "ZDRPGYellowArmor",      255, 3;
+        DropItem "ZDRPGRedArmor",         255, 2;
+        DropItem "ZDRPGWhiteArmor",       255, 1;
+    }
 }
 
-actor DRPGShopPowerupRandomizer : RandomSpawner 11005
+class ZDRPGShopPowerupRandomizer : RandomSpawner
 {
-    DropItem "DRPGInvulnerabilityCharge"    255 1
-    DropItem "DRPGInvisibilityCharge"       255 1
-    DropItem "DRPGTimeSphere"               255 1
-    DropItem "DRPGRegenSphere"              255 5
-    DropItem "DRPGRadSuit"                  255 5
-    DropItem "DRPGInfrared"                 255 5
-    DropItem "DRPGAllMap"                   255 5
-//  DropItem "DRPGBerserk"                  255 5
+    Default
+    {
+        DropItem "ZDRPGInvulnerabilityCharge",    255, 1;
+        DropItem "ZDRPGInvisibilityCharge",       255, 1;
+        DropItem "ZDRPGTimeSphere",               255, 1;
+        DropItem "ZDRPGRegenSphere",              255, 5;
+        DropItem "ZDRPGRadSuit",                  255, 5;
+        DropItem "ZDRPGInfrared",                 255, 5;
+        DropItem "ZDRPGAllMap",                   255, 5;
+    //  DropItem "ZDRPGBerserk",                  255, 5;
+    }
 }
 
-actor DRPGShopMiscRandomizer : RandomSpawner 11006
+class ZDRPGShopMiscRandomizer : RandomSpawner
 {
-    DropItem "DRPGTurretPart"
+    Default
+    {
+        DropItem "ZDRPGTurretPart";
+    }
 }
 
-actor DRPGShopShieldRandomizer : DRPGShieldDropper 11007 {}
+class ZDRPGShopShieldRandomizer : ZDRPGShieldDropper {}
 
-actor DRPGShopAugRandomizer : RandomSpawner 11008
+class ZDRPGShopAugRandomizer : RandomSpawner
 {
-    DropItem "DRPGVialDropper"              255 25
-    DropItem "DRPGStimDropper"              255 10
-    DropItem "DRPGAugDropper"               255 1
+    Default
+    {
+        DropItem "ZDRPGVialDropper",              255, 25;
+        DropItem "ZDRPGStimDropper",              255, 10;
+        DropItem "ZDRPGAugDropper",               255, 1;
+    }
 }
 
-actor DRPGShopRandomizer : RandomSpawner 11009
+class ZDRPGShopRandomizer : RandomSpawner
 {
-    DropItem "DRPGShopWeaponRandomizer"
-    DropItem "DRPGShopAmmoRandomizer"
-    DropItem "DRPGShopHealthRandomizer"
-    DropItem "DRPGShopArmorRandomizer"
-    DropItem "DRPGShopPowerupRandomizer"
-    DropItem "DRPGShopMiscRandomizer"
-    DropItem "DRPGShopShieldRandomizer"
-    DropItem "DRPGShopAugRandomizer"
+    Default
+    {
+        DropItem "ZDRPGShopWeaponRandomizer";
+        DropItem "ZDRPGShopAmmoRandomizer";
+        DropItem "ZDRPGShopHealthRandomizer";
+        DropItem "ZDRPGShopArmorRandomizer";
+        DropItem "ZDRPGShopPowerupRandomizer";
+        DropItem "ZDRPGShopMiscRandomizer";
+        DropItem "ZDRPGShopShieldRandomizer";
+        DropItem "ZDRPGShopAugRandomizer";
+    }
 }
 
 // Generic Item Dropper
-actor DRPGItemDropper
+class ZDRPGItemDropper : Actor
 {
     States
     {
-    Spawn:
-        TNT1 A 0 NoDelay A_Jump(32, "DropItem")
-        TNT1 A -1
-        Stop
-    DropItem:
-        TNT1 A 1 A_SpawnItemEx("DRPGAmmoDropper", 0, 0, 0, Random(-4, 4), Random(-4, 4), Random(1, 8))
-        TNT1 A 0 A_Jump(32, "DropItem")
-        TNT1 A -1
-        Stop
+        Spawn:
+            TNT1 A 0 NoDelay A_Jump(32, "DropItem");
+            TNT1 A -1;
+            Stop;
+        DropItem:
+            TNT1 A 1 A_SpawnItemEx("ZDRPGAmmoDropper", 0, 0, 0, Random(-4, 4), Random(-4, 4), Random(1, 8));
+            TNT1 A 0 A_Jump(32, "DropItem");
+            TNT1 A -1;
+            Stop;
     }
 }
 
@@ -670,56 +820,66 @@ actor DRPGItemDropper
 // --------------------------------------------------
 
 // Health Bonus Randomizer
-actor DRPGHealthBonusSpawner : MapSpot
+class ZDRPGLootSpawner : RandomSpawner
 {
-    States
+    Default
     {
-    Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner")
-        Stop
+        DropItem "ZDRPGLootMedicalSupplies";
+        DropItem "ZDRPGLootChemicals";
+        DropItem "ZDRPGLootHazardousMaterials";
+        DropItem "ZDRPGLootAnomalousMaterials";
+        DropItem "ZDRPGLootBriefcase";
+        DropItem "ZDRPGLootComputerData";
+        DropItem "ZDRPGLootGunParts";
+        DropItem "ZDRPGLootAmmoCasings";
+        DropItem "ZDRPGLootFuelCapsule";
+        DropItem "ZDRPGLootScrapMetals";
+        DropItem "ZDRPGLootScrapElectronics";
+        DropItem "ZDRPGLootExperimentalParts";
+        DropItem "ZDRPGLootDemonArtifact";
     }
 }
 
 // Armor Bonus Randomizer
-actor DRPGArmorBonusSpawner : MapSpot
+class ZDRPGArmorBonusSpawner : MapSpot
 {
     States
     {
-    Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGGenericLootSpawner")
-        Stop
+        Spawn:
+            TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("ZDRPGGenericLootSpawner");
+            Stop;
     }
 }
 
 // Armor Randomizer
-actor DRPGArmorSpawner : MapSpot
+class ZDRPGArmorSpawner : MapSpot
 {
     States
     {
-    Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGArmorSpawner")
-        Stop
+        Spawn:
+            TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("ZDRPGArmorSpawner");
+            Stop;
     }
 }
 
 // Weapon Randomizer
-actor DRPGWeaponSpawner : MapSpot
+class ZDRPGWeaponSpawner : MapSpot
 {
     States
     {
-    Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGWeaponSpawner")
-        Stop
+        Spawn:
+            TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("ZDRPGWeaponSpawner");
+            Stop;
     }
 }
 
 // Shield Randomizer
-actor DRPGShieldSpawner : MapSpot
+class ZDRPGShieldSpawner : MapSpot
 {
     States
     {
-    Spawn:
-        TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("DRPGShieldSpawner")
-        Stop
+        Spawn:
+            TNT1 A -1 NoDelay ACS_NamedExecuteWithResult("ZDRPGShieldSpawner");
+            Stop;
     }
 }

@@ -50,7 +50,7 @@ class ZDRPG_ZF_StatsMenu : ZDRPG_ZF_GenericMenu
 
         // Call GenericMenu's 'Init' function to do some required initialization.
         Super.Init (parent);
-        menuactive = Menu.On;
+        //menuactive = Menu.On;
         // Set our base resolution to 320x200.
         SetBaseResolution (baseRes);
 

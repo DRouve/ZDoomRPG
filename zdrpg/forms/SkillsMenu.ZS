@@ -48,7 +48,7 @@ class ZDRPG_ZF_SkillsMenu : ZDRPG_ZF_GenericMenu
 
         // Call GenericMenu's 'Init' function to do some required initialization.
         Super.Init (parent);
-        menuactive = Menu.On;
+        //menuactive = Menu.On;
         // Set our base resolution to 320x200.
         SetBaseResolution (baseRes);
 
@@ -85,17 +85,36 @@ class ZDRPG_ZF_SkillsMenu : ZDRPG_ZF_GenericMenu
         }*/
 
         let item = players [consoleplayer].mo.inv;
-        array <int> blocksCount;
+        array <int> skillsCount;
+        array <int> categoriesCount;
         while (item != NULL)
         {
-            if (item is "ZDRPGSkill")
-            {   
-                CreateStatBox(item.GetTag(), "useSkill:"..item.GetClassName(), baseRes, blocksCount);
-                item = item.inv;
-            } else {
-                item = item.inv;
-                continue;
+            let skill = ZDRPGSkill(item);
+            if(skill)
+            {
+                CreateStatBox(item.GetTag(), "useSkill:"..item.GetClassName(), baseRes, skillsCount);
             }
+            /*if (item.GetParentClass() != "ZDRPGSkill" && item is "ZDRPGSkill")
+            {   
+                //console.printf("%d", item.Power);
+                CreateStatBox(item.GetTag(), "useSkill:"..item.GetClassName(), baseRes, skillsCount);
+                
+            }
+            else if(item.GetParentClass() == "ZDRPGSkill")
+            {
+                //let skillCategory = item.GetParentClass();
+                //let zitem = skillCategory(item);
+                CreateMenuBox(item.GetTag(), "useSkill:"..item.GetClassName(), baseRes, categoriesCount, Font.CR_GREEN);
+            }*/
+            item = item.inv;
+        }
+
+        let staticHandler = ZDRPGStaticHandler(StaticEventHandler.Find("ZDRPGStaticHandler"));
+        for(int i = 0; i < staticHandler.skillCategories.Size(); i++)
+        {
+            Array <String> category;
+            staticHandler.skillCategories[i].split(category, ":");
+            CreateMenuBox(category[0], "", baseRes, categoriesCount, category[1].ToInt());
         }
     }
 
@@ -196,4 +215,104 @@ class ZDRPG_ZF_SkillsMenu : ZDRPG_ZF_GenericMenu
 		super.handleBack();
         menuactive = Menu.OnNoPause;
 	}
+
+    void CreateMenuBox(string labelText, string commandName, Vector2 baseRes, out array <int> blocksCount, int fontColor) 
+    {
+        let boxTexture = ZDRPG_ZF_BoxTextures.CreateTexturePixels
+        (
+            // The texture itself.
+            "",
+            // The top-left corner of the middle of the box.
+            (32, 32),
+            // The bottom-right corner of the middle of the box.
+            (64, 64),
+            // Whether to scale (true) or tile (false) the sides.
+            false,
+            // Whether to scale (true) or tile (false) the middle.
+            false
+        );
+        
+        let offsetX = 75;
+        // Add a box image.
+        let boxSize = (165, 35);
+        let boxOffset = offsetX + boxSize.X / 2 * blocksCount.Size();
+        let boxInnerOffset = blocksCount.Size() * 10;
+
+        let aBoxImage = ZDRPG_ZF_BoxImage.Create
+        (
+            // Position
+            
+            (offsetX, boxOffset + boxInnerOffset),
+            // Size
+            boxSize,
+            // Texture
+            boxTexture,
+            // Scale
+            (0.25, 0.25)
+        );
+        // Add the box image element into the main frame.
+        aBoxImage.Pack (mainFrame);
+
+        // Create the button's textures.
+        let buttonIdle = ZDRPG_ZF_BoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonIdle.png", true);
+        let buttonHover = ZDRPG_ZF_BoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonHovered.png", false);
+        let buttonClick = ZDRPG_ZF_BoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonClicked.png", false);
+
+        let buttonSideSize = 18;
+        let buttonPosX = offsetX + aBoxImage.GetWidth() / 2 - buttonSideSize / 2;
+        let buttonPosY = boxOffset + boxInnerOffset + aBoxImage.GetHeight() / 2 - buttonSideSize / 2;
+        
+
+        // Add a button.
+        aButton = ZDRPG_ZF_Button.Create
+        (
+            // Position
+            //((baseRes.X - 18.) / 2, (baseRes.Y - 18.) / 2),
+            (offsetX, boxOffset + boxInnerOffset),
+            // Size
+            boxSize,
+            text: labelText,
+            // Our command handler
+            cmdHandler: handler,
+            // A command string for the button
+            command: commandName,
+            // The button's textures
+            //inactive: buttonIdle,
+            //hover: buttonHover,
+            //click: buttonClick,
+            fnt: bigFont,
+            textScale: 2,
+            textColor: fontColor,
+            alignment: ZDRPG_ZF_Button.AlignType_CenterLeft 
+        );
+        // Add the button element into the main frame.
+        aButton.Pack (mainFrame);
+
+        // Add a label.
+        /*aLabel = ZDRPG_ZF_Label.Create
+        (
+            // Position
+            (offsetX, aButton.GetPosY() - 4),
+            // Size.
+            (0, bigFont.GetHeight ()),
+            // The label's text
+            text: labelText,
+            // The font to use
+            fnt: bigFont,
+            
+            // Whether to automatically wrap the text or not
+            wrap: false,
+            // Whether to automatically resize the element based on the text width
+            autoSize: true,
+            textScale: 2,
+            // The text's colour
+            textColor: fontColor
+        );
+        // Calculate the horizontal position for the label so that it's centered on the screen.
+        //aLabel.SetPosX (offsetX);
+        // Add the label element to the main frame.
+        aLabel.Pack (mainFrame);*/
+
+        blocksCount.Push(1);
+    }
 }

@@ -95,23 +95,23 @@ class ZDRPGSpecialShopInteraction : Actor
     }
 }
 
-class DRPGLootDropper : RandomSpawner //Loot Spawner on Missions BBQ
+class ZDRPGLootDropper : RandomSpawner //Loot Spawner on Missions BBQ
 {
     Default 
     {
-        DropItem "DRPGLootMedicalSupplies",    255, 10;
-        DropItem "DRPGLootChemicals",          255, 10;
-        DropItem "DRPGLootHazardousMaterials", 255, 10;
-        DropItem "DRPGLootAnomalousMaterials", 255, 5;
-        DropItem "DRPGLootBriefcase",          255, 5;
-        DropItem "DRPGLootComputerData",       255, 10;
-        DropItem "DRPGLootGunParts",           255, 1;
-        DropItem "DRPGLootAmmoCasings",        255, 1;
-        DropItem "DRPGLootFuelCapsule",        255, 1;
-        DropItem "DRPGLootScrapMetals",        255, 1;
-        DropItem "DRPGLootScrapElectronics",   255, 1;
-        DropItem "DRPGLootExperimentalParts",  255, 1;
-        DropItem "DRPGLootDemonArtifact",      255, 5;
+        DropItem "ZDRPGLootMedicalSupplies",    255, 10;
+        DropItem "ZDRPGLootChemicals",          255, 10;
+        DropItem "ZDRPGLootHazardousMaterials", 255, 10;
+        DropItem "ZDRPGLootAnomalousMaterials", 255, 5;
+        DropItem "ZDRPGLootBriefcase",          255, 5;
+        DropItem "ZDRPGLootComputerData",       255, 10;
+        DropItem "ZDRPGLootGunParts",           255, 1;
+        DropItem "ZDRPGLootAmmoCasings",        255, 1;
+        DropItem "ZDRPGLootFuelCapsule",        255, 1;
+        DropItem "ZDRPGLootScrapMetals",        255, 1;
+        DropItem "ZDRPGLootScrapElectronics",   255, 1;
+        DropItem "ZDRPGLootExperimentalParts",  255, 1;
+        DropItem "ZDRPGLootDemonArtifact",      255, 5;
     }
 }
 
@@ -133,7 +133,7 @@ class ZDRPGOutpostPadBaseLine : Actor
 }
 
 //---Praticle Effects (pad praticle code based on Tormentor667 Stronghold_Pad praticles )
-class DRPGBaseLineMed : ZDRPGOutpostPadBaseLine //Medic
+class ZDRPGBaseLineMed : ZDRPGOutpostPadBaseLine //Medic
 { 
     States
     {
@@ -144,7 +144,7 @@ class DRPGBaseLineMed : ZDRPGOutpostPadBaseLine //Medic
     }
 }
 
-class DRPGBaseLineArmor: ZDRPGOutpostPadBaseLine //Armor
+class ZDRPGBaseLineArmor: ZDRPGOutpostPadBaseLine //Armor
 {
     States
     {
@@ -155,7 +155,7 @@ class DRPGBaseLineArmor: ZDRPGOutpostPadBaseLine //Armor
     }
 }
 
-class DRPGBaseLineAUG : ZDRPGOutpostPadBaseLine //AUG battery
+class ZDRPGBaseLineAUG : ZDRPGOutpostPadBaseLine //AUG battery
 {
     States
     {
@@ -166,7 +166,7 @@ class DRPGBaseLineAUG : ZDRPGOutpostPadBaseLine //AUG battery
     }
 }
 
-class DRPGBaseLineEP : ZDRPGOutpostPadBaseLine //EP
+class ZDRPGBaseLineEP : ZDRPGOutpostPadBaseLine //EP
 {
     States
     {
@@ -205,11 +205,11 @@ class MedParticle: ZDRPGOutpostParticle
             Active:
                 TNT1 A 0;
                 TNT1 A 0 A_JumpIf(Args[1], "Circle");
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineMed", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]); 
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineMed", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]); 
                 Loop;
             Circle:
                 TNT1 A 0;
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineMed", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]) ;
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineMed", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]) ;
                 Loop;
     }     
         
@@ -231,11 +231,11 @@ class ArmorParticle : ZDRPGOutpostParticle
             Active:
                 TNT1 A 0;
                 TNT1 A 0 A_JumpIf(Args[1], "Circle");
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineArmor", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]);
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineArmor", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]);
                 Loop;
             Circle:
                 TNT1 A 0;
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineArmor", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]);
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineArmor", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]);
                 Loop;
     }     
         
@@ -249,11 +249,11 @@ class AUGParticle : ZDRPGOutpostParticle
             Active:
                 TNT1 A 0;
                 TNT1 A 0 A_JumpIf(Args[1], "Circle");
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineAUG", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]);
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineAUG", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]);
                 Loop;
             Circle:
                 TNT1 A 0;
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineAUG", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]);
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineAUG", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]);
                 Loop;
     }            
 }
@@ -266,11 +266,11 @@ class EPParticle : ZDRPGOutpostParticle
             Active:
                 TNT1 A 0;
                 TNT1 A 0 A_JumpIf(Args[1], "Circle");
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineEP", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]);
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineEP", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(0,2*Args[1]), 0, 0, random(1,3), 0, 129, Args[2]);
                 Loop;
             Circle:
                 TNT1 A 0;
-                TNT1 A 1 A_SpawnItemEx ("DRPGBaseLineEP", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]);
+                TNT1 A 1 A_SpawnItemEx ("ZDRPGBaseLineEP", random(-Args[0], Args[0]), 0, random(0,2*Args[1]), 0, 0, random(1,3), Random(0, 360), 129, Args[2]);
                 Loop;
     }        
 }
@@ -501,7 +501,7 @@ class OutpostAdminLamp : Actor
     }
 }
 
-class DRPGOutpostAlarm : SwitchableDecoration
+class ZDRPGOutpostAlarm : SwitchableDecoration
 {
     Default
     {
@@ -520,7 +520,7 @@ class DRPGOutpostAlarm : SwitchableDecoration
             OALM A 0 A_Jump (256, 1, 2, 3);
             OALM AAA 1 Light ("OUTPOSTALARM");
         AlarmLoop:
-            OALM A 4 Light ("OUTPOSTALARM") A_PlaySound ("misc/alarm", CHAN_VOICE, 1.0, 1, ATTN_NORM);
+            OALM A 4 Light ("OUTPOSTALARM") A_StartSound ("misc/alarm", CHAN_VOICE, 1.0, 1, ATTN_NORM);
             OALM BCD 4 Light ("OUTPOSTALARM");
             Loop;
     }
@@ -529,7 +529,7 @@ class DRPGOutpostAlarm : SwitchableDecoration
 // Outpost Particle Effects
 // --------------------------------------------------
 
-class DRPGOutpostPadParticleSpawner : Actor
+class ZDRPGOutpostPadParticleSpawner : Actor
 {
     int user_angle;
     int user_angleofs;
@@ -571,17 +571,17 @@ class DRPGOutpostPadParticleSpawner : Actor
     }
 }
 
-class DRPGOutpostLevelTransportParticleSpawner : DRPGOutpostPadParticleSpawner
+class ZDRPGOutpostLevelTransportParticleSpawner : ZDRPGOutpostPadParticleSpawner
 {
     States
     {
         Spawn:
             TNT1 A 0 NoDelay 
             {
-                A_SpawnItemEx ("DRPGOutpostLevelTransportParticle", 32,  0, 0, 0, 0, 0,  user_angle);
-                A_SpawnItemEx ("DRPGOutpostLevelTransportParticle", 64,  0, 0, 0, 0, 0, -user_angle);
-                A_SpawnItemEx ("DRPGOutpostLevelTransportParticle", 96,  0, 0, 0, 0, 0,  user_angle);
-                A_SpawnItemEx ("DRPGOutpostLevelTransportParticle", 128, 0, 0, 0, 0, 0, -user_angle);
+                A_SpawnItemEx ("ZDRPGOutpostLevelTransportParticle", 32,  0, 0, 0, 0, 0,  user_angle);
+                A_SpawnItemEx ("ZDRPGOutpostLevelTransportParticle", 64,  0, 0, 0, 0, 0, -user_angle);
+                A_SpawnItemEx ("ZDRPGOutpostLevelTransportParticle", 96,  0, 0, 0, 0, 0,  user_angle);
+                A_SpawnItemEx ("ZDRPGOutpostLevelTransportParticle", 128, 0, 0, 0, 0, 0, -user_angle);
             }      
             TNT1 A 3
             {   
@@ -591,47 +591,47 @@ class DRPGOutpostLevelTransportParticleSpawner : DRPGOutpostPadParticleSpawner
     }
 }
 
-class DRPGOutpostHealthPadParticleSpawner : DRPGOutpostPadParticleSpawner 
+class ZDRPGOutpostHealthPadParticleSpawner : ZDRPGOutpostPadParticleSpawner 
 {
     States
     {
         MakeCircle:
-            TNT1 A 0 A_SpawnItemEx ("DRPGOutpostHealthPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
+            TNT1 A 0 A_SpawnItemEx ("ZDRPGOutpostHealthPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
             goto super::MakeCircle;
     }
 }
 
-class DRPGOutpostEPPadParticleSpawner : DRPGOutpostPadParticleSpawner
+class ZDRPGOutpostEPPadParticleSpawner : ZDRPGOutpostPadParticleSpawner
 {
     States
     {
         MakeCircle:
-            TNT1 A 0 A_SpawnItemEx ("DRPGOutpostEPPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
+            TNT1 A 0 A_SpawnItemEx ("ZDRPGOutpostEPPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
             goto super::MakeCircle;
     }
 }
 
-class DRPGOutpostArmorPadParticleSpawner : DRPGOutpostPadParticleSpawner
+class ZDRPGOutpostArmorPadParticleSpawner : ZDRPGOutpostPadParticleSpawner
 {
     States
     {
         MakeCircle:
-            TNT1 A 0 A_SpawnItemEx ("DRPGOutpostArmorPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
+            TNT1 A 0 A_SpawnItemEx ("ZDRPGOutpostArmorPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
             goto super::MakeCircle;
     }
 }
 
-class DRPGOutpostBatteryPadParticleSpawner : DRPGOutpostPadParticleSpawner
+class ZDRPGOutpostBatteryPadParticleSpawner : ZDRPGOutpostPadParticleSpawner
 {
     States
     {
         MakeCircle:
-            TNT1 A 0 A_SpawnItemEx ("DRPGOutpostBatteryPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
+            TNT1 A 0 A_SpawnItemEx ("ZDRPGOutpostBatteryPadParticle", user_radius, 0, 0, 0, 0, 0, user_angle + user_angleofs);
             goto super::MakeCircle;
     }
 }
 
-class DRPGOutpostPadParticle : Actor
+class ZDRPGOutpostPadParticle : Actor
 {
     Default
     {
@@ -649,7 +649,7 @@ class DRPGOutpostPadParticle : Actor
             {
                 A_ChangeVelocity (0, 0, 0.05);
                 A_FadeOut (1.0 / 70);
-                A_JumpIf (ScaleX <= 0, "Death");
+                A_JumpIf (Scale.X <= 0, "Death");
             }
             Loop;
         Death:
@@ -658,16 +658,16 @@ class DRPGOutpostPadParticle : Actor
     }
 }
 
-class DRPGOutpostLevelTransportParticle : DRPGOutpostPadParticle
+class ZDRPGOutpostLevelTransportParticle : ZDRPGOutpostPadParticle
 {
     States
     {
         Spawn:
-            PTCL A 1 Bright A_SetScale (ScaleX - (0.05 / 70));
+            PTCL A 1 Bright A_SetScale (Scale.X - (0.05 / 70));
             TNT1 A 0 
             {
                 A_ChangeVelocity (0, 0, 0.1);
-                A_JumpIf (ScaleX <= 0, "Death");
+                A_JumpIf (Scale.X <= 0, "Death");
             }
             Loop;
     }
@@ -675,7 +675,7 @@ class DRPGOutpostLevelTransportParticle : DRPGOutpostPadParticle
 
 
 
-class DRPGOutpostHealthPadParticle : DRPGOutpostPadParticle
+class ZDRPGOutpostHealthPadParticle : ZDRPGOutpostPadParticle
 {
     Default
     {
@@ -685,17 +685,17 @@ class DRPGOutpostHealthPadParticle : DRPGOutpostPadParticle
     States
     {
         Spawn:
-            AUEF F 1 Bright A_SetScale (ScaleX - (0.05 / 70));
+            AUEF F 1 Bright A_SetScale (Scale.X - (0.05 / 70));
             TNT1 A 0 {
                 A_ChangeVelocity (0, 0, 0.05);
                 A_FadeOut (0.5 / 70);
-                A_JumpIf (ScaleX <= 0, "Death");
+                A_JumpIf (Scale.X <= 0, "Death");
             }
             Loop;
     }
 }
 
-class DRPGOutpostEPPadParticle : DRPGOutpostPadParticle
+class ZDRPGOutpostEPPadParticle : ZDRPGOutpostPadParticle
 {
     Default
     {
@@ -705,33 +705,33 @@ class DRPGOutpostEPPadParticle : DRPGOutpostPadParticle
     States
     {
         Spawn:
-            AUEF G 1 Bright A_SetScale (ScaleX - (0.05 / 70));
+            AUEF G 1 Bright A_SetScale (Scale.X - (0.05 / 70));
             TNT1 A 0 
             {
                 A_ChangeVelocity (0, 0, 0.05);
                 A_FadeOut (0.5 / 70);
-                A_JumpIf (ScaleX <= 0, "Death");
+                A_JumpIf (Scale.X <= 0, "Death");
             }
             Loop;
     }
 }
 
-class DRPGOutpostArmorPadParticle : DRPGOutpostPadParticle
+class ZDRPGOutpostArmorPadParticle : ZDRPGOutpostPadParticle
 {
     States
     {
         Spawn:
-            AUEF E 1 Bright A_SetScale (ScaleX - (0.05 / 70));
+            AUEF E 1 Bright A_SetScale (Scale.X - (0.05 / 70));
             goto super::Spawn;
     }
 }
 
-class DRPGOutpostBatteryPadParticle : DRPGOutpostPadParticle
+class ZDRPGOutpostBatteryPadParticle : ZDRPGOutpostPadParticle
 { 
     States
     {
         Spawn:
-            PTCL B 1 Bright A_SetScale (ScaleX - (0.05 / 70));
+            PTCL B 1 Bright A_SetScale (Scale.X - (0.05 / 70));
             goto super::Spawn;
     }
 }
@@ -874,7 +874,7 @@ class OutpostMarker_Sale : OutpostMarker
 // Borrowed from DRLA
 // WHAT A SHAME
 
-class DRPGTeleportRift : Actor
+class ZDRPGTeleportRift : Actor
 {
     int user_distance;
     int user_angle;
@@ -902,7 +902,7 @@ class DRPGTeleportRift : Actor
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay A_SpawnItemEx("DRPGTeleportRiftAlerter");
+            TNT1 A 0 NoDelay A_SpawnItemEx("ZDRPGTeleportRiftAlerter");
         See:
             TNT1 A 0 A_Chase;
             TFOG BBBBCCCCDDDDCCCC 1 Bright A_Jump(12, "MonsterSpawn");
@@ -912,13 +912,13 @@ class DRPGTeleportRift : Actor
                 user_distance = random(0, 256);
                 user_angle = random(0, 359);
                 A_SpawnItemEx("TeleportFog", 0, user_distance, 0, 0, 0, 0, user_angle);
-                A_SpawnItemEx("DRPGTeleportRiftSpawner", 0, user_distance, 0, 0, 0, 0, user_angle, SXF_TRANSFERPOINTERS | SXF_SETMASTER, 0, TID + 1);
+                A_SpawnItemEx("ZDRPGTeleportRiftSpawner", 0, user_distance, 0, 0, 0, 0, user_angle, SXF_TRANSFERPOINTERS | SXF_SETMASTER, 0, TID + 1);
             }
             Goto See;
     }
 }
 
-class DRPGTeleportRiftAlerter : Actor
+class ZDRPGTeleportRiftAlerter : Actor
 {
     Default
     {
@@ -937,7 +937,7 @@ class DRPGTeleportRiftAlerter : Actor
     }
 }
 
-class DRPGTeleportRiftSpawner : RandomSpawner
+class ZDRPGTeleportRiftSpawner : RandomSpawner
 {
     Default
     {

@@ -67,9 +67,6 @@ const int TC_ORBIT = 3;
 const int TC_TARGET = 4;
 const int TC_CONTROL = 5;
 
-// Randomizers
-#include "actors/Randomizers.txt"
-
 // Marines
 #include "actors/Marines/Base.txt"
 #include "actors/Marines/Pistol.txt"
@@ -84,7 +81,6 @@ const int TC_CONTROL = 5;
 #include "actors/Marines/PowerSuit.txt"
 #include "actors/Marines/Summons.txt"
 #include "actors/Dummies.txt"
-//#include "actors/Outpost.txt"
 
 // Megabosses
 #include "actors/Megabosses/Base.txt"

@@ -51,3 +51,20 @@ class ZDRPGShieldActivator: ZDRPGUtility
         return true;
     }
 }
+
+class ZDRPGWeaponSpeedScaling: ZDRPGUtility
+{
+    private PSpriteSpeedScalerSet scalers;
+	
+	override void Tick() {
+		Super.Tick();
+		
+		if (Owner && Owner.player && Owner.player.ReadyWeapon)
+        {
+            let Stats = ZDRPGStats.GetStats(owner);
+			scalers.Tick(Owner.player.ReadyWeapon, Stats.WeaponSpeed*-1);
+        }
+		else if (scalers.first)
+			scalers.Clear();
+	}
+}

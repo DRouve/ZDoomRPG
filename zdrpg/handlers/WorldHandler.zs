@@ -25,6 +25,7 @@ class ZDRPGWorldHandler : EventHandler
             }
         }
     }*/
+
     override void WorldThingSpawned(WorldEvent e)
     {
         if (e.Thing && e.Thing.bIsMonster)
@@ -45,9 +46,9 @@ class ZDRPGWorldHandler : EventHandler
 
     override void CheckReplacement (ReplaceEvent e)
     {
-        if (e.Replacee is "Health")
+        /*if (e.Replacee is "Health")
         {
             e.Replacement = "ZDRPGSurgeryKit";
-        }
+        }*/
     }
 }

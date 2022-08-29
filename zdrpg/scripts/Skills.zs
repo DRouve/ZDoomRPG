@@ -5,10 +5,16 @@ class ZDRPGSkill: Inventory
     int EPCost;
     int Power;
 
+    string SkillCategory;
+    int FontColor;
+
     property SkillLevel   : SkillLevel;
     property ModulesCost  : ModulesCost;
     property EPCost       : EPCost;
     property Power        : Power;
+    
+    property SkillCategory : SkillCategory;
+    property FontColor : FontColor;
     
     Default {
         Inventory.Amount 0;
@@ -18,12 +24,57 @@ class ZDRPGSkill: Inventory
     }
 }
 
+/*class ZDRPGOffenseSkill : ZDRPGSkill
+{
+    Default {
+        Tag "Offense";
+        ZDRPGSkill.FontColor Font.CR_RED;
+    }   
+}
+class ZDRPGSupportSkill : ZDRPGSkill
+{
+    Default {
+        Tag "Support";
+        ZDRPGSkill.FontColor Font.CR_BRICK;
+    }
+}
+class ZDRPGSummonSkill : ZDRPGSkill
+{
+    Default {
+        Tag "Summon";
+        ZDRPGSkill.FontColor Font.CR_ORANGE;
+    }
+}
+class ZDRPGAuraSkill : ZDRPGSkill
+{
+    Default {
+        Tag "Auras";
+        ZDRPGSkill.FontColor Font.CR_CYAN;
+    }
+}
+class ZDRPGPowerupSkill : ZDRPGSkill
+{
+    Default {
+        Tag "Powerups";
+        ZDRPGSkill.FontColor Font.CR_GREEN;
+    }
+}
+class ZDRPGUtilitySkill : ZDRPGSkill
+{
+    Default {
+        Tag "Utility";
+        ZDRPGSkill.FontColor Font.CR_GREY;
+    }
+}*/
+
 class ZDRPGTransport : ZDRPGSkill
 {
     Default {
         Tag "Transport";
         ZDRPGSkill.EPCost 0;
         ZDRPGSkill.Power  50;
+        ZDRPGSkill.SkillCategory "Utility";
+        ZDRPGSkill.FontColor Font.CR_GRAY;
     }
 
     override bool Use(bool pickup)
@@ -52,6 +103,8 @@ class ZDRPGHeal : ZDRPGSkill
         Tag "Heal";
         ZDRPGSkill.EPCost 25;
         ZDRPGSkill.Power  50;
+        ZDRPGSkill.SkillCategory "Support";
+        ZDRPGSkill.FontColor Font.CR_BRICK;
     }
 
     override bool Use(bool pickup)
@@ -69,6 +122,8 @@ class ZDRPGMagnetize : ZDRPGSkill
         Tag "Magnetize";
         ZDRPGSkill.EPCost 33;
         ZDRPGSkill.Power  50;
+        ZDRPGSkill.SkillCategory "Support";
+        ZDRPGSkill.FontColor Font.CR_BRICK;
     }
 
     override bool Use(bool pickup)

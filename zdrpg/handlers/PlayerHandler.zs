@@ -1,21 +1,62 @@
 class ZDRPGPlayerHandler : EventHandler 
 {
-    override void PlayerSpawned(PlayerEvent e)
+    override void WorldLoaded(WorldEvent e)
+    {
+        for(int i = 0; i<Players.Size(); i++)
+		{
+            let playerMo = Players[i].mo;
+			if(playerMo)
+			{
+                if(!playerMo.CountInv("ZDRPGStats"))
+                    playerMo.GiveInventory("ZDRPGStats", 1);
+                if(!playerMo.CountInv("ZDRPGPlayerInventory"))
+                    playerMo.GiveInventory("ZDRPGPlayerInventory", 1);
+                if(!playerMo.CountInv("ZDRPGMedkitActivator"))  
+                    playerMo.GiveInventory("ZDRPGMedkitActivator", 1);  
+                if(!playerMo.CountInv("ZDRPGShieldActivator")) 
+                    playerMo.GiveInventory("ZDRPGShieldActivator", 1);   
+                if(!playerMo.CountInv("ZDRPGWeaponSpeedScaling")) 
+                    playerMo.GiveInventory("ZDRPGWeaponSpeedScaling", 1);
+
+                // adding skills and augs
+                for (int j=0; j<allactorclasses.size(); j++) {
+                    if (
+                        (allactorclasses[j] is 'ZDRPGSkill' && allactorclasses[j].getClassName() != 'ZDRPGSkill') 
+                    ||  (allactorclasses[j] is 'ZDRPGAug'   && allactorclasses[j].getClassName() != 'ZDRPGAug')
+                    && !playerMo.CountInv(allactorclasses[j].GetClassName())
+                    )
+                        playerMo.GiveInventory(allactorclasses[j].GetClassName(), 1);
+                }
+            }            
+        }
+    }
+
+    /*override void PlayerSpawned(PlayerEvent e)
     {
         PlayerInfo player = players[e.PlayerNumber];
-        player.mo.GiveInventory("ZDRPGStats", 1);
-        player.mo.GiveInventory("ZDRPGPlayerInventory", 1);   
-        player.mo.GiveInventory("ZDRPGMedkitActivator", 1);   
-        player.mo.GiveInventory("ZDRPGShieldActivator", 1);   
+        
+        let Stats = ZDRPGStats.GetStats(player.mo);
+        if(Stats)
+        {
+            console.printf('Str: %d', Stats.Strength);
+        }
+
+        if(!player.mo.CountInv("ZDRPGStats"))        
+            player.mo.GiveInventory("ZDRPGStats", 1);
+        if(!player.mo.CountInv("ZDRPGPlayerInventory"))
+            player.mo.GiveInventory("ZDRPGPlayerInventory", 1);   
+        if(!player.mo.CountInv("ZDRPGMedkitActivator"))
+            player.mo.GiveInventory("ZDRPGMedkitActivator", 1);   
+        if(!player.mo.CountInv("ZDRPGShieldActivator"))
+            player.mo.GiveInventory("ZDRPGShieldActivator", 1);   
 
         // adding skills and augs
         for (int i=0; i<allactorclasses.size(); i++) {
             if ((allactorclasses[i] is 'ZDRPGSkill' && allactorclasses[i].getClassName() != 'ZDRPGSkill') 
-            ||  (allactorclasses[i] is 'ZDRPGAug'   && allactorclasses[i].getClassName() != 'ZDRPGAug')) {
+            ||  (allactorclasses[i] is 'ZDRPGAug'   && allactorclasses[i].getClassName() != 'ZDRPGAug'))
                 player.mo.GiveInventory(allactorclasses[i].GetClassName(), 1);
-            }
         }
-
+        
         //if(Level.MapName != 'Outpost')
         //{
             /*let Stats = ZDRPGStats.GetStats(player.mo);
@@ -53,7 +94,7 @@ class ZDRPGPlayerHandler : EventHandler
             }
         }*/
         //whatever.Replace("\r","");
-    }
+    //}
 
     override void NetworkProcess(ConsoleEvent e)
     {

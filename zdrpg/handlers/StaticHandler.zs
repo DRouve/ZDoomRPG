@@ -1,6 +1,7 @@
 class ZDRPGStaticHandler : StaticEventHandler 
 {
     array <string> mapPacks;
+    array <string> skillCategories;
 
     override void OnRegister ()
     {
@@ -26,6 +27,17 @@ class ZDRPGStaticHandler : StaticEventHandler
                     }     
                 }
                 mapPacks.Push(mapPackName .. "##" .. level.MapName);
+            }
+        }
+
+        for (int i=0; i<allactorclasses.size(); i++) {
+            if (allactorclasses[i] is 'ZDRPGSkill' && allactorclasses[i].getClassName() != 'ZDRPGSkill')
+            {
+                let skill = GetDefaultByType( (class<ZDRPGSkill>) (allactorclasses[i]) );
+                if(!(skillCategories.Find(skill.SkillCategory..':'..skill.FontColor) != skillCategories.Size()))
+                {
+                    skillCategories.Push(skill.SkillCategory..':'..skill.FontColor);
+                }
             }
         }
     }

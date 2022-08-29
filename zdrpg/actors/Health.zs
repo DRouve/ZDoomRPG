@@ -18,6 +18,39 @@
 
 */
 
+// Health Bonus
+class ZDRPGHealthBonus : Inventory
+{
+    Default
+    {
+        +INVENTORY.ALWAYSPICKUP;
+        Inventory.Amount 5;
+        Inventory.PickupMessage "$GOTHTHBONUS";
+        Inventory.PickupSound "items/vial";
+    }
+    
+    States
+    {
+        Spawn:
+            BON1 ABCDCB 6 Bright;
+            Loop;
+    }
+
+    override bool TryPickup (in out Actor toucher) 
+	{
+        let Stats = ZDRPGStats.GetStats(toucher);
+        let overhealMax = Stats.MaxHealth + 100;
+        if(toucher.Health < overhealMax)
+        {
+            if(toucher.Health+self.Amount >= overhealMax)
+                toucher.A_SetHealth(overhealMax);
+            else
+                toucher.GiveBody(self.Amount, overhealMax);
+        }
+        return false;
+	}
+}
+
 class ZDRPGMedkit: Inventory
 {
     int GiveAmount;
@@ -142,360 +175,238 @@ class ZDRPGMedkitRefill: ZDRPGMedkit
             Stop;
     }
 }
-/*
-// Basic Health
-actor DRPGBasicHealth : Health
-{
-    Inventory.Amount 1
-    Inventory.MaxAmount 0x7FFFFFFF
-}
-
-// Health Bonus
-actor DRPGHealthBonus : CustomInventory
-{
-    +INVENTORY.ALWAYSPICKUP
-    
-    Inventory.PickupMessage "$GOTHTHBONUS"
-    Inventory.PickupSound "items/vial"
-    
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        BON1 ABCDCB 6 Bright
-        Goto Spawn+1
-    Pickup:
-        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 5, 200)
-        Stop
-    }
-}
-
-// Stimpack
-ACTOR DRPGStimpack : CustomInventory
-{
-    Inventory.PickupMessage "You got a Stimpack!"
-    Inventory.PickupSound "items/health"
-    
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        STIM A -1
-        Stop
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 10)
-        Stop
-    PickupFail:
-        TNT1 A 0
-        Fail
-    }
-}
-
-// Medikit
-ACTOR DRPGMedikit : CustomInventory
-{
-    Inventory.PickupMessage "You got a medium Medikit!"
-    Inventory.PickupSound "items/health"
-
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        MEDI A -1
-        Stop
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 15)
-        Stop
-    PickupFail:
-        TNT1 A 0
-        Fail
-    }
-}
-
-// Large Medikit
-actor DRPGLargeMedikit : CustomInventory 25030
-{
-    Inventory.PickupMessage "You got a large Medikit!"
-    Inventory.PickupSound "items/health"
-    
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        MEDL A -1
-        Stop
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 25)
-        Stop
-    PickupFail:
-        TNT1 A 0
-        Fail
-    }
-}
-
-// Extra-Large Medikit
-actor DRPGXLMedikit : CustomInventory 25031
-{
-    Inventory.PickupMessage "You got an Extra-large Medikit!"
-    Inventory.PickupSound "items/health"
-    
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        MEDX A -1
-        Stop
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 50)
-        Stop
-    PickupFail:
-        TNT1 A 0
-        Fail
-    }
-}
-
-// Med Pack
-actor DRPGMedPack : CustomInventory 25032
-{
-    Inventory.PickupMessage "You got a Med Pack!"
-    Inventory.PickupSound "items/health"
-    
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        MEDP A -1
-        Stop
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 75)
-        Stop
-    PickupFail:
-        TNT1 A 0
-        Fail
-    }
-}
-
-// Surgery Kit
-actor DRPGSurgeryKit : CustomInventory 25033
-{
-    Inventory.PickupMessage "You got a Surgery Kit!"
-    Inventory.PickupSound "items/health"
-    
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        MEDS AB 8
-        Goto Spawn+1
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("CheckMedkitMax"), "PickupFail")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 100)
-        Stop
-    PickupFail:
-        TNT1 A 0
-        Fail
-    }
-}
-
-// Medkit Refill
-ACTOR DRPGMedkitRefill : CustomInventory
-{
-    Inventory.PickupMessage "You got a Medkit refill."
-    Inventory.PickupSound "items/health"
-
-    States
-    {
-    Spawn:
-        MEDK A -1
-        Stop
-    Pickup:
-        TNT1 A 0 ACS_NamedExecuteAlways("AddMedkit", 0, 1000000)
-        Stop
-    }
-}
 
 // Soulspheres
-ACTOR DRPGSoulsphere : CustomInventory
+class ZDRPGSoulsphere : Inventory
 {
-    +FLOATBOB
-    -COUNTITEM
-    
-    +INVENTORY.AUTOACTIVATE
-    +INVENTORY.ALWAYSPICKUP
-    +INVENTORY.FANCYPICKUPSOUND
-    +INVENTORY.BIGPOWERUP
-    
-    Inventory.PickupMessage "You got a Soulsphere!"
-    Inventory.PickupSound "powerups/soulsphere"
+    Default
+    {
+        +FLOATBOB;
+        -COUNTITEM;
+        
+        +INVENTORY.AUTOACTIVATE;
+        +INVENTORY.ALWAYSPICKUP;
+        +INVENTORY.FANCYPICKUPSOUND;
+        +INVENTORY.BIGPOWERUP;
+        
+        Inventory.PickupMessage "You got a Soulsphere!";
+        Inventory.PickupSound "powerups/soulsphere";
+    }
     
     States
     {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        SOUL ABCDCB 6 Bright
-        Goto Spawn+1
-    Pickup:
-        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 100, 200)
-        TNT1 A 0 ACS_NamedExecuteWithResult("ClearStatusEffects")
-        Stop
+        Spawn:
+            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
+            SOUL ABCDCB 6 Bright;
+            Goto Spawn+1;
+        Pickup:
+            TNT1 A 0 
+            {
+                ACS_NamedExecuteWithResult("AddHealthDirect", 100, 200);
+                ACS_NamedExecuteWithResult("ClearStatusEffects");
+            }
+            Stop;
     }
 }
 
-ACTOR DRPGSoulsphere2 : DRPGSoulsphere 25034
+class ZDRPGSoulsphere2 : ZDRPGSoulsphere
 {
-    Translation "192 : 207 = 112 : 127", "240 : 247 = 127 : 127"
+    Default
+    {
+        Translation "192 : 207 = 112 : 127", "240 : 247 = 127 : 127";
+    }
+    
     
     States
     {
-    Pickup:
-        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealthDirect", 200, 200)
-        TNT1 A 0 ACS_NamedExecuteWithResult("ClearStatusEffects")
-        Stop
+        Pickup:
+            TNT1 A 0 
+            {
+                ACS_NamedExecuteWithResult("AddHealthDirect", 200, 200);
+                ACS_NamedExecuteWithResult("ClearStatusEffects");
+            }
+            Stop;
     }
 }
 
-ACTOR DRPGSoulsphere3 : DRPGSoulsphere 25035
+class ZDRPGSoulsphere3 : ZDRPGSoulsphere
 {
-    Translation "192 : 207 = 172 : 187", "240 : 247 = 191 : 191"
+    Default
+    {
+        Translation "192 : 207 = 172 : 187", "240 : 247 = 191 : 191";
+    }
     
     States
     {
-    Pickup:
-        TNT1 A 0 ACS_NamedExecuteWithResult("AddHealth", 300, 200)
-        TNT1 A 0 ACS_NamedExecuteWithResult("ClearStatusEffects")
-        Stop
+        Pickup:
+            TNT1 A 0 
+            {
+                ACS_NamedExecuteWithResult("AddHealth", 300, 200);
+                ACS_NamedExecuteWithResult("ClearStatusEffects");
+            }
+            Stop;
     }
 }
 
 // 1-Ups
-ACTOR DRPGLife : Inventory
+class ZDRPGLife : Inventory
 {
-    -INVBAR
+    Default
+    {
+        //-INVBAR;
     
-    Inventory.MaxAmount 5
-    Inventory.InterHubAmount 5
-    Inventory.PickupMessage "You got a Life!"
-    Inventory.PickupSound "health/1up"
+        Inventory.MaxAmount 5;
+        Inventory.InterHubAmount 5;
+        Inventory.PickupMessage "You got a Life!";
+        Inventory.PickupSound "health/1up";
+    }
+    
 }
 
-ACTOR DRPG1Up : CustomInventory 25036
+class ZDRPG1Up : Inventory
 {
-    -INVBAR
-    +FLOATBOB
-    +INVENTORY.FANCYPICKUPSOUND
-    
-    Inventory.PickupMessage "You got a \cd1-Up!"
-    Inventory.PickupSound "health/1up"
-    
-    Scale 0.5
+    Default
+    {
+        //-INVBAR;
+        +FLOATBOB;
+        +INVENTORY.FANCYPICKUPSOUND;
+        
+        Inventory.PickupMessage "You got a \cd1-Up!";
+        Inventory.PickupSound "health/1up";
+        
+        Scale 0.5;
+    }
     
     States
     {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        P1UP ABCD 4 Bright
-        TNT1 A 0 A_Jump(232, 2)
-        TNT1 A 0 A_PlaySound("hums/extralife", CHAN_6, 4.0, false, 0.5)
-        TNT1 A 0
-        Goto Spawn+1
-    Pickup:
-        TNT1 A 0 A_GiveInventory("DRPGLife", 1)
-        Stop
+        Spawn:
+            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
+            P1UP ABCD 4 Bright;
+            TNT1 A 0 
+            {
+                A_Jump(232, 1);
+                A_StartSound("hums/extralife", CHAN_6, 4.0, false, 0.5);
+            }
+            Goto Spawn+1;
+        Pickup:
+            TNT1 A 0 A_GiveInventory("ZDRPGLife", 1);
+            Stop;
     }
 }
 
-ACTOR DRPG3Up : DRPG1Up
+class ZDRPG3Up : ZDRPG1Up
 {
-    Inventory.PickupMessage "You got a \ch3-Up!"
-    Inventory.PickupSound "health/3up"
+    Default
+    {
+        Inventory.PickupMessage "You got a \ch3-Up!";
+        Inventory.PickupSound "health/3up";
+    }
     
     States
     {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        P3UP ABCD 4 Bright
-        TNT1 A 0 A_Jump(232, 2)
-        TNT1 A 0 A_PlaySound("hums/extralife", CHAN_6, 4.0, false, 0.5)
-        TNT1 A 0
-        Goto Spawn+1
-    Pickup:
-        TNT1 A 0 A_GiveInventory("DRPGLife", 3)
-        Stop
+        Spawn:
+            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
+            P3UP ABCD 4 Bright;
+            TNT1 A 0 
+            {
+                A_Jump(232, 1);
+                A_PlaySound("hums/extralife", CHAN_6, 4.0, false, 0.5);
+            }
+            Goto Spawn+1;
+        Pickup:
+            TNT1 A 0 A_GiveInventory("ZDRPGLife", 3);
+            Stop;
     }
 }
 
-ACTOR DRPG5Up : DRPG1Up
+class ZDRPG5Up : ZDRPG1Up
 {
-    Inventory.PickupMessage "You got a \cg5-Up!"
-    Inventory.PickupSound "health/5up"
+    Default
+    {
+        Inventory.PickupMessage "You got a \cg5-Up!";
+        Inventory.PickupSound "health/5up";
+    }
     
     States
     {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-        P5UP ABCD 4 Bright
-        TNT1 A 0 A_Jump(232, 2)
-        TNT1 A 0 A_PlaySound("hums/extralife", CHAN_6, 4.0, false, 0.5)
-        TNT1 A 0
-        Goto Spawn+1
-    Pickup:
-        TNT1 A 0 A_GiveInventory("DRPGLife", 5)
-        Stop
+        Spawn:
+            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
+            P5UP ABCD 4 Bright;
+            TNT1 A 0 
+            {
+                A_Jump(232, 1);
+                A_StartSound("hums/extralife", CHAN_6, 4.0, false, 0.5);
+            }
+            Goto Spawn+1;
+        Pickup:
+            TNT1 A 0 A_GiveInventory("ZDRPGLife", 5);
+            Stop;
     }
 }
 
 // EP Capsule
-actor DRPGEPCapsule : CustomInventory 25037
+class ZDRPGEPCapsule : Inventory
 {
-    inventory.PickupMessage "Got an EP Capsule!"
-    Inventory.PickupSound "health/epcapsule"
-    
-    Scale 0.5
+    Default
+    {
+        Inventory.PickupSound "health/epcapsule";
+        inventory.PickupMessage "Got an EP Capsule!";
+        Scale 0.5;
+    }
     
     States
     {
-    Spawn:
-        TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0)
-    SpawnLoop:
-        EPUP ABCDEFGHIHGFEDCB 3 Bright
-        Loop
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("GetEP") >= CallACS("GetEPMax"), "SpawnLoop")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddEP", 0, CallACS("GetEPMax") / 10)
-        Stop
+        Spawn:
+            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
+        SpawnLoop:
+            EPUP ABCDEFGHIHGFEDCB 3 Bright;
+            Loop;
+        Pickup:
+            TNT1 A 0 
+            {
+                A_JumpIf(CallACS("GetEP") >= CallACS("GetEPMax"), "SpawnLoop");
+                ACS_NamedExecuteAlways("AddEP", 0, CallACS("GetEPMax") / 10);
+            }
+            Stop;
     }
 }
 
 // Little EP Capsule
-actor DRPGLittleEPCapsule : DRPGEPCapsule 25039
+class ZDRPGLittleEPCapsule : ZDRPGEPCapsule
 {
-    Scale 0.40
+    Default
+    {
+        Scale 0.40;
+    }
     
     States
     {
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("GetEP") >= CallACS("GetEPMax"), "SpawnLoop")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddEP", 0, CallACS("GetEPMax") / 15)
-        Stop
+        Pickup:
+            TNT1 A 0 
+            {
+                A_JumpIf(CallACS("GetEP") >= CallACS("GetEPMax"), "SpawnLoop");
+                ACS_NamedExecuteAlways("AddEP", 0, CallACS("GetEPMax") / 15);
+            }
+            Stop;
     }
 }
 
 // Big EP Capsule
-actor DRPGBigEPCapsule : DRPGEPCapsule 25038
+class ZDRPGBigEPCapsule : ZDRPGEPCapsule
 {
-    Scale 0.75
+    Default
+    {
+        Scale 0.75;
+    }
     
     States
     {
-    Pickup:
-        TNT1 A 0 A_JumpIf(CallACS("GetEP") >= CallACS("GetEPMax"), "SpawnLoop")
-        TNT1 A 0 ACS_NamedExecuteAlways("AddEP", 0, CallACS("GetEPMax") / 4)
-        Stop
+        Pickup:
+            TNT1 A 0 
+            {
+                A_JumpIf(CallACS("GetEP") >= CallACS("GetEPMax"), "SpawnLoop");
+                ACS_NamedExecuteAlways("AddEP", 0, CallACS("GetEPMax") / 4);
+            }
+            Stop;
     }
 }
-*/

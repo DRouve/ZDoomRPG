@@ -4,6 +4,13 @@ class ZDRPGHUD : BaseStatusBar
     HUDFont fontBig;
     HUDFont fontBigNoMono;
 
+    int OldHealth;
+    int OldEP;
+    
+    int OldCredits;
+    int OldModules;
+    int OldMedkit;
+
     override void Init()
     {
         super.Init();

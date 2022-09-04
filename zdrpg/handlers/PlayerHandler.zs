@@ -17,6 +17,8 @@ class ZDRPGPlayerHandler : EventHandler
                     playerMo.GiveInventory("ZDRPGShieldActivator", 1);   
                 if(!playerMo.CountInv("ZDRPGWeaponSpeedScaling")) 
                     playerMo.GiveInventory("ZDRPGWeaponSpeedScaling", 1);
+                if(!playerMo.CountInv("ZDRPGMissionController")) 
+                    playerMo.GiveInventory("ZDRPGMissionController", 1);
 
                 // adding skills and augs
                 for (int j=0; j<allactorclasses.size(); j++) {
@@ -120,6 +122,13 @@ class ZDRPGPlayerHandler : EventHandler
                 if (Skill)
                     Skill.Use(true);
             } 
+
+            //let eHandler = ZDRPGMissionHandler(EventHandler.Find("ZDRPGMissionHandler"));
+            //if(eHandler.Missions.Size() > 0)
+            //{
+            //    players[e.Player].mo.GiveInventory(eHandler.Missions[0].GetClassName(), 1);
+            //}
+            
         }
 
         if(eString.IndexOf("activateAug") >= 0) 

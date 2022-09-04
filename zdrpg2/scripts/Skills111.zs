@@ -4,6 +4,8 @@ class ZDRPGHealFromMod : ZDRPGSkill
         Tag "HealFromMod";
         ZDRPGSkill.EPCost 25;
         ZDRPGSkill.Power  50;
+        ZDRPGSkill.SkillCategory "Support";
+        ZDRPGSkill.FontColor Font.CR_BRICK;
     }
 
     override bool Use(bool pickup)

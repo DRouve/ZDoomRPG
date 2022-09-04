@@ -545,7 +545,7 @@ class ZDRPGGenericLootRandomizer : RandomSpawner
 // --------------------------------------------------
 
 // Backpack locations
-class ZDRPGBackpackRandomizer : RandomSpawner Replaces Backpack
+class ZDRPGBackpackRandomizer : RandomSpawner
 {
     Default
     {
@@ -560,7 +560,7 @@ class ZDRPGBackpackRandomizer : RandomSpawner Replaces Backpack
 // --------------------------------------------------
 
 // Health Bonus Locations
-class ZDRPGHealthBonusReplacer : RandomSpawner Replaces HealthBonus
+class ZDRPGHealthBonusReplacer : RandomSpawner
 {
     Default
     {
@@ -582,7 +582,7 @@ class ZDRPGHealthBonusReplacer : RandomSpawner Replaces HealthBonus
 }
 
 // Stimpack Locations
-class ZDRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
+class ZDRPGStimpackRandomizer : RandomSpawner
 {
     Default
     {
@@ -594,7 +594,7 @@ class ZDRPGStimpackRandomizer : RandomSpawner Replaces Stimpack
 }
 
 // Medikit Locations
-class ZDRPGMedikitRandomizer : RandomSpawner Replaces Medikit
+class ZDRPGMedikitRandomizer : RandomSpawner
 {
     Default
     {
@@ -609,7 +609,7 @@ class ZDRPGMedikitRandomizer : RandomSpawner Replaces Medikit
 }
 
 // Soulsphere Locations
-class ZDRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
+class ZDRPGSoulSphereRandomizer : RandomSpawner
 {
     Default
     {
@@ -624,7 +624,7 @@ class ZDRPGSoulSphereRandomizer : RandomSpawner Replaces Soulsphere
 // --------------------------------------------------
 
 // Armor Bonus Locations
-class ZDRPGArmorBonusReplacer : RandomSpawner Replaces ArmorBonus
+class ZDRPGArmorBonusReplacer : RandomSpawner
 {
     Default
     {
@@ -634,7 +634,7 @@ class ZDRPGArmorBonusReplacer : RandomSpawner Replaces ArmorBonus
 }
 
 // Green Armor Locations
-class ZDRPGGreenArmorRandomizer : RandomSpawner Replaces GreenArmor
+class ZDRPGGreenArmorRandomizer : RandomSpawner
 {
     Default
     {
@@ -648,7 +648,7 @@ class ZDRPGGreenArmorRandomizer : RandomSpawner Replaces GreenArmor
 }
 
 // Blue Armor Locations
-class ZDRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
+class ZDRPGBlueArmorRandomizer : RandomSpawner
 {
     Default
     {
@@ -665,7 +665,7 @@ class ZDRPGBlueArmorRandomizer : RandomSpawner Replaces BlueArmor
 // --------------------------------------------------
 
 // Invulnerability Sphere Locations
-class ZDRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces InvulnerabilitySphere
+class ZDRPGInvulnerabilitySphereRandomizer : RandomSpawner
 {
     Default
     {
@@ -675,7 +675,7 @@ class ZDRPGInvulnerabilitySphereRandomizer : RandomSpawner Replaces Invulnerabil
 }
 
 // Blur Sphere Locations
-class ZDRPGBlurSphereRandomizer : RandomSpawner Replaces BlurSphere
+class ZDRPGBlurSphereRandomizer : RandomSpawner
 {
     Default
     {

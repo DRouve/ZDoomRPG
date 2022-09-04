@@ -56,7 +56,7 @@ class ZDRPGMissionInteraction : Actor
     override bool Used(Actor user) 
     {
         ZDRPG_ZF_PlayerMenu link; 
-        link.setMenu('ZDRPG_ZF_AugsMenu'); 
+        link.setMenu('ZDRPG_ZF_MissionsMenu'); 
         return true;
     }
 }
@@ -926,6 +926,7 @@ class ZDRPGTeleportRiftAlerter : Actor
         +NOBLOCKMAP
         +NOGRAVITY
         +NOTELEPORT
+        -COUNTKILL
     }
     
     States

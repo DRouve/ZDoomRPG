@@ -116,54 +116,7 @@ class ZDRPG_ZF_MapsMenu : ZDRPG_ZF_GenericMenu
                 }
             }
         }*/
-        
-        /*
-        CreateStatBox("Turret 1",      "statUp:1", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 2",      "statUp:2", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 3",      "statUp:3", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 4",      "statUp:4", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 5",      "statUp:5", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        */
+
     }
 
     void CreateStatBox(string labelText, string commandName, Vector2 baseRes, out array <int> blocksCount, out array <int> rowsCount) 

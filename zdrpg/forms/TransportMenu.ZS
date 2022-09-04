@@ -72,6 +72,56 @@ class ZDRPG_ZF_TransportMenu : ZDRPG_ZF_GenericMenu
 
         // Create the box image's textures.
 
+        let scrollTexture = ZDRPG_ZF_BoxTextures.CreateTexturePixels
+        (
+            // The texture itself.
+            "graphics/ZFormsExamples/BoxTextureGreen.png",
+            // The top-left corner of the middle of the box.
+            (16, 16),
+            // The bottom-right corner of the middle of the box.
+            (16, 16),
+            // Whether to scale (true) or tile (false) the sides.
+            false,
+            // Whether to scale (true) or tile (false) the middle.
+            false
+        );
+
+        /*let slider = ZDRPG_ZF_Slider.create
+        (
+            (200, 200),
+            (750, 750),
+            1.,
+            5.,
+            1.,
+            1.,
+            0.0,
+            scrollTexture,
+            scrollTexture
+        );
+        /*
+        let scrollBar = ZDRPG_ZF_Scrollbar.create
+        (
+            (900, 100),
+            (10, 100),
+            scrollTexture
+        );
+
+        let scroll = ZDRPG_ZF_ScrollContainer.create
+        (
+            (32, 32),
+            (64, 64),
+            50.,
+            99.,
+            1.,
+            scrollTexture
+        );
+
+        scrollBar.Pack (mainFrame);
+        scroll.Pack (mainFrame);
+        */
+
+        //slider.Pack (mainFrame);
+
         array <int> blocksCount;
         array <int> rowsCount;
         
@@ -86,82 +136,6 @@ class ZDRPG_ZF_TransportMenu : ZDRPG_ZF_GenericMenu
                 CreateStatBox(maps[0], "showMaps#"..maps[1], baseRes, blocksCount, rowsCount);
             }
         }
-        /*else
-        {
-            console.printf("gggggg");
-            int levelsCount = LevelInfo.GetLevelInfoCount();
-            for(int i=0; i<levelsCount; i++)
-            {
-                let level = LevelInfo.GetLevelInfo(i);
-                if(level.MapExists(level.MapName))
-                {
-                    if(i > 0)
-                    {
-                        let prevLevel = LevelInfo.GetLevelInfo(i-1);
-                        if(prevLevel.MapName.Left(prevLevel.MapName.length()-2) == level.MapName.Left(level.MapName.length()-2) || level.LookupLevelName() == "UAC Outpost") 
-                            continue;
-                    }
-                    string mapName = level.MapName.Left(level.MapName.length()-2);
-                    string mapPackName = Stringtable.Localize("$C_"..mapName);
-                    mapPacks.Push(mapPackName);
-
-                    //console.printf(level.LookupLevelName());
-                    //console.printf(mapPackName);
-                    //console.printf("");
-                    //console.printf(level.LevelName);
-                    
-                    CreateStatBox(mapPackName, "C_"..mapName, baseRes, blocksCount, rowsCount);
-                }
-            }
-        }*/
-        
-        /*
-        CreateStatBox("Turret 1",      "statUp:1", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 2",      "statUp:2", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 3",      "statUp:3", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 4",      "statUp:4", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 5",      "statUp:5", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        CreateStatBox("Turret 6",      "statUp:6", baseRes, blocksCount, rowsCount);
-        */
     }
 
     void CreateStatBox(string labelText, string commandName, Vector2 baseRes, out array <int> blocksCount, out array <int> rowsCount) 

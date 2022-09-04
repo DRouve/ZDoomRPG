@@ -46,9 +46,19 @@ class ZDRPGWorldHandler : EventHandler
 
     override void CheckReplacement (ReplaceEvent e)
     {
-        /*if (e.Replacee is "Health")
+        let staticHandler = ZDRPGStaticHandler(StaticEventHandler.Find("ZDRPGStaticHandler"));
+        if(staticHandler.replacements.Size() > 0)
         {
-            e.Replacement = "ZDRPGSurgeryKit";
-        }*/
+            array <string> replaceInfo;
+            for(int i = 0; i < staticHandler.replacements.size(); i++)
+            {
+                staticHandler.replacements[i].Split(replaceInfo, ':');
+                if (e.Replacee is replaceInfo[0])
+                {
+                    e.Replacement = replaceInfo[1];
+                }
+                replaceInfo.clear();
+            }
+        }
     }
 }

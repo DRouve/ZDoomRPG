@@ -29,38 +29,10 @@ class ZDRPGStats: Inventory
     int Lvl;
     int Rank;
 
+    int OldLvl;
+    int OldRank;
+
     string LastMap;
-
-    property Strength     : Strength;
-    property Defense      : Defense;
-    property Vitality     : Vitality;
-    property Energy       : Energy;
-    property Regeneration : Regeneration;
-    property Agility      : Agility;
-    property Capacity     : Capacity;
-    property Luck         : Luck;
-
-    property OldStrength     : OldStrength;
-    property OldDefense      : OldDefense;
-    property OldVitality     : OldVitality;
-    property OldEnergy       : OldEnergy;
-    property OldRegeneration : OldRegeneration;
-    property OldAgility      : OldAgility;
-    property OldCapacity     : OldCapacity;
-    property OldLuck         : OldLuck;
-
-    property WeaponSpeed  : WeaponSpeed;
-
-    property MaxHealth : MaxHealth;
-
-    property EP               : EP;
-    property MaxEP            : MaxEP;
-    property EPCostMultiplier : EPCostMultiplier;
-
-    property Lvl  : Lvl;
-    property Rank : Rank;
-
-    property LastMap  : LastMap;
 
     Default 
     {
@@ -71,8 +43,7 @@ class ZDRPGStats: Inventory
         +Inventory.PersistentPower;
     }
 
-    override void AttachToOwner (Actor other) 
-	{
+    override void AttachToOwner (Actor other) {
         Super.AttachToOwner(other); 
 
         int StartMaxHealth;
@@ -131,7 +102,7 @@ class ZDRPGStats: Inventory
      *  @return int
      */
     int CalculateMonsterMaxHealth() {
-        let Stats = ZDRPGStats.GetStats(owner);
+        let Stats = self.GetStats(owner);
 
         int Health = owner.SpawnHealth();
         int HealthAddition = owner.SpawnHealth() * CVar.GetCVar("drpg_monster_vitality_effect").GetInt();
@@ -214,18 +185,12 @@ class ZDRPGStats: Inventory
             if(owner.health < self.MaxHealth) 
                 self.regenerateHealth();
             
-            let Stats = ZDRPGStats.GetStats(owner);
+            let Stats = self.GetStats(owner);
             if(Stats.EP < Stats.MaxEP) 
                 self.regenerateEP();
         }
 	}
 
-    /**
-     *  Regenerates actor's health
-     *   
-     *  @param Actor other
-     *  @return void
-     */
     void regenerateHealth() {
         if((GameTic % 35) == 0)
 		{
@@ -241,7 +206,7 @@ class ZDRPGStats: Inventory
     void regenerateEP() {
         if((GameTic % 35) == 0)
 		{
-            let Stats = ZDRPGStats.GetStats(owner);
+            let Stats = self.GetStats(owner);
             int EPRestoreAmount = self.Regeneration / 100 + 1;
             if(Stats.EP + EPRestoreAmount > Stats.MaxEP) {
                 Stats.EP = Stats.MaxEP;
@@ -252,58 +217,55 @@ class ZDRPGStats: Inventory
     }
 
     void StatChangesHandler() {
-        let Stats = ZDRPGStats.GetStats(owner);
-        
-        if(Stats.OldStrength != Stats.Strength)
-        {
+        let Stats = self.GetStats(owner);
+
+        if(Stats.OldLvl != Stats.Lvl) {
+            self.setMaxHealth(self.MaxHealth + ((Stats.Lvl - Stats.OldLvl) * 5));
+            self.setMaxEP(self.MaxEP + ((Stats.Lvl - Stats.OldLvl) * 5));
+            Stats.OldLvl = Stats.Lvl; 
+        }
+
+        if(Stats.OldStrength != Stats.Strength) {
             Stats.OldStrength = Stats.Strength;
         }
 
-        if(Stats.OldDefense != Stats.Defense)
-        {
+        if(Stats.OldDefense != Stats.Defense) {
             Stats.OldDefense = Stats.Defense;
         }
 
-        if(Stats.OldVitality != Stats.Vitality)
-        {
+        if(Stats.OldVitality != Stats.Vitality) {
             self.setMaxHealth(self.MaxHealth + ((Stats.Vitality - Stats.OldVitality) * 5));
             Stats.OldVitality = Stats.Vitality;
         }
 
-        if(Stats.OldEnergy != Stats.Energy)
-        {
+        if(Stats.OldEnergy != Stats.Energy) {
             self.setMaxEP(self.MaxEP + ((Stats.Energy - Stats.OldEnergy) * 5));
             Stats.OldEnergy = Stats.Energy;
         }
 
-        if(Stats.OldRegeneration != Stats.Regeneration)
-        {
+        if(Stats.OldRegeneration != Stats.Regeneration) {
             Stats.OldRegeneration = Stats.Regeneration;
         }
 
-        if(Stats.OldAgility != Stats.Agility)
-        {
+        if(Stats.OldAgility != Stats.Agility) {
             Stats.WeaponSpeed = double(Stats.Agility) / 100;
             Stats.OldAgility = Stats.Agility;
         }
 
-        if(Stats.OldCapacity != Stats.Capacity)
-        {
+        if(Stats.OldCapacity != Stats.Capacity) {
             let PlayerInventory = ZDRPGPlayerInventory.GetInventory(owner);
             PlayerInventory.UpdateAmmoLimits();
             Stats.OldCapacity = Stats.Capacity;
         }
 
-        if(Stats.OldLuck != Stats.Luck)
-        {
+        if(Stats.OldLuck != Stats.Luck) {
             Stats.OldLuck = Stats.Luck;
         }
     }
 
     override void ModifyDamage (int damage, Name damageType, out int newdamage, bool passive, Actor inflictor, Actor source, int flags) 
 	{
-        if (!passive && damage > 0)
-		{
+        if (!passive && damage > 0) {
             int targetDefense = 0;
             let targetStats = self.GetStats(source);
             if(targetStats)

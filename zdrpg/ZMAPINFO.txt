@@ -27,6 +27,7 @@ gameinfo
     AddEventHandlers = "ZDRPGWorldHandler",
                        "ZDRPGPlayerHandler",
                        "ZDRPGMenuHandler",
+                       "ZDRPGMissionHandler",
                        "ZDRPGStaticHandler"
 }
 

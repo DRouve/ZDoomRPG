@@ -1,9 +1,24 @@
 class ZDRPGModules: Inventory
 {
     Default {
-        Inventory.Amount 0;
+        Inventory.Amount 1;
         Inventory.MaxAmount 1000000000;
+
+        Scale 0.33;
+    
+        Inventory.PickupMessage "You got some Upgrade Modules!";
+        Inventory.PickupSound "items/module";
+        
+        +INVENTORY.ALWAYSPICKUP;
+        +INVENTORY.TRANSFER;
     }
+
+    override bool TryPickup (in out Actor toucher) 
+	{
+        let Inventory = ZDRPGPlayerInventory(toucher.FindInventory("ZDRPGPlayerInventory"));
+        Inventory.Modules += self.Amount;
+        return false;
+	}
 }
 /*
 actor DRPGModulePickup : CustomInventory

@@ -68,3 +68,15 @@ class ZDRPGWeaponSpeedScaling: ZDRPGUtility
 			scalers.Clear();
 	}
 }
+
+// Lewisk3: You can "block" saving by giving the player an inventory item which contains a CVar. CVars cannot be serialized into saves.
+// May be useful to block saving in arena waves
+class BlockSaves : Inventory
+{
+  CVar myCVar;
+  override void DoEffect()
+  {
+    super.DoEffect();
+    if(!myCVar) myCVar = CVar.GetCVar("somerandomcvar");
+  }
+}

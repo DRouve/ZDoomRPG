@@ -33,6 +33,22 @@ class ZDRPGPlayerHandler : EventHandler
         }
     }
 
+    /*override void WorldUnloaded(WorldEvent e)
+    {
+        for(int i = 0; i<Players.Size(); i++)
+        {
+            let playerMo = Players[i].mo;
+            if(playerMo)
+            {
+                let MissionController = ZDRPGMissionController(playerMo.FindInventory("ZDRPGMissionController"));
+                if(MissionController)
+                {
+                    MissionController.OldSecretCount = 0;
+                }
+            }
+        }
+    }*/
+
     /*override void PlayerSpawned(PlayerEvent e)
     {
         PlayerInfo player = players[e.PlayerNumber];

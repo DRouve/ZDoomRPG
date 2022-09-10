@@ -1,6 +1,7 @@
 class ZDRPGMissionController: Inventory
 {
     ZDRPGMission mission;
+    int OldSecretCount;
 
     Default {
         Inventory.Amount 1;
@@ -10,13 +11,49 @@ class ZDRPGMissionController: Inventory
     override void Tick() {
         Super.Tick();
         if(owner && mission && mission.isActive) {
+            if(isSecretFound() && mission.Type == "Find Secrets")
+                mission.CurrentAmount++;
+
+            if(mission.OldCurrentAmount != mission.CurrentAmount)
+            {
+                console.printf(mission.Item..": "..mission.CurrentAmount);
+                mission.OldCurrentAmount = mission.CurrentAmount;
+            }
             if(mission.CurrentAmount >= mission.Amount) {
+                if(mission.Type == "Collection")
+                    owner.TakeInventory(mission.Item, mission.Amount);
                 owner.GiveInventory("ZDRPGCredits", mission.RewardCredits);
                 owner.GiveInventory("ZDRPGModules", mission.RewardModules);
+                console.printf("Mission complete!");
                 mission.Destroy();
             }
         }
+
+        // resets OldSecretCount every map
+        if(owner.player.secretcount == 0 && OldSecretCount != 0)
+        {
+            OldSecretCount = 0;
+        }
+
+        if(isSecretFound())
+        {
+            //console.printf("secretfound");
+            OldSecretCount = owner.player.secretcount;
+        }
     }
+
+    bool isSecretFound()
+    {
+        // checking "owner.player.secretcount > 0" to avoid false triggering during map change
+        return (owner.player.secretcount > 0 && owner.player.secretcount != OldSecretCount);
+    }
+
+    //override bool OnGiveSecret(bool printmsg, bool playsound)
+    //{
+        //super.OnGiveSecret(printmsg, playsound);
+        //console.printf("omegalul");
+        //return true;
+    //}
 }
 
 class ZDRPGMission
@@ -27,10 +64,13 @@ class ZDRPGMission
     // mission type
     string Type;
     // objective/target
-    string Item;
+    name Item;
+    // missions' menu icon
+    string Icon;
 
     int Amount;
     int CurrentAmount;
+    int OldCurrentAmount;
     int RewardXP;
     int RewardRank;
     int RewardCredits;
@@ -42,8 +82,8 @@ class ZDRPGMission
         let instance = ZDRPGMission(args);
 
         instance.isActive = true;
-        instance.CurrentAmount = 0;
-
+        instance.OldCurrentAmount = instance.CurrentAmount;
+            
         console.printf("%d", instance.Difficulty);
         console.printf(instance.Type);
         console.printf(instance.Item);

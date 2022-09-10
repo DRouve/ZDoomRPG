@@ -12,7 +12,7 @@ class ZDRPG_ZF_ElementContainer : ZDRPG_ZF_Element {
 	/// Note that some care must be taken when adding to this - you must set the pushed element's
 	/// [`master`](ZF_Element.master) pointer to be equal to the element container that contains
 	/// it.
-	protected Array<ZDRPG_ZF_Element> elements;
+	Array<ZDRPG_ZF_Element> elements;
 
 	override bool handleBack() {
 		let ret = false;

@@ -26,11 +26,13 @@ class ZDRPGStats: Inventory
     int MaxEP;
     int EPCostMultiplier;
 
+    int XP;
     int Lvl;
-    int Rank;
+    int RankXP;
+    int RankLvl;
 
     int OldLvl;
-    int OldRank;
+    int OldRankLvl;
 
     string LastMap;
 
@@ -172,7 +174,7 @@ class ZDRPGStats: Inventory
         self.WeaponSpeed  = double(self.Agility) / 100;
 
         self.Lvl  = CVar.GetCVar("drpg_start_level", player).GetInt() > 0 ? CVar.GetCVar("drpg_start_level", player).GetInt() : 1; 
-        self.Rank = CVar.GetCVar("drpg_start_rank",  player).GetInt() > 0 ? CVar.GetCVar("drpg_start_rank",  player).GetInt() : 1;
+        self.RankLvl = CVar.GetCVar("drpg_start_rank",  player).GetInt() > 0 ? CVar.GetCVar("drpg_start_rank",  player).GetInt() : 0;
     }
 
     override void Tick () 
@@ -223,6 +225,10 @@ class ZDRPGStats: Inventory
             self.setMaxHealth(self.MaxHealth + ((Stats.Lvl - Stats.OldLvl) * 5));
             self.setMaxEP(self.MaxEP + ((Stats.Lvl - Stats.OldLvl) * 5));
             Stats.OldLvl = Stats.Lvl; 
+        }
+
+        if(Stats.OldRankLvl != Stats.RankLvl) {
+            Stats.OldRankLvl = Stats.RankLvl; 
         }
 
         if(Stats.OldStrength != Stats.Strength) {

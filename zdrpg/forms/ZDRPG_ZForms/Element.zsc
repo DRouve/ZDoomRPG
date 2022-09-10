@@ -106,6 +106,10 @@ class ZDRPG_ZF_Element ui {
 	/// [`ZF_ElementContainer`]. A lot of custom elements won't need to touch it directly.
 	protected ZDRPG_ZF_Element master;
 
+	ZDRPG_ZF_Element getMaster() {
+        return self.master;
+    }
+
 	/// ?doc: hidden
 	protected ZDRPG_ZF_ElementTreeGlobal globalStore;
 	/// ?doc: hidden

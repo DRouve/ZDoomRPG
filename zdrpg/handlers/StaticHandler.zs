@@ -8,13 +8,11 @@ class ZDRPGStaticHandler : StaticEventHandler
     array <string> mapPacks;
     array <string> skillCategories;
     array <string> monsters;
+    array <string> questItems;
     array <string> replacements;
 
     array <string> missionDifficulties;
     array <string> missionTypes;
-
-    
-    
 
     override void OnRegister ()
     {
@@ -111,11 +109,11 @@ class ZDRPGStaticHandler : StaticEventHandler
     {
         if((GameTic % 35) == 0 && !monsters.Size())
         {
-            prepareMonstersArray();
+            prepareActorArrays();
         }
     }
 
-    void prepareMonstersArray()
+    void prepareActorArrays()
     {
         // Doom-only monsters (+ monsterpacks)
         array <string> excludeActors;
@@ -134,6 +132,11 @@ class ZDRPGStaticHandler : StaticEventHandler
         );
         
         for (int i=0; i<allactorclasses.size(); i++) {
+            if(allactorclasses[i] is "ZDRPGLoot" && allactorclasses[i].GetClassName() != 'ZDRPGLoot')
+            {
+                questItems.Push(allactorclasses[i].GetClassName());
+                continue;
+            }        
             let def = GetDefaultByType(allActorClasses[i]);
             if (def.bIsMonster 
             && !def.bFriendly                                                                  // ignore friendlies

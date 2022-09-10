@@ -55,6 +55,12 @@ class ZDRPGMissionInteraction : Actor
 
     override bool Used(Actor user) 
     {
+        let Stats = ZDRPGStats.GetStats(user);
+        if(Stats.RankLvl == 0)
+        {
+            console.printf("Too low rank");
+            return false;
+        }
         ZDRPG_ZF_PlayerMenu link; 
         link.setMenu('ZDRPG_ZF_MissionsMenu'); 
         return true;

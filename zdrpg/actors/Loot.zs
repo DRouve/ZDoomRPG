@@ -11,6 +11,22 @@ class ZDRPGLoot : Inventory
         
         +COUNTITEM;
     }
+
+    override bool TryPickup (in out Actor toucher)
+    {
+        if(toucher.Player)
+        {
+            let missionController = ZDRPGMissionController(toucher.FindInventory("ZDRPGMissionController"));
+            if(missionController)
+                if(missionController.mission && missionController.mission.isActive)
+                    if(missionController.mission.Type == "Find Items" || missionController.mission.Item == self.GetClassName())
+                    {
+                        missionController.mission.CurrentAmount++;
+                    }
+        }
+        super.TryPickup(toucher);
+        return true;
+    }
     
 }
 

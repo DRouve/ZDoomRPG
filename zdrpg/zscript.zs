@@ -5,6 +5,7 @@ version "4.8.2"
 #include "scripts/Stats.zs"
 #include "scripts/Skills.zs"
 #include "scripts/WeaponSpeedScaling.zs"
+#include "scripts/ArraySort.zs"
 
 #include "handlers/WorldHandler.zs"
 #include "handlers/PlayerHandler.zs"

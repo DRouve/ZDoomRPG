@@ -142,6 +142,8 @@ class ZDRPGStats: Inventory
         self.OldAgility      = self.Agility;     
         self.OldCapacity     = self.Capacity;    
         self.OldLuck         = self.Luck; 
+
+        owner.GiveInventory("ZDRPGCredits", random(0, 273));
     }
 
     /**

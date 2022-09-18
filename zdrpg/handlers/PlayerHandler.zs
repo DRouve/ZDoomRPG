@@ -13,12 +13,14 @@ class ZDRPGPlayerHandler : EventHandler
                     playerMo.GiveInventory("ZDRPGPlayerInventory", 1);
                 if(!playerMo.CountInv("ZDRPGMedkitActivator"))  
                     playerMo.GiveInventory("ZDRPGMedkitActivator", 1);  
-                if(!playerMo.CountInv("ZDRPGShieldActivator")) 
-                    playerMo.GiveInventory("ZDRPGShieldActivator", 1);   
+                //if(!playerMo.CountInv("ZDRPGShieldActivator")) 
+                //    playerMo.GiveInventory("ZDRPGShieldActivator", 1);   
                 if(!playerMo.CountInv("ZDRPGWeaponSpeedScaling")) 
                     playerMo.GiveInventory("ZDRPGWeaponSpeedScaling", 1);
                 if(!playerMo.CountInv("ZDRPGMissionController")) 
                     playerMo.GiveInventory("ZDRPGMissionController", 1);
+                if(!playerMo.CountInv("ZDRPGShield")) 
+                    playerMo.GiveInventory("ZDRPGShield", 1);
 
                 // adding skills and augs
                 for (int j=0; j<allactorclasses.size(); j++) {
@@ -158,11 +160,55 @@ class ZDRPGPlayerHandler : EventHandler
             } 
         }
 
+        if(eString.IndexOf("equipShield") >= 0) 
+        {
+            Array <String> shieldName;
+            e.Name.split(shieldName, ":");
+            if (shieldName.Size() != 0) {
+                let Shield = ZDRPGShield(players[e.Player].mo.FindInventory("ZDRPGShield"));
+                let ShieldPart = ZDRPGShieldPart(players[e.Player].mo.FindInventory(shieldName[1]));
+                string msg;
+                if (Shield && ShieldPart)
+                {
+                    if(ShieldPart is "ZDRPGShieldBody")
+                    {
+                        Shield.Body = Shield.Body == ShieldPart ? Null : ShieldPart;
+                        msg = "Shield Body";
+                    }
+                    if(ShieldPart is "ZDRPGShieldBattery")
+                    {
+                        Shield.Battery = Shield.Battery == ShieldPart ? Null : ShieldPart;
+                        msg = "Shield Battery";
+                    }
+                    if(ShieldPart is "ZDRPGShieldCapacitor")
+                    {
+                        Shield.Capacitor = Shield.Capacitor == ShieldPart ? Null : ShieldPart;
+                        msg = "Shield Capacitor";
+                    }
+                    if(ShieldPart is "ZDRPGShieldAccessory")
+                    {
+                        Shield.Accessory = Shield.Accessory == ShieldPart ? Null : ShieldPart;
+                        msg = "Shield Accessory";
+                    }
+                        
+                    Shield.CalculateShieldStats();
+                    console.printf(msg .. " equipped");
+                }
+            } 
+        }
+
         if (e.Name ~== "UseMedkit" && players[e.Player].mo.health > 0)
         {
             let item = players[e.Player].mo.FindInventory("ZDRPGMedkitActivator");
             if (item)
                 item.Use(true);
+        }
+
+        if (e.Name ~== "ToggleShield" && players[e.Player].mo.health > 0)
+        {
+            let item = ZDRPGShield(players[e.Player].mo.FindInventory("ZDRPGShield"));
+            if (item)
+                item.ToggleShield();
         }
     }
 }

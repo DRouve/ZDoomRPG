@@ -1,33 +1,148 @@
 class ZDRPGShield : Inventory
 {
+    bool Active;
+    int Charge;
+
+    int MaxCharge;
+    int ChargeRate;
+    double Delay;
+
+    double DelayCounter;
+
+    ZDRPGShieldPart Body;
+    ZDRPGShieldPart Capacitor;
+    ZDRPGShieldPart Battery;
+    ZDRPGShieldPart Accessory; 
+      
     Default
     {
         Inventory.Amount 1;
         Inventory.MaxAmount 1;
+        +Inventory.Undroppable;
+        +Inventory.Untossable;
+        +Inventory.PersistentPower;
     }
-}
 
-class ZDRPGShieldCapacity : inventory
-{ 
-    Default 
+    override void DoEffect()
     {
-        Inventory.MaxAmount 100;
+        if(!IsAssembled())
+        {
+            Active = false;
+            Charge = 0;
+        }
+
+        if(Active)
+        {
+            if(DelayCounter > 0)
+                DelayCounter--;
+
+            if(Charge < MaxCharge)
+                RegenerateShield();
+        }
     }
-}
 
-class ZDRPGShieldCharge : inventory
-{ 
-    Default 
+    override void AttachToOwner (Actor other) 
     {
-        Inventory.MaxAmount 1000000;
+        Super.AttachToOwner(other);
+        Active = false;
+        Delay = 5;
+        Charge = 0;
     }
-}
 
-class ZDRPGShieldChargeMax : inventory
-{ 
-    Default 
+    override void AbsorbDamage (int damage, Name damageType, out int newdamage, Actor inflictor, Actor source, int flags)
     {
-        Inventory.MaxAmount 1000000;
+        if(Active)
+        {
+            if(damage >= Charge)
+            {
+                let remainderDamage = damage - Charge; 
+                Charge = 0;
+                newdamage = remainderDamage;
+            }
+            else
+            {
+                Charge -= damage;
+                newdamage = 0;
+            }
+            DelayCounter = Delay * 35;
+        }
+    }
+
+    bool IsAssembled()
+    {
+        if(Body && Capacitor && Battery)
+            return true;
+        return false;
+    }
+
+    void ToggleShield()
+    {
+        if(IsAssembled())
+        {
+            Active = !Active;
+            Charge = 0;
+            DelayCounter = Delay * 35;
+        }
+        else
+            console.printf("Shield is incomplete");
+    }
+
+    void CalculateShieldStats()
+    {
+        int BodyCapacity = 0;
+        double BodyChargeRate = 0;
+        double BodyDelay = 0;
+
+        int BatteryCapacity = 0;
+        double BatteryChargeRate = 0;
+        double BatteryDelay = 0;
+
+        int CapacitorCapacity = 0;
+        double CapacitorChargeRate = 0;
+        double CapacitorDelay = 0;
+
+        if(Body)
+        {
+            BodyCapacity = Body.Capacity;
+            BodyChargeRate = Body.ChargeRate;
+            BodyDelay = Body.Delay;
+        }
+        if(Battery)
+        {
+            BatteryCapacity = Battery.Capacity;
+            BatteryChargeRate = Battery.ChargeRate;
+            BatteryDelay = Battery.Delay;
+        }
+        if(Capacitor)
+        {
+            CapacitorCapacity = Capacitor.Capacity;
+            CapacitorChargeRate = Capacitor.ChargeRate;
+            CapacitorDelay = Capacitor.Delay;
+        }
+
+        MaxCharge = BodyCapacity + BatteryCapacity + CapacitorCapacity;
+        ChargeRate = BodyChargeRate + BatteryChargeRate + CapacitorChargeRate;
+
+        if(BodyDelay + BatteryDelay + CapacitorDelay != 0)
+            Delay = 5 + BodyDelay + BatteryDelay + CapacitorDelay;
+
+        if(Delay < 1)
+            Delay = 1;
+
+        if(ChargeRate < 1)
+            ChargeRate = 0;
+    }
+
+    void RegenerateShield()
+    {
+        if(GameTic % 35 == 0 && DelayCounter == 0)
+        {
+            if(Charge + ChargeRate > MaxCharge) {
+                Charge = MaxCharge;
+            } else {
+                Charge += ChargeRate;
+            }
+        }
     }
 }
 
@@ -46,7 +161,6 @@ class ZDRPGShieldBooster : Inventory
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SBST A 0 Bright A_SpawnItemEx("ZDRPGShieldBoosterBeam", 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER);
             SBST A -1 Bright;
             Stop;
@@ -105,7 +219,6 @@ class ZDRPGBasicShieldPackage : Inventory
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHPA A -1 Bright;
             Stop;
         Use:
@@ -118,6 +231,14 @@ class ZDRPGBasicShieldPackage : Inventory
 
 class ZDRPGShieldPart : Inventory
 {
+    int Capacity;
+    int ChargeRate;
+    double Delay;
+
+    property Capacity   : Capacity;
+    property ChargeRate : ChargeRate;
+    property Delay      : Delay;
+
     Default
     {
         Scale 0.5;
@@ -126,13 +247,15 @@ class ZDRPGShieldPart : Inventory
         Inventory.InterHubAmount 100;
         Inventory.PickupMessage "Got a Shield Part!";
         Inventory.PickupSound "shield/pickup";
+
+        ZDRPGShieldPart.Capacity   0;
+        ZDRPGShieldPart.ChargeRate 0;
+        ZDRPGShieldPart.Delay      0;
     }
     
-
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA A -1 Bright;
             Stop;
         Pickup:
@@ -141,251 +264,382 @@ class ZDRPGShieldPart : Inventory
     }
 }
 
+class ZDRPGShieldBody      : ZDRPGShieldPart {}
+class ZDRPGShieldBattery   : ZDRPGShieldPart {}
+class ZDRPGShieldCapacitor : ZDRPGShieldPart {}
+class ZDRPGShieldAccessory : ZDRPGShieldPart 
+{
+    ZDRPGShield Shield;
+    override void AttachToOwner (Actor other) 
+    {
+        Super.AttachToOwner(other);
+        Shield = ZDRPGShield(owner.FindInventory("ZDRPGShield"));
+    }
+
+    override void DoEffect()
+    {
+        if(Shield.IsAssembled() && Shield.Active && Shield.Accessory && Shield.Accessory.GetClassName() == self.GetClassName())
+            ApplyAccessoryEffect();
+    }
+
+    virtual void ApplyAccessoryEffect() {}
+}
+
 // BODIES
 // --------------------------------------------------
 
-class ZDRPGShieldBody1 : ZDRPGShieldPart
+class ZDRPGShieldBody1 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "UAC";
+        ZDRPGShieldPart.Capacity 25;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO A -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody2 : ZDRPGShieldPart
+class ZDRPGShieldBody2 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Xtron";
+        ZDRPGShieldPart.Capacity 50;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO B -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody3 : ZDRPGShieldPart
+class ZDRPGShieldBody3 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Black Mesa";
+        ZDRPGShieldPart.Capacity 150;
+        ZDRPGShieldPart.Delay 2;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO C -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody4 : ZDRPGShieldPart
+class ZDRPGShieldBody4 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "EDF";
+        ZDRPGShieldPart.Capacity 100;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO D -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody5 : ZDRPGShieldPart
+class ZDRPGShieldBody5 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Cyberdyne Systems";
+        ZDRPGShieldPart.Capacity 80;
+        ZDRPGShieldPart.ChargeRate 2;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO E -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody6 : ZDRPGShieldPart
+class ZDRPGShieldBody6 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Misfit Tech";
+        ZDRPGShieldPart.Capacity 150;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO F -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody7 : ZDRPGShieldPart
+class ZDRPGShieldBody7 : ZDRPGShieldBody
 {
     Default
     {
+        Tag "Shadaloo";
         Inventory.PickupSound "shield/bisonpickup";
+        ZDRPGShieldPart.Capacity 400;
+        ZDRPGShieldPart.ChargeRate -1;
+        ZDRPGShieldPart.Delay 4;
     }
     
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO G -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody8 : ZDRPGShieldPart
+class ZDRPGShieldBody8 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Arkai";
+        ZDRPGShieldPart.Capacity 250;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO H -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody9 : ZDRPGShieldPart
+class ZDRPGShieldBody9 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Ironclad Inc.";
+        ZDRPGShieldPart.Capacity 150;
+        ZDRPGShieldPart.Delay -2;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO I -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody10 : ZDRPGShieldPart
+class ZDRPGShieldBody10 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Yholl";
+        ZDRPGShieldPart.Capacity 50;
+        ZDRPGShieldPart.ChargeRate 5;
+        ZDRPGShieldPart.Delay -3;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO J -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody11 : ZDRPGShieldPart
+class ZDRPGShieldBody11 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Hyperix";
+        ZDRPGShieldPart.Capacity 200;
+        ZDRPGShieldPart.ChargeRate 1;
+        ZDRPGShieldPart.Delay -1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO K -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody12 : ZDRPGShieldPart
+class ZDRPGShieldBody12 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Xaser";
+        ZDRPGShieldPart.Capacity 500;
+        ZDRPGShieldPart.Delay 2.5;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO L -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody13 : ZDRPGShieldPart
+class ZDRPGShieldBody13 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Datadyne";
+        ZDRPGShieldPart.Capacity 250;
+        ZDRPGShieldPart.ChargeRate 3;
+        ZDRPGShieldPart.Delay -1;
+    }
+
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO M -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody14 : ZDRPGShieldPart
+class ZDRPGShieldBody14 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Starbright";
+        ZDRPGShieldPart.Capacity 400;
+        ZDRPGShieldPart.ChargeRate 2;
+        ZDRPGShieldPart.Delay -1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO N -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody15 : ZDRPGShieldPart
+class ZDRPGShieldBody15 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Hellsing";
+        ZDRPGShieldPart.Capacity 666;
+        ZDRPGShieldPart.ChargeRate -1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO O -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody16 : ZDRPGShieldPart
+class ZDRPGShieldBody16 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "S.H.I.E.L.D.";
+        ZDRPGShieldPart.Capacity 500;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO P -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody17 : ZDRPGShieldPart
+class ZDRPGShieldBody17 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "UAC Elite";
+        ZDRPGShieldPart.Capacity 400;
+        ZDRPGShieldPart.ChargeRate 1;
+        ZDRPGShieldPart.Delay -3;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO Q -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody18 : ZDRPGShieldPart
+class ZDRPGShieldBody18 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Stark Industries";
+        ZDRPGShieldPart.Capacity 550;
+        ZDRPGShieldPart.ChargeRate 1;
+        ZDRPGShieldPart.Delay -1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO R -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody19 : ZDRPGShieldPart
+class ZDRPGShieldBody19 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Weyland-Yutani";
+        ZDRPGShieldPart.Capacity 100;
+        ZDRPGShieldPart.ChargeRate 7;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO S -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody20 : ZDRPGShieldPart
+class ZDRPGShieldBody20 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Megalith";
+        ZDRPGShieldPart.Capacity 750;
+        ZDRPGShieldPart.Delay 5;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO T -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody21 : ZDRPGShieldPart
+class ZDRPGShieldBody21 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Reaper Industries";
+        ZDRPGShieldPart.Capacity 444;
+        ZDRPGShieldPart.ChargeRate 4;
+        ZDRPGShieldPart.Delay -4;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO U -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBody22 : ZDRPGShieldPart
+class ZDRPGShieldBody22 : ZDRPGShieldBody
 {
+    Default
+    {
+        Tag "Eternity Systems";
+        ZDRPGShieldPart.Capacity 2000;
+        ZDRPGShieldPart.Delay 15;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBO V -1 Bright;
             Stop;
     }
@@ -394,144 +648,212 @@ class ZDRPGShieldBody22 : ZDRPGShieldPart
 // BATTERIES
 // --------------------------------------------------
 
-class ZDRPGShieldBattery1 : ZDRPGShieldPart
+class ZDRPGShieldBattery1 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Crappy";
+        ZDRPGShieldPart.Capacity 25;
+    }
+
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA A -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery2 : ZDRPGShieldPart
+class ZDRPGShieldBattery2 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Bullet";
+        ZDRPGShieldPart.Capacity 50;
+        ZDRPGShieldPart.ChargeRate 1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA B -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery3 : ZDRPGShieldPart
+class ZDRPGShieldBattery3 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Elegant";
+        ZDRPGShieldPart.Capacity 20;
+        ZDRPGShieldPart.Delay -3;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA C -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery4 : ZDRPGShieldPart
+class ZDRPGShieldBattery4 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Spiked";
+        ZDRPGShieldPart.Capacity 100;
+        ZDRPGShieldPart.ChargeRate 1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA D -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery5 : ZDRPGShieldPart
+class ZDRPGShieldBattery5 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Stubborn";
+        ZDRPGShieldPart.Capacity 250;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA E -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery6 : ZDRPGShieldPart
+class ZDRPGShieldBattery6 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Mirrored";
+        ZDRPGShieldPart.Capacity 150;
+        ZDRPGShieldPart.ChargeRate 2;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA F -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery7 : ZDRPGShieldPart
+class ZDRPGShieldBattery7 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Refined";
+        ZDRPGShieldPart.Capacity 100;
+        ZDRPGShieldPart.ChargeRate 2;
+        ZDRPGShieldPart.Delay -1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA G -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery8 : ZDRPGShieldPart
+class ZDRPGShieldBattery8 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Clustered";
+        ZDRPGShieldPart.Capacity 200;
+        ZDRPGShieldPart.ChargeRate 3;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA H -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery9 : ZDRPGShieldPart
+class ZDRPGShieldBattery9 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Winged";
+        ZDRPGShieldPart.Capacity 250;
+        ZDRPGShieldPart.ChargeRate 4;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA I -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery10 : ZDRPGShieldPart
+class ZDRPGShieldBattery10 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Overcharged";
+        ZDRPGShieldPart.Capacity 10;
+        ZDRPGShieldPart.ChargeRate 5;
+        ZDRPGShieldPart.Delay -2;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA J -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery11 : ZDRPGShieldPart
+class ZDRPGShieldBattery11 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Superb";
+        ZDRPGShieldPart.Capacity 425;
+        ZDRPGShieldPart.ChargeRate 1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA K -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery12 : ZDRPGShieldPart
+class ZDRPGShieldBattery12 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Redundant";
+        ZDRPGShieldPart.Capacity 50;
+        ZDRPGShieldPart.ChargeRate 30;
+        ZDRPGShieldPart.Delay 15;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA L -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldBattery13 : ZDRPGShieldPart
+class ZDRPGShieldBattery13 : ZDRPGShieldBattery
 {
+    Default
+    {
+        Tag "Reinforced";
+        ZDRPGShieldPart.Capacity 1000;
+        ZDRPGShieldPart.ChargeRate 2;
+        ZDRPGShieldPart.Delay 2.5;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHBA M -1 Bright;
             Stop;
     }
@@ -540,166 +862,239 @@ class ZDRPGShieldBattery13 : ZDRPGShieldPart
 // CAPACITORS
 // --------------------------------------------------
 
-class ZDRPGShieldCapacitor1 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor1 : ZDRPGShieldCapacitor
 {
+    Default
+    {   Tag "Standard";
+        ZDRPGShieldPart.ChargeRate 1;
+    }
+
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA A -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor2 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor2 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Outdated";
+        ZDRPGShieldPart.ChargeRate 3;
+        ZDRPGShieldPart.Delay 2;
+    }
+
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA B -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor3 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor3 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Cooled";
+        ZDRPGShieldPart.ChargeRate 2;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA C -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor4 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor4 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Warm";
+        ZDRPGShieldPart.Capacity 25;
+        ZDRPGShieldPart.ChargeRate 1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA D -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor5 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor5 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Inefficient";
+        ZDRPGShieldPart.ChargeRate 6;
+        ZDRPGShieldPart.Delay 5;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA E -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor6 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor6 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Energized";
+        ZDRPGShieldPart.ChargeRate 3;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA F -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor7 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor7 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Infused";
+        ZDRPGShieldPart.ChargeRate 4;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA G -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor8 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor8 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Plasmatic";
+        ZDRPGShieldPart.Capacity 100;
+        ZDRPGShieldPart.ChargeRate 3;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA H -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor9 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor9 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Burning";
+        ZDRPGShieldPart.ChargeRate 5;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA I -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor10 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor10 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Pulsating";
+        ZDRPGShieldPart.ChargeRate 1;
+        ZDRPGShieldPart.Delay -5;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA J -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor11 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor11 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Fiery";
+        ZDRPGShieldPart.ChargeRate 5;
+        ZDRPGShieldPart.Delay -1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA K -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor12 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor12 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Eternal";
+        ZDRPGShieldPart.Capacity 500;
+        ZDRPGShieldPart.ChargeRate 1;
+        ZDRPGShieldPart.Delay 3;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA L -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor13 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor13 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Overloaded";
+        ZDRPGShieldPart.ChargeRate 10;
+        ZDRPGShieldPart.Delay 1;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA M -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor14 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor14 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Dark";
+        ZDRPGShieldPart.Capacity 1000;
+        ZDRPGShieldPart.ChargeRate -1;
+        ZDRPGShieldPart.Delay 15;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA N -1 Bright;
             Stop;
     }
 }
 
-class ZDRPGShieldCapacitor15 : ZDRPGShieldPart
+class ZDRPGShieldCapacitor15 : ZDRPGShieldCapacitor
 {
+    Default
+    {
+        Tag "Chaotic";
+        ZDRPGShieldPart.ChargeRate 7;
+        ZDRPGShieldPart.Delay -7;
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHCA O -1 Bright;
             Stop;
     }
@@ -708,727 +1103,930 @@ class ZDRPGShieldCapacitor15 : ZDRPGShieldPart
 // ACCESSORIES
 // --------------------------------------------------
 
-class ZDRPGShieldAccessory1 : ZDRPGShieldPart
+class ZDRPGShieldAccessory1 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "X-7";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC A -1 Bright;
             Stop; 
     }
+
+    override void ApplyAccessoryEffect()
+    {
+        console.printf("123a");
+    }
 }
 
-class ZDRPGShieldAccessory2 : ZDRPGShieldPart
+class ZDRPGShieldAccessory2 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "SGENX-5B";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC B -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory3 : ZDRPGShieldPart
+class ZDRPGShieldAccessory3 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "AMP-3000";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC C -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory4 : ZDRPGShieldPart
+class ZDRPGShieldAccessory4 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "HRY-VP80";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC D -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory5 : ZDRPGShieldPart
+class ZDRPGShieldAccessory5 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "DEF-2";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC E -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory6 : ZDRPGShieldPart
+class ZDRPGShieldAccessory6 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "B1-ZUT3";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC F -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory7 : ZDRPGShieldPart
+class ZDRPGShieldAccessory7 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "CNV-RT99";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC G -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory8 : ZDRPGShieldPart
+class ZDRPGShieldAccessory8 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "REK-T50";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC H -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory9 : ZDRPGShieldPart
+class ZDRPGShieldAccessory9 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "VW-OT";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC I -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory10 : ZDRPGShieldPart
+class ZDRPGShieldAccessory10 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "CV-256";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC J -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory11 : ZDRPGShieldPart
+class ZDRPGShieldAccessory11 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "TX-BGONN";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC K -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory12 : ZDRPGShieldPart
+class ZDRPGShieldAccessory12 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "WRP30-LITE";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC L -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory13 : ZDRPGShieldPart
+class ZDRPGShieldAccessory13 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "NOV-A2";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC M -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory14 : ZDRPGShieldPart
+class ZDRPGShieldAccessory14 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "LZ-Y200";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC N -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory15 : ZDRPGShieldPart
+class ZDRPGShieldAccessory15 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "BST-700";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC O -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory16 : ZDRPGShieldPart
+class ZDRPGShieldAccessory16 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "PH-D88";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC P -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory17 : ZDRPGShieldPart
+class ZDRPGShieldAccessory17 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "BATT-B";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC Q -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory18 : ZDRPGShieldPart
+class ZDRPGShieldAccessory18 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "SHVR-Z7";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC R -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory19 : ZDRPGShieldPart
+class ZDRPGShieldAccessory19 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "MM-12";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC S -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory20 : ZDRPGShieldPart
+class ZDRPGShieldAccessory20 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "MRTE-KRAR";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC T -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory21 : ZDRPGShieldPart
+class ZDRPGShieldAccessory21 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "SP-00K";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC U -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory22 : ZDRPGShieldPart
+class ZDRPGShieldAccessory22 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "RR-GO";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC V -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory23 : ZDRPGShieldPart
+class ZDRPGShieldAccessory23 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "E1N-T31";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC W -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory24 : ZDRPGShieldPart
+class ZDRPGShieldAccessory24 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "PATR-0T";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC X -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory25 : ZDRPGShieldPart
+class ZDRPGShieldAccessory25 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "RNJSUS-2";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC Y -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory26 : ZDRPGShieldPart
+class ZDRPGShieldAccessory26 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "PWAA-9001";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHAC Z -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory27 : ZDRPGShieldPart
+class ZDRPGShieldAccessory27 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "AW-G01";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 A -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory28 : ZDRPGShieldPart
+class ZDRPGShieldAccessory28 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "SCL-AR53";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 B -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory29 : ZDRPGShieldPart
+class ZDRPGShieldAccessory29 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "RF-CT";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 C -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory30 : ZDRPGShieldPart
+class ZDRPGShieldAccessory30 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "TEW-11";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 D -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory31 : ZDRPGShieldPart
+class ZDRPGShieldAccessory31 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "NU-YU5";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 E -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory32 : ZDRPGShieldPart
+class ZDRPGShieldAccessory32 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "RUS-ROU1";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 F -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory33 : ZDRPGShieldPart
+class ZDRPGShieldAccessory33 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "TENS-H11";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 G -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory34 : ZDRPGShieldPart
+class ZDRPGShieldAccessory34 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "TEEM-AU5";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 H -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory35 : ZDRPGShieldPart
+class ZDRPGShieldAccessory35 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "VENG-R";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 I -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory36 : ZDRPGShieldPart
+class ZDRPGShieldAccessory36 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "SANIC-S88";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 J -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory37 : ZDRPGShieldPart
+class ZDRPGShieldAccessory37 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "NAKD-NOW";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 K -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory38 : ZDRPGShieldPart
+class ZDRPGShieldAccessory38 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "HA3-L1N";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 L -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory39 : ZDRPGShieldPart
+class ZDRPGShieldAccessory39 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "HAET-60";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 M -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory40 : ZDRPGShieldPart
+class ZDRPGShieldAccessory40 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "PHA-LX2";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 N -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory41 : ZDRPGShieldPart
+class ZDRPGShieldAccessory41 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "IKV-N7";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 O -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory42 : ZDRPGShieldPart
+class ZDRPGShieldAccessory42 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "REGN-ERB";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 P -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory43 : ZDRPGShieldPart
+class ZDRPGShieldAccessory43 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "COUN-TR20";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 Q -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory44 : ZDRPGShieldPart
+class ZDRPGShieldAccessory44 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "PRO-100";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 R -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory45 : ZDRPGShieldPart
+class ZDRPGShieldAccessory45 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "ADPT-V15";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 S -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory46 : ZDRPGShieldPart
+class ZDRPGShieldAccessory46 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "OCD-MX90";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 T -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory47 : ZDRPGShieldPart
+class ZDRPGShieldAccessory47 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "MASTA-R4";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 U -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory48 : ZDRPGShieldPart
+class ZDRPGShieldAccessory48 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "HOW-EV3N";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 V -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory49 : ZDRPGShieldPart
+class ZDRPGShieldAccessory49 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "K00-LAYD";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 W -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory50 : ZDRPGShieldPart
+class ZDRPGShieldAccessory50 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "SKR00-G3";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 X -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory51 : ZDRPGShieldPart
+class ZDRPGShieldAccessory51 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "INFI-NT1";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 Y -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory52 : ZDRPGShieldPart
+class ZDRPGShieldAccessory52 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "REMI-500";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 Z -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory53 : ZDRPGShieldPart
+class ZDRPGShieldAccessory53 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "FLAN-495";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 "[" -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory54 : ZDRPGShieldPart
+class ZDRPGShieldAccessory54 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "TOJ1-K0";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 \ -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory55 : ZDRPGShieldPart
+class ZDRPGShieldAccessory55 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "TRANS-EB252";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA2 "]" -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory56 : ZDRPGShieldPart
+class ZDRPGShieldAccessory56 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "LIL-ZZ8";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 A -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory57 : ZDRPGShieldPart
+class ZDRPGShieldAccessory57 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "MURD-BURD";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 B -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory58 : ZDRPGShieldPart
+class ZDRPGShieldAccessory58 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "LKY-BSTRD4";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 C -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory59 : ZDRPGShieldPart
+class ZDRPGShieldAccessory59 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "HEL-FY20";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 D -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory60 : ZDRPGShieldPart
+class ZDRPGShieldAccessory60 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "MUN3-MAG";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 E -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory61 : ZDRPGShieldPart
+class ZDRPGShieldAccessory61 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "EFF-C13";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 F -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory62 : ZDRPGShieldPart
+class ZDRPGShieldAccessory62 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "SYN-C3P";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 G -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory63 : ZDRPGShieldPart
+class ZDRPGShieldAccessory63 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "TUFF-MAG3";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 H -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory64 : ZDRPGShieldPart
+class ZDRPGShieldAccessory64 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "UBR-MANZ5";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 I -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory65 : ZDRPGShieldPart
+class ZDRPGShieldAccessory65 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "HORD-3RR";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 J -1 Bright;
             Stop; 
     }
 }
 
-class ZDRPGShieldAccessory66 : ZDRPGShieldPart
+class ZDRPGShieldAccessory66 : ZDRPGShieldAccessory
 {
+    Default
+    {
+        Tag "S-SP4G3TT";
+    }
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             SHA3 K -1 Bright;
             Stop; 
     }

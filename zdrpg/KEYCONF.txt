@@ -22,7 +22,7 @@ alias drpg_focusmode "pukename ToggleFocusMode"
 
 // Shield
 addmenukey "Toggle Shield" drpg_shield
-alias drpg_shield "pukename ToggleShield"
+alias drpg_shield "netevent ToggleShield"
 
 // Stim
 addmenukey "Use Stim" drpg_usestim

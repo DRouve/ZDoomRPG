@@ -122,7 +122,7 @@ class ZDRPGPlayerInventory: Inventory
     
     void GiveUtilityItems() {
         owner.GiveInventory("ZDRPGMedkitActivator", 1);
-        owner.GiveInventory("ZDRPGShieldActivator", 1);
+        //owner.GiveInventory("ZDRPGShieldActivator", 1);
     }
 
     static ZDRPGPlayerInventory GetInventory(Actor actor) {

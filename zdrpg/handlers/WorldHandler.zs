@@ -29,7 +29,7 @@ class ZDRPGWorldHandler : EventHandler
     override void WorldThingSpawned(WorldEvent e)
     {
         if (e.Thing && e.Thing.bIsMonster)
-        {  
+        {                                                          
             e.Thing.GiveInventory("ZDRPGStats", 1);    
         }
     }
@@ -41,6 +41,72 @@ class ZDRPGWorldHandler : EventHandler
             let Stats = ZDRPGStats(e.Thing.target.FindInventory("ZDRPGStats"));
             Stats.Lvl += 1;
             console.printf("level: %d", Stats.Lvl);   
+
+            array <string> creditsList;
+            Actor spawnedCredits;
+
+            let credits = ZDRPGCredits(e.Thing.FindInventory("ZDRPGCredits"));
+            let enemyCreditsAmount = credits.Amount;
+            console.printf("before: %d", enemyCreditsAmount);
+            while(enemyCreditsAmount >= 1000)
+            {
+                creditsList.Push("ZDRPGCredits1000");
+                enemyCreditsAmount -= 1000;
+            }
+
+            while(enemyCreditsAmount >= 500)
+            {
+                creditsList.Push("ZDRPGCredits500");
+                enemyCreditsAmount -= 500;
+            }
+                
+                
+            while(enemyCreditsAmount >= 250)
+            {
+                creditsList.Push("ZDRPGCredits250");
+                enemyCreditsAmount -= 250;
+            }
+
+            while(enemyCreditsAmount >= 100)
+            {
+                creditsList.Push("ZDRPGCredits100");
+                enemyCreditsAmount -= 100;
+            }
+
+            while(enemyCreditsAmount >= 50)
+            {
+                creditsList.Push("ZDRPGCredits50");
+                enemyCreditsAmount -= 50;
+            }
+
+            while(enemyCreditsAmount >= 20)
+            {
+                creditsList.Push("ZDRPGCredits20");
+                enemyCreditsAmount -= 20;
+            }
+
+            while(enemyCreditsAmount >= 10)
+            {
+                creditsList.Push("ZDRPGCredits10");
+                enemyCreditsAmount -= 10;
+            }
+
+            while(enemyCreditsAmount >= 5 )
+            {
+                creditsList.Push("ZDRPGCredits5");
+                enemyCreditsAmount -= 5;
+            }
+
+            console.printf("after: %d", enemyCreditsAmount);
+
+            for(int i = 0; i < enemyCreditsAmount; i++)
+                creditsList.Push("ZDRPGCredits1");
+
+            for(int i = 0; i < creditsList.Size(); i++)
+            {
+                spawnedCredits = Actor.Spawn(creditsList[i], (e.Thing.pos.x, e.Thing.pos.y, e.Thing.z * 1.5));
+                spawnedCredits.vel +=(frandom(-1,1),frandom(-1,1),5);
+            }
         }
     }
 

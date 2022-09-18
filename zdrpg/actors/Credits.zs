@@ -11,9 +11,14 @@ class ZDRPGCredits: Inventory
 
     override bool TryPickup (in out Actor toucher) 
 	{
-        let Inventory = ZDRPGPlayerInventory(toucher.FindInventory("ZDRPGPlayerInventory"));
-        Inventory.Credits += self.Amount;
-        return false;
+        if(toucher.player)
+        {
+            let playerInventory = ZDRPGPlayerInventory(toucher.FindInventory("ZDRPGPlayerInventory"));
+            playerInventory.Credits += self.Amount;
+            return false;
+        }
+        Super.TryPickup(toucher);
+        return true;      
 	}
 }
 

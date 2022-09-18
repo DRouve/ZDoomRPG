@@ -43,14 +43,19 @@ class ZDRPGMedkitActivator: ZDRPGUtility
     }
 }
 
-class ZDRPGShieldActivator: ZDRPGUtility
+/*class ZDRPGShieldActivator: ZDRPGUtility
 {
     override bool Use(bool pickup)
     {
-        
+        let Shield = ZDRPGShield(owner.FindInventory("ZDRPGShield"));
+        if(Shield)
+        {
+            Shield.ShieldActive = false;
+            console.printf("Active: " .. Shield.ShieldActive);
+        }
         return true;
     }
-}
+}*/
 
 class ZDRPGWeaponSpeedScaling: ZDRPGUtility
 {

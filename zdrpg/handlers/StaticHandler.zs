@@ -8,8 +8,13 @@ class ZDRPGStaticHandler : StaticEventHandler
     array <string> mapPacks;
     array <string> skillCategories;
     array <string> monsters;
-    array <string> questItems;
     array <string> replacements;
+
+    array <string> questItems;
+    array <string> shieldBodies;
+    array <string> shieldBatteries;
+    array <string> shieldCapacitors;
+    array <string> shieldAccessories;
 
     array <string> missionDifficulties;
     array <string> missionTypes;
@@ -136,7 +141,29 @@ class ZDRPGStaticHandler : StaticEventHandler
             {
                 questItems.Push(allactorclasses[i].GetClassName());
                 continue;
-            }        
+            }    
+
+            if(allactorclasses[i] is "ZDRPGShieldBody" && allactorclasses[i].GetClassName() != 'ZDRPGShieldBody')
+            {
+                shieldBodies.Push(allactorclasses[i].GetClassName());
+                continue;
+            }    
+            if(allactorclasses[i] is "ZDRPGShieldBattery" && allactorclasses[i].GetClassName() != 'ZDRPGShieldBattery')
+            {
+                shieldBatteries.Push(allactorclasses[i].GetClassName());
+                continue;
+            }   
+            if(allactorclasses[i] is "ZDRPGShieldCapacitor" && allactorclasses[i].GetClassName() != 'ZDRPGShieldCapacitor')
+            {
+                shieldCapacitors.Push(allactorclasses[i].GetClassName());
+                continue;
+            }  
+            if(allactorclasses[i] is "ZDRPGShieldAccessory" && allactorclasses[i].GetClassName() != 'ZDRPGShieldAccessory')
+            {
+                shieldAccessories.Push(allactorclasses[i].GetClassName());
+                continue;
+            } 
+
             let def = GetDefaultByType(allActorClasses[i]);
             if (def.bIsMonster 
             && !def.bFriendly                                                                  // ignore friendlies

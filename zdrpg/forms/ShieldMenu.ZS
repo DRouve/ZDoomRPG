@@ -331,6 +331,8 @@ class ZDRPG_ZF_ShieldMenu : ZDRPG_ZF_GenericMenu
                 itemSprite = TexMan.GetName(itemDefaults.spawnstate.GetSpriteTexture(0));
                 cmd = "showDescription:"..itemsArray[i];
             }
+
+            console.printf(itemSprite);
             
             CreateStatBox("", cmd, itemSprite, baseRes, blocksCount, rowsCount, frame);
         }

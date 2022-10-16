@@ -1,4 +1,4 @@
-class ZDRPGHealFromMod : ZDRPGSkill
+class ZDRPGHealFromMod : ZDRPGSupportSkill
 {
     Default {
         Tag "HealFromMod";

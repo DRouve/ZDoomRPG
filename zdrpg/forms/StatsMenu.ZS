@@ -23,7 +23,7 @@ class ZDRPG_ZF_StatsMenuHandler : ZDRPG_ZF_Handler
     
         if(buttonCommand [0] ~== "statUp" && buttonCommand.Size() > 1)
         {
-            playerHandler.SendNetworkEvent("statUp", buttonCommand[1].ToInt());
+            playerHandler.SendNetworkEvent("statUp:" .. buttonCommand[1].ToInt());
         }
     }
 }

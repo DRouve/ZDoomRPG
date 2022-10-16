@@ -36,12 +36,29 @@ class ZDRPGWorldHandler : EventHandler
 
     override void WorldThingDied(WorldEvent e)
     {
-        if (e.Thing && e.Thing.bIsMonster && e.Thing.target && !e.Thing.target.bIsMonster)
+        if (e.Thing && e.Thing.bIsMonster)
         {  
-            let Stats = ZDRPGStats(e.Thing.target.FindInventory("ZDRPGStats"));
-            Stats.Lvl += 1;
-            console.printf("level: %d", Stats.Lvl);   
+            let MonsterStats = ZDRPGStats.GetStats(e.Thing);
+            for(int i = 0; i < Players.Size(); i++)
+            {
+                if(PlayerInGame[i] && MonsterStats.DamageTakenTable[i]) {
+                    double DamageMultiplier;
+                    if(MonsterStats.DamageTakenTable[i] >= MonsterStats.CalculateMonsterMaxHealth())
+                        DamageMultiplier = 1.0;
+                    else 
+                        DamageMultiplier = MonsterStats.DamageTakenTable[i] / MonsterStats.CalculateMonsterMaxHealth();
 
+                    console.printf("table: %f", MonsterStats.DamageTakenTable[i] / MonsterStats.CalculateMonsterMaxHealth());   
+                    
+                    let Stats = ZDRPGStats.GetStats(Players[i].mo);
+                    int XPAmount = 100 * DamageMultiplier;
+                    Stats.XP += XPAmount;
+                    console.printf("xp: %d", Stats.XP);   
+                    let staticHandler = ZDRPGStaticHandler(StaticEventHandler.Find("ZDRPGStaticHandler")); 
+                    console.printf("table: %d", staticHandler.XPTable[Stats.Lvl]);
+                }
+            }
+            
             array <string> creditsList;
             Actor spawnedCredits;
 

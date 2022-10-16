@@ -1,11 +1,14 @@
 class ZDRPGStaticHandler : StaticEventHandler 
 {
-    const MAX_LEVEL    = 100;
-    const MAX_MISSIONS = 30;
+    const MAX_LEVEL        = 100;
+    const MAX_MISSIONS     = 30;
+    const MODULE_STAT_MULT = 25;
+    
     int XPCurve;
     array <int> XPTable;
 
     array <string> mapPacks;
+    array <string> skills;
     array <string> skillCategories;
     array <string> monsters;
     array <string> replacements;
@@ -24,11 +27,11 @@ class ZDRPGStaticHandler : StaticEventHandler
         XPCurve = CVar.GetCVar("drpg_xp_curve").GetInt();
         XPTable.Push(475 + XPCurve);
         for (int i = 1; i < MAX_LEVEL; i++)
-            // todo: replace formula
-            // in original first few elements were: 600, 700, 900
-            // here we have: 637, 817, 1046
-            // gotta fix calculation before release
-            XPTable.Push(((((XPTable[i - 1] * (1.0 + i / (i * 8.0))) + ((i * XPCurve) * (1.0 + i / (101.0 - i))))) + 50) / 100 * 100);
+        {
+            int XPAmount = ((((XPTable[i - 1] * (1.0 + i / (i * 8.0))) + ((i * XPCurve) * (1.0 + i / (101.0 - i))))) + 50) / 100;
+            XPTable.Push(XPAmount * 100);
+            //console.printf("%d", XPTable[i]);
+        }
                 
         // replacements
         replacements.PushV(
@@ -98,7 +101,7 @@ class ZDRPGStaticHandler : StaticEventHandler
         }
 
         // skill categories (deprecated?)
-        for (int i=0; i<allactorclasses.size(); i++) {
+        /*for (int i=0; i<allactorclasses.size(); i++) {
             if (allactorclasses[i] is 'ZDRPGSkill' && allactorclasses[i].getClassName() != 'ZDRPGSkill')
             {
                 let skill = GetDefaultByType( (class<ZDRPGSkill>) (allactorclasses[i]) );
@@ -107,7 +110,7 @@ class ZDRPGStaticHandler : StaticEventHandler
                     skillCategories.Push(skill.SkillCategory..':'..skill.FontColor);
                 }
             }
-        }
+        }*/
     }
 
     override void WorldTick()
@@ -163,6 +166,20 @@ class ZDRPGStaticHandler : StaticEventHandler
                 shieldAccessories.Push(allactorclasses[i].GetClassName());
                 continue;
             } 
+
+            if(allactorclasses[i] is 'ZDRPGSkill')
+            {
+                if(allactorclasses[i].GetParentClass() == 'ZDRPGSkill')
+                {
+                    //let skill = GetDefaultByType( (class<ZDRPGSkill>) (allactorclasses[i]) );
+                    //skillCategories.Push(skill.GetTag()..':'..skill.FontColor);
+                    skillCategories.Push(allactorclasses[i].GetClassName());
+                }
+                else if(allactorclasses[i].GetClassName() != 'ZDRPGSkill')
+                {
+                    skills.Push(allactorclasses[i].GetClassName());
+                }
+            }
 
             let def = GetDefaultByType(allActorClasses[i]);
             if (def.bIsMonster 

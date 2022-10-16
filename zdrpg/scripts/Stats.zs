@@ -36,6 +36,11 @@ class ZDRPGStats: Inventory
 
     string LastMap;
 
+    // Monster-only stats
+
+    double DamageTakenTable[Players.Size()];
+    int XPReward;
+
     Default 
     {
         Inventory.Amount 1;
@@ -143,6 +148,8 @@ class ZDRPGStats: Inventory
         self.OldCapacity     = self.Capacity;    
         self.OldLuck         = self.Luck; 
 
+        self.WeaponSpeed  = double(self.Agility) / 100;
+
         owner.GiveInventory("ZDRPGCredits", random(0, 273));
     }
 
@@ -221,7 +228,20 @@ class ZDRPGStats: Inventory
     }
 
     void StatChangesHandler() {
+        let staticHandler = ZDRPGStaticHandler(StaticEventHandler.Find("ZDRPGStaticHandler")); 
         let Stats = self.GetStats(owner);
+        let PlayerInventory = ZDRPGPlayerInventory.GetInventory(owner);
+
+        if(Stats.XP >= staticHandler.XPTable[Stats.Lvl])
+        {
+            Stats.XP -= staticHandler.XPTable[Stats.Lvl];
+            int Modules = ((Stats.Lvl + 1) * 100) * CVar.GetCVar("drpg_module_levelfactor", owner.player).GetFloat();
+            Stats.Lvl++;
+            PlayerInventory.Modules += Modules;
+            
+            //console.printf("+ modules: %d", Modules);  
+            console.printf("Level up!");   
+        }
 
         if(Stats.OldLvl != Stats.Lvl) {
             self.setMaxHealth(self.MaxHealth + ((Stats.Lvl - Stats.OldLvl) * 5));
@@ -261,7 +281,6 @@ class ZDRPGStats: Inventory
         }
 
         if(Stats.OldCapacity != Stats.Capacity) {
-            let PlayerInventory = ZDRPGPlayerInventory.GetInventory(owner);
             PlayerInventory.UpdateAmmoLimits();
             Stats.OldCapacity = Stats.Capacity;
         }
@@ -281,11 +300,72 @@ class ZDRPGStats: Inventory
             newdamage = damage + (self.Strength - targetDefense); 
             console.printf("Enemy health: %d", source.health);
 		}
+
+        // calculate damage taken by monster from player to calculate gained XP
+        if(passive && owner.bIsMonster && source.player) {
+            let MonsterStats = ZDRPGStats.GetStats(owner);
+            if(damage >= MonsterStats.CalculateMonsterMaxHealth() && owner.Health == MonsterStats.CalculateMonsterMaxHealth())
+                DamageTakenTable[source.PlayerNumber()] += MonsterStats.CalculateMonsterMaxHealth();
+            else if(damage >= owner.Health)
+                DamageTakenTable[source.PlayerNumber()] += owner.Health;
+            else
+                DamageTakenTable[source.PlayerNumber()] += owner.Health - (owner.Health - damage);
+
+            console.printf("damage taken: %d", DamageTakenTable[source.PlayerNumber()]); 
+        }        
 	}
 
     static ZDRPGStats GetStats(Actor other) {
         return ZDRPGStats(other.FindInventory("ZDRPGStats"));
     }
+
+    void IncreaseStat(int stat)
+    {
+        int statValue;
+        let Stats = ZDRPGStats.GetStats(owner);
+        
+        switch(stat) {
+            case 1:
+                statValue = Stats.Strength;
+                break;
+            case 2:
+                statValue = Stats.Defense;
+                break;
+            case 3:
+                statValue = Stats.Vitality;
+                break;
+            case 4:
+                statValue = Stats.Energy;
+                break;
+            case 5:
+                statValue = Stats.Regeneration;
+                break;
+            case 6:
+                statValue = Stats.Agility;
+                break;
+            case 7:
+                statValue = Stats.Capacity;
+                break;
+            case 8:
+                statValue = Stats.Luck;
+                break;
+        }
+        let upgradeCost = ((statValue + 1) * ZDRPGStaticHandler.MODULE_STAT_MULT) * CVar.GetCVar("drpg_module_statfactor", owner.player).GetFloat();
+        if (upgradeCost < 0)
+            upgradeCost = -upgradeCost;
+        else if (upgradeCost == 0)
+            upgradeCost = (1 * ZDRPGStaticHandler.MODULE_STAT_MULT) * CVar.GetCVar("drpg_module_statfactor", owner.player).GetFloat();
+
+        let PlayerInventory = ZDRPGPlayerInventory.GetInventory(owner);
+        if(PlayerInventory.Modules < upgradeCost)
+        {
+            console.printf("not enough modules");
+            return;
+        }
+
+        self.StatUpInt(owner, stat);
+        PlayerInventory.Modules -= upgradeCost;
+    } 
 
     static void StatUpInt(Actor other, int stat) 
     {

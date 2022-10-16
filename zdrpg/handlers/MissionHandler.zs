@@ -223,7 +223,7 @@ class ZDRPGMissionHandler : EventHandler
             }
         }
         
-        console.printf(actorStats.GetTag() .. ": %d", difficultyScore);
+        //console.printf(actorStats.GetTag() .. ": %d", difficultyScore);
         return difficultyScore;
     }
 }

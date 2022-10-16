@@ -124,10 +124,7 @@ class ZDRPGPlayerHandler : EventHandler
         /*Array<string> command;
         e.Name.Split (command, ":");
     
-        if(command [0] ~== "statUp" && command.Size() > 1)
-        {
-            ZDRPGStats.StatUp(players[e.Player], command[1]);
-        }*/
+        */
         
         
         string eString = e.Name;
@@ -147,6 +144,17 @@ class ZDRPGPlayerHandler : EventHandler
             //    players[e.Player].mo.GiveInventory(eHandler.Missions[0].GetClassName(), 1);
             //}
             
+        }
+
+        if(eString.IndexOf("statUp") >= 0) 
+        {
+            Array <String> stat;
+            e.Name.split(stat, ":");
+            if (stat.Size() != 0) {
+                let Stats = ZDRPGStats.GetStats(players[e.Player].mo);
+                if (Stats)
+                    Stats.IncreaseStat(stat[1].ToInt());
+            } 
         }
 
         if(eString.IndexOf("activateAug") >= 0) 

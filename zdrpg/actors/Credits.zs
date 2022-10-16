@@ -64,7 +64,6 @@ class ZDRPGCredits1 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED A -1 Bright;
             Stop;
     }
@@ -82,7 +81,6 @@ class ZDRPGCredits5 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED B -1 Bright;
             Stop;
     }
@@ -100,7 +98,6 @@ class ZDRPGCredits10 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED C -1 Bright;
             Stop;
     }
@@ -118,7 +115,6 @@ class ZDRPGCredits20 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED D -1 Bright;
             Stop;
     }
@@ -136,7 +132,6 @@ class ZDRPGCredits50 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED E -1 Bright;
             Stop;
     }
@@ -154,7 +149,6 @@ class ZDRPGCredits100 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED F -1 Bright;
             Stop;
     }
@@ -172,7 +166,6 @@ class ZDRPGCredits250 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED G -1 Bright;
             Stop;
     }
@@ -190,7 +183,6 @@ class ZDRPGCredits500 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED H -1 Bright;
             Stop;
     }
@@ -208,7 +200,6 @@ class ZDRPGCredits1000 : ZDRPGCredits
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             CRED ABCDEFGHCF 3 Bright;
             Goto Spawn+1;
     }
@@ -230,7 +221,6 @@ class ZDRPGUACCard : Inventory
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             TNT1 A 0
             {
                 A_JumpIf(CallACS("GetShopCard") == 0, "CardBronze");
@@ -259,7 +249,6 @@ class ZDRPGDiamondUACCard : ZDRPGUACCard
     States
     {
         Spawn:
-            TNT1 A 0 NoDelay ACS_NamedExecuteAlways("ItemInit", 0);
             UCRD E -1 Bright;
             Stop;
     }
